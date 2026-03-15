@@ -11,3 +11,6 @@ wheels/
 
 .tmp.drivedownload/
 .tmp.driveupload/
+
+# M77-info files
+*.pdf

@@ -1,137 +1,148 @@
 <!DOCTYPE HTML>
-<!--
-	Solid State by HTML5 UP
-	html5up.net | @ajlkn
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
--->
 <html>
 
 <head>
-	<title>Grupo Montoya-Pérez C.A. | Equipamiento - Maquinaria - Energía</title>
-	<meta charset="utf-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-	<link rel="stylesheet" href="/static/assets/css/main.css" />
-	<noscript>
-		<link rel="stylesheet" href="/static/assets/css/noscript.css" />
-	</noscript>
+    <title>Grupo Montoya-Pérez C.A. | Soluciones Industriales</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+
+    <link rel="icon" type="image/png" href="{{ url_for('static', path='assets/css/images/favicon.png') }}" />
+
+    <link rel="stylesheet" href="{{ url_for('static', path='assets/css/main.css') }}" />
+    <noscript>
+        <link rel="stylesheet" href="{{ url_for('static', path='assets/css/noscript.css') }}" />
+    </noscript>
 </head>
 
 <body class="is-preload">
 
-	<!-- Page Wrapper -->
-	<div id="page-wrapper">
+    <div id="page-wrapper">
 
-		<!-- Header -->
-		<header id="header" class="alt">
-			<h1><a href="index.html">Grupo Montoya-Pérez C.A.</a></h1>
-			<nav>
-				<a href="#menu">Menu</a>
-			</nav>
-		</header>
+        <header id="header" class="alt">
+            <h1><a href="/">GMPC</a></h1>
+            <nav><a href="#menu">Menú</a></nav>
+        </header>
 
-		<!-- Menu -->
-		<nav id="menu">
-			<div class="inner">
-				<h2>Menu</h2>
-				<ul class="links">
-					<li><a href="index.html">Home</a></li>
-					<li><a href="generic.html">Generic</a></li>
-					<li><a href="elements.html">Elements</a></li>
-					<li><a href="#">Log In</a></li>
-					<li><a href="#">Sign Up</a></li>
-				</ul>
-				<a href="#" class="close">Close</a>
-			</div>
-		</nav>
+        <nav id="menu">
+            <div class="inner">
+                <h2>Líneas de Negocio</h2>
+                <ul class="links">
+                    <li><a href="/">Inicio</a></li>
+                    <li><a href="#one">Petrolera</a></li>
+                    <li><a href="#two">Agrícola</a></li>
+                    <li><a href="#four">Infraestructura y Energía</a></li>
+                    <li><a href="#footer">Contacto</a></li>
+                </ul>
+                <a href="#" class="close">Cerrar</a>
+            </div>
+        </nav>
 
-		<!-- Banner -->
-		<section id="banner">
-			<div class="inner">
-				<div class="logo"><span class="icon fa-gem"></span></div>
-				<h2>Equipamiento, Maquinaria y Energía</h2>
-				<p>Venta, alquiler, instalación y mantenimiento de generadores eléctricos.<br>
-					📍 SERVICIO A NIVEL NACIONAL.</p>
-			</div>
-		</section>
+        <section id="banner">
+            <div class="inner">
+                &nbsp;
+            </div>
+        </section>
 
-		<!-- Wrapper -->
-		<section id="wrapper">
+        <section id="wrapper">
 
-			<section id="one" class="wrapper spotlight style1">
-				<div class="inner">
-					<div class="content">
-						<h2 class="major">Generadores Eléctricos</h2>
-						<p><strong>Especialistas en las mejores marcas:</strong> Caterpillar, Perkins, Cummins, F.G
-							Wilson y Kohler.</p>
+            <section id="one" class="wrapper spotlight style1">
+                <div class="inner">
+                    <a href="#" class="image"><img
+                            src="{{ url_for('static', path='images/petrolera/banner_petrolero.png') }}"
+                            alt="División Petrolera" /></a>
+                    <div class="content">
+                        <h2 class="major">División Petrolera</h2>
+                        <p>Suministro técnico para la industria de hidrocarburos.</p>
+                        <a href="https://wa.me/{{ phone }}?text=Hola,%20solicito%20información%20especializada%20sobre%20la%20División%20Petrolera"
+                            class="special" target="_blank">WhatsApp Directo</a>
+                    </div>
+                </div>
+            </section>
 
-						<h3 class="major">Nuestros Servicios</h3>
-						<ul class="alt">
-							<li>Venta y Alquiler de equipos.</li>
-							<li>Instalación y Reparaciones.</li>
-							<li>Mantenimiento y Diagnóstico especializado.</li>
-							<li>Venta de Lubricantes Mobil, filtros y correas.</li>
-						</ul>
-					</div>
-				</div>
-			</section>
+            <section id="two" class="wrapper alt spotlight style2">
+                <div class="inner">
+                    <a href="#" class="image"><img
+                            src="{{ url_for('static', path='images/agricola/tractor_banner.png') }}"
+                            alt="Tecnificación Agrícola" /></a>
+                    <div class="content">
+                        <h2 class="major">Tecnificación Agrícola</h2>
+                        <p>Maquinaria de alto rendimiento para el campo.</p>
+                        <a href="https://wa.me/{{ phone }}?text=Hola,%20deseo%20consultar%20sobre%20maquinaria%20para%20Tecnificación%20Agrícola"
+                            class="special" target="_blank">WhatsApp Directo</a>
+                    </div>
+                </div>
+            </section>
 
-		</section>
+            <section id="four" class="wrapper alt style1">
+                <div class="inner">
+                    <h2 class="major">Infraestructura y Energía</h2>
+                    <section class="features">
+                        <article>
+                            <a href="#" class="image"><img
+                                    src="{{ url_for('static', path='images/mineria/minero_01.png') }}"
+                                    alt="Minería" /></a>
+                            <h3 class="major">Minería</h3>
+                            <p>Equipamiento robusto para extracción y procesamiento.</p>
+                            <a href="https://wa.me/{{ phone }}?text=Hola,%20requiero%20asesoría%20sobre%20equipos%20de%20Minería"
+                                class="special" target="_blank">WhatsApp Directo</a>
+                        </article>
+                        <article>
+                            <a href="#" class="image"><img
+                                    src="{{ url_for('static', path='images/solar/paneles_01.png') }}"
+                                    alt="Energía Solar" /></a>
+                            <h3 class="major">Energía Solar</h3>
+                            <p>Soluciones fotovoltaicas para la industria moderna.</p>
+                            <a href="https://wa.me/{{ phone }}?text=Hola,%20estoy%20interesado%20en%20proyectos%20de%20Energía%20Solar"
+                                class="special" target="_blank">WhatsApp Directo</a>
+                        </article>
+                    </section>
+                </div>
+            </section>
 
-		<!-- Footer -->
-		<section id="footer">
-			<div class="inner">
-				<h2 class="major">Ponte en contacto con nosotros</h2>
-				<p>Cras mattis ante fermentum, malesuada neque vitae, eleifend erat. Phasellus non pulvinar erat. Fusce
-					tincidunt, nisl eget mattis egestas, purus ipsum consequat orci, sit amet lobortis lorem lacus in
-					tellus. Sed ac elementum arcu. Quisque placerat auctor laoreet.</p>
-				<form method="post" action="#">
-					<div class="fields">
-						<div class="field">
-							<label for="name">Nombre</label>
-							<input type="text" name="name" id="name" />
-						</div>
-						<div class="field">
-							<label for="email">Email</label>
-							<input type="email" name="email" id="email" />
-						</div>
-						<div class="field">
-							<label for="message">Mensaje</label>
-							<textarea name="message" id="message" rows="4"></textarea>
-						</div>
-					</div>
-					<ul class="actions">
-						<li><input type="submit" value="Enviar Mensaje" /></li>
-					</ul>
-				</form>
-				<ul class="contact">
-					<li class="icon solid fa-home">
-						Grupo Montoya-Pérez C.A.<br />
-						Servicio a Nivel Nacional<br />
-						(San Cristóbal, Mérida, Barcelona)
-					</li>
-					<li class="icon solid fa-phone">+58 424-7294824 / +58 414-7294824</li>
-					<li class="icon solid fa-envelope"><a href="mailto:grupompc.a1@gmail.com">grupompc.a1@gmail.com</a>
-					</li>
-					<li class="icon brands fa-instagram"><a href="https://instagram.com/grupo.mpca1"
-							target="_blank">@grupo.mpca1</a></li>
-				</ul>
-				<ul class="copyright">
-					<li>&copy; Grupo Montoya-Pérez C.A. Todos los derechos reservados.</li>
-					<li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
-				</ul>
-			</div>
-		</section>
+        </section>
 
-	</div>
+        <section id="footer">
+            <div class="inner">
+                <h2 class="major">Contacto Técnico</h2>
+                <form method="post" action="#">
+                    <div class="fields">
+                        <div class="field">
+                            <label for="name">Nombre</label>
+                            <input type="text" name="name" id="name" />
+                        </div>
+                        <div class="field">
+                            <label for="message">Mensaje</label>
+                            <textarea name="message" id="message" rows="4"></textarea>
+                        </div>
+                    </div>
+                    <ul class="actions">
+                        <li><a href="https://wa.me/{{ phone }}?text=Hola,%20requiero%20Soporte%20Técnico%20GMPC"
+                                class="button primary" target="_blank">Enviar vía WhatsApp</a></li>
+                    </ul>
+                </form>
+                <ul class="contact">
+                    <li class="icon solid fa-home">
+                        Grupo Montoya-Pérez C.A.<br />
+                        Sede Industrial Binacional
+                    </li>
+                    <li class="icon solid fa-phone"><a href="tel:{{ phone }}">+{{ phone }}</a></li>
+                    <li class="icon solid fa-envelope"><a href="mailto:{{ email }}">{{ email }}</a></li>
+                </ul>
+                <ul class="copyright">
+                    <li>&copy; GMPC. Todos los derechos reservados.</li>
+                    <li>Desarrollo: <a href="https://linkedin.com/in/mardila77">Ing. Manuel Ardila</a></li>
+                </ul>
+            </div>
+        </section>
 
-	<!-- Scripts -->
-	<script src="/static/assets/js/jquery.min.js"></script>
-	<script src="/static/assets/js/jquery.scrollex.min.js"></script>
-	<script src="/static/assets/js/browser.min.js"></script>
-	<script src="/static/assets/js/breakpoints.min.js"></script>
-	<script src="/static/assets/js/util.js"></script>
-	<script src="/static/assets/js/main.js"></script>
+    </div>
 
+    <script src="{{ url_for('static', path='assets/js/jquery.min.js') }}"></script>
+    <script src="{{ url_for('static', path='assets/js/jquery.scrollex.min.js') }}"></script>
+    <script src="{{ url_for('static', path='assets/js/browser.min.js') }}"></script>
+    <script src="{{ url_for('static', path='assets/js/breakpoints.min.js') }}"></script>
+    <script src="{{ url_for('static', path='assets/js/util.js') }}"></script>
+    <script src="{{ url_for('static', path='assets/js/main.js') }}"></script>
 </body>
 
 </html>
