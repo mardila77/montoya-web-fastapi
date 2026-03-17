@@ -27,3 +27,12 @@ async def leer_raiz(request: Request):
         "index.html",
         {"request": request, "phone": CONTACTO["telefono"], "email": CONTACTO["email"]},
     )
+
+
+# Ruta de contacto (debe ir después de la inicialización de app y variables)
+@app.get("/contacto")
+async def contacto(request: Request):
+    return templates.TemplateResponse(
+        "contacto.html",
+        {"request": request, "phone": CONTACTO["telefono"], "email": CONTACTO["email"]},
+    )

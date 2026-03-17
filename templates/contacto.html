@@ -1,0 +1,101 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>Contacto - Grupo Montoya-Pérez</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+        <link rel="stylesheet" href="{{ url_for('static', path='assets/css/main.css') }}" />
+        <noscript><link rel="stylesheet" href="{{ url_for('static', path='assets/css/noscript.css') }}" /></noscript>
+    </head>
+
+    <body class="is-preload">
+        <div id="page-wrapper">
+            <section id="banner" style="background: url('{{ url_for('static', path='images/montoyaperez/banner.png') }}') center center/cover no-repeat; min-height: 350px; width: 100vw; position: relative; left: 50%; right: 50%; margin-left: -50vw; margin-right: -50vw; display: flex; align-items: flex-end; justify-content: flex-start;">
+                <div style="width:100vw;height:100%;position:absolute;top:0;left:0;background:rgba(24,24,24,0.45);"></div>
+                <div class="inner" style="position:relative;z-index:2;width:100%;text-align:left;padding:3em 2em 2em 4vw;">
+                    <h2 style="color:#fff; text-shadow: 1px 1px 8px #000; letter-spacing: 0.1em; font-size:3em;">CONTACTO</h2>
+                    <p style="color:#fff; font-size:2em;">¿Tienes dudas o necesitas soporte? Contáctanos por correo, WhatsApp o el formulario.</p>
+                </div>
+            </section>
+
+            <header id="header" style="position: absolute; top: 0; left: 0; width: 100vw; background: transparent; z-index: 10;">
+                <h1><a href="/">Grupo Montoya-Pérez</a></h1>
+                <nav>
+                    <a href="#menu" style="color:#fff; text-shadow: 1px 1px 8px #000; font-weight:bold; border:2px solid #fff; border-radius:0.5em; padding:0.3em 1.2em; background:rgba(24,24,24,0.35);">Menú</a>
+                </nav>
+            </header>
+
+            <nav id="menu">
+                <div class="inner">
+                    <h2>Menú</h2>
+                    <ul class="links">
+                        <li><a href="/">Inicio</a></li>
+                        <li><a href="/contacto">Contacto</a></li>
+                    </ul>
+                    <a href="#" class="close">Cerrar</a>
+                </div>
+            </nav>
+
+            <section id="wrapper">
+
+
+                <div class="wrapper" style="background: #181818 url('{{ url_for('static', path='images/montoyaperez/fondoseccioncontato.png') }}') center/cover no-repeat; border-radius: 0 0 1em 1em; box-shadow: 0 8px 32px rgba(0,0,0,0.18); padding: 2em 0; position: relative; min-height: 600px;">
+                    <div class="inner" style="max-width: 600px; margin: auto; background: rgba(24,24,24,0.82); border-radius: 1em; box-shadow: 0 2px 12px rgba(255,204,0,0.10); padding: 2em; position: relative; z-index: 2;">
+                        <h3 class="major" style="color:#e10600; text-align:center;">Envíanos un mensaje</h3>
+                        <form method="post" action="#" style="background: transparent; border-radius: 1em; box-shadow: none; padding: 0; border: none;">
+                            <div class="fields" style="display: flex; flex-direction: column; gap: 1em;">
+                                <div class="field">
+                                    <label for="name" style="color:#ffcc00; font-weight:bold;">Nombre</label>
+                                    <input type="text" name="name" id="name" required style="border: 1.5px solid #e10600; border-radius: 0.5em; padding: 0.7em; color:#fff; background:#232323;" />
+                                </div>
+                                <div class="field">
+                                    <label for="email" style="color:#ffcc00; font-weight:bold;">Correo electrónico</label>
+                                    <input type="email" name="email" id="email" required style="border: 1.5px solid #e10600; border-radius: 0.5em; padding: 0.7em; color:#fff; background:#232323;" />
+                                </div>
+                                <div class="field">
+                                    <label for="message" style="color:#ffcc00; font-weight:bold;">Mensaje</label>
+                                    <textarea name="message" id="message" rows="5" required style="border: 1.5px solid #e10600; border-radius: 0.5em; padding: 0.7em; color:#fff; background:#232323;"></textarea>
+                                </div>
+                            </div>
+                            <ul class="actions" style="text-align:center; margin-top:1.5em;">
+                                <li><input type="submit" value="Enviar mensaje" class="primary" style="background:#e10600; border:none; color:#fff; font-weight:bold; font-size:1.1em; border-radius:0.5em; padding:0.7em 2em; box-shadow: 0 2px 8px #ffcc00; transition: background 0.2s;" onmouseover="this.style.background='#ffcc00';this.style.color='#e10600';" onmouseout="this.style.background='#e10600';this.style.color='#fff';" /></li>
+                            </ul>
+                        </form>
+                        <div style="margin-top:2.5em; background: #ffcc00; border-radius: 0.7em; padding: 1.5em; box-shadow: 0 2px 8px #e10600;">
+                            <ul class="contact" style="margin:0; color:#000;">
+                                <li class="icon solid fa-home" style="color:#e10600; font-weight:bold;">
+                                    Grupo Montoya-Pérez C.A.<br />
+                                    <span style="color:#000; font-weight:normal;">Sede Industrial Binacional</span>
+                                </li>
+                                <li class="icon solid fa-phone"><a href="tel:{{ phone }}" style="color:#e10600; font-weight:bold;">+{{ phone }}</a></li>
+                                <li class="icon solid fa-envelope"><a href="mailto:{{ email }}" style="color:#e10600; font-weight:bold;">{{ email }}</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="footer">
+                <div class="inner">
+                    <ul class="copyright">
+                        <li>&copy; GMPC. Todos los derechos reservados.</li>
+                        <li>Desarrollo: <a href="https://linkedin.com/in/mardila77">Ing. Manuel Ardila</a></li>
+                    </ul>
+                </div>
+            </section>
+
+        </div>
+
+        <script src="{{ url_for('static', path='assets/js/jquery.min.js') }}"></script>
+        <script src="{{ url_for('static', path='assets/js/jquery.scrollex.min.js') }}"></script>
+        <script src="{{ url_for('static', path='assets/js/browser.min.js') }}"></script>
+        <script src="{{ url_for('static', path='assets/js/breakpoints.min.js') }}"></script>
+        <script src="{{ url_for('static', path='assets/js/util.js') }}"></script>
+        <script src="{{ url_for('static', path='assets/js/main.js') }}"></script>
+
+        <!-- Botón flotante de WhatsApp -->
+        <a href="https://wa.me/{{ phone }}?text=Hola%20Marco%2C%20quisiera%20informaci%C3%B3n%20sobre%20mi%20equipo.%20Adjunto%20la%20foto%20de%20la%20placa%20identificadora%20para%20ubicarlo%20en%20el%20cat%C3%A1logo." class="whatsapp-float" target="_blank" title="Chatea con Marco Montoya">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" />
+        </a>
+    </body>
+</html>

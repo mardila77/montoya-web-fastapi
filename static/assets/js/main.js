@@ -4,12 +4,36 @@
 	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 */
 
+
 (function($) {
 
-	var	$window = $(window),
-		$body = $('body'),
-		$header = $('#header'),
-		$banner = $('#banner');
+	       var $window = $(window),
+		       $body = $('body'),
+		       $header = $('#header'),
+		       $banner = $('#banner');
+
+	       // --- Animación de aparición/desaparición del banner al hacer scroll ---
+	       var lastScrollTop = 0;
+	       var ticking = false;
+	       if ($banner.length > 0) {
+		       $window.on('scroll', function() {
+			       if (!ticking) {
+				       window.requestAnimationFrame(function() {
+					       var st = $window.scrollTop();
+					       if (st > lastScrollTop && st > 50) {
+						       // Scroll down: ocultar banner
+						       $banner.addClass('banner-hidden');
+					       } else {
+						       // Scroll up: mostrar banner
+						       $banner.removeClass('banner-hidden');
+					       }
+					       lastScrollTop = st;
+					       ticking = false;
+				       });
+				       ticking = true;
+			       }
+		       });
+	       }
 
 	// Breakpoints.
 		breakpoints({

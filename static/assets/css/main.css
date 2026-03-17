@@ -1,3 +1,37 @@
+/* Botón flotante de WhatsApp */
+.whatsapp-float {
+	position: fixed;
+	width: 60px;
+	height: 60px;
+	bottom: 30px;
+	right: 30px;
+	z-index: 9999;
+	background: #25d366;
+	border-radius: 50%;
+	box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	transition: box-shadow 0.2s;
+}
+.whatsapp-float:hover {
+	box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+	background: #128c7e;
+}
+.whatsapp-float img {
+	width: 38px;
+	height: 38px;
+	display: block;
+}
+#banner {
+	transition: opacity 0.6s cubic-bezier(0.4,0,0.2,1), visibility 0.6s cubic-bezier(0.4,0,0.2,1);
+}
+
+.banner-hidden {
+	opacity: 0 !important;
+	visibility: hidden !important;
+	pointer-events: none;
+}
 @import url(fontawesome-all.min.css);
 @import url("https://fonts.googleapis.com/css?family=Raleway:200,700|Source+Sans+Pro:300,600,300italic,600italic");
 
@@ -190,14 +224,11 @@ html {
 }
 
 body {
-	background-color: #2e3141;
-	background-image: linear-gradient(to top, rgba(46, 49, 65, 0.8), rgba(46, 49, 65, 0.8)), url("../../images/bg.jpg");
-	background-size: auto,
-		cover;
-	background-attachment: fixed,
-		fixed;
-	background-position: center,
-		center;
+	background-color: #000000;
+	background-image: linear-gradient(to top, rgba(0, 0, 0, 0.85), rgba(255, 255, 255, 0.05)), url("../../images/bg.jpg");
+	background-size: auto, cover;
+	background-attachment: fixed, fixed;
+	background-position: center, center;
 }
 
 body.is-preload *,
@@ -219,7 +250,7 @@ body,
 input,
 select,
 textarea {
-	color: #ffffff;
+	color: #fff;
 	font-family: "Source Sans Pro", Helvetica, sans-serif;
 	font-size: 16.5pt;
 	font-weight: 300;
@@ -281,19 +312,21 @@ textarea {
 
 }
 
+/* Enlaces en rojo corporativo */
 a {
 	-moz-transition: color 0.2s ease-in-out, border-bottom-color 0.2s ease-in-out;
 	-webkit-transition: color 0.2s ease-in-out, border-bottom-color 0.2s ease-in-out;
 	-ms-transition: color 0.2s ease-in-out, border-bottom-color 0.2s ease-in-out;
 	transition: color 0.2s ease-in-out, border-bottom-color 0.2s ease-in-out;
-	border-bottom: dotted 1px rgba(255, 255, 255, 0.35);
-	color: #ffffff;
+	border-bottom: dotted 1px rgba(255, 0, 0, 0.5);
+	color: #e10600;
 	text-decoration: none;
 }
 
+/* Hover en rojo más oscuro */
 a:hover {
 	border-bottom-color: transparent;
-	color: #ffffff !important;
+	color: #b30000 !important;
 }
 
 a.special:not(.button) {
@@ -350,7 +383,7 @@ a.special:not(.button):active:before {
 
 strong,
 b {
-	color: #ffffff;
+	color: #e10600;
 	font-weight: 600;
 }
 
@@ -363,13 +396,22 @@ p {
 	margin: 0 0 2em 0;
 }
 
+/* Títulos en negro o rojo según jerarquía */
 h1,
-h2,
+h2 {
+	color: #e10600;
+	font-family: Raleway, Helvetica, sans-serif;
+	font-weight: 700;
+	letter-spacing: 0.1em;
+	margin: 0 0 1em 0;
+	text-transform: uppercase;
+}
+
 h3,
 h4,
 h5,
 h6 {
-	color: #ffffff;
+	color: #000;
 	font-family: Raleway, Helvetica, sans-serif;
 	font-weight: 700;
 	letter-spacing: 0.1em;
@@ -451,11 +493,10 @@ sup {
 	top: -0.5em;
 }
 
-blockquote {
-	border-left: solid 4px rgba(255, 255, 255, 0.125);
-	font-style: italic;
-	margin: 0 0 2em 0;
-	padding: 0.5em 0 0.5em 2em;
+border-left: solid 4px #e10600;
+font-style: italic;
+margin: 0 0 2em 0;
+padding: 0.5em 0 0.5em 2em;
 }
 
 code {
@@ -2319,11 +2360,10 @@ textarea {
 	-webkit-appearance: none;
 	-ms-appearance: none;
 	appearance: none;
-	background: rgba(255, 255, 255, 0.025);
+	background: #fff;
 	border-radius: 5px;
-	border: none;
-	border: solid 2px rgba(255, 255, 255, 0.125);
-	color: inherit;
+	border: solid 2px #e10600;
+	color: #000;
 	display: block;
 	outline: 0;
 	padding: 0 1em;
@@ -2446,10 +2486,10 @@ input[type="radio"]+label:before {
 
 input[type="checkbox"]:checked+label:before,
 input[type="radio"]:checked+label:before {
-	background: #ffffff;
-	border-color: #ffffff;
+	background: #e10600;
+	border-color: #e10600;
 	content: '\f00c';
-	color: #2e3141;
+	color: #fff;
 }
 
 input[type="checkbox"]:focus+label:before,
@@ -2489,7 +2529,7 @@ input[type="radio"]+label:before {
 
 .box {
 	border-radius: 5px;
-	border: solid 2px rgba(255, 255, 255, 0.125);
+	border: solid 2px #e10600;
 	margin-bottom: 2em;
 	padding: 1.5em;
 }
@@ -3142,10 +3182,12 @@ button:disabled,
 
 .features article {
 	padding: 1.75em 1.75em 0.1em 1.75em;
-	background-color: #353849;
+	background-color: #ffcc00;
+	/* Amarillo Caterpillar */
 	border-radius: 5px;
 	margin: 1.5em 3em 1.5em 0;
 	width: calc(50% - 1.5em);
+	color: #000;
 }
 
 .features article:nth-child(2n) {
@@ -3213,7 +3255,7 @@ button:disabled,
 	-webkit-transition: background-color 0.2s ease-in-out;
 	-ms-transition: background-color 0.2s ease-in-out;
 	transition: background-color 0.2s ease-in-out;
-	background-color: rgba(53, 56, 73, 0.95);
+	background-color: #e10600;
 	height: 3.5em;
 	left: 0;
 	line-height: 3.5em;
@@ -3419,7 +3461,7 @@ button:disabled,
 	-ms-transition: opacity 0.35s ease, -ms-transform 0.35s ease;
 	transition: opacity 0.35s ease, transform 0.35s ease;
 	-webkit-overflow-scrolling: touch;
-	background: #4c5c96;
+	background: #000;
 	border-radius: 5px;
 	display: block;
 	max-width: 100%;
@@ -3472,6 +3514,12 @@ button:disabled,
 	line-height: 1.85em;
 	padding: 0.75em 0;
 	text-transform: uppercase;
+	color: #e10600;
+}
+
+#menu .links li a:hover {
+	background: #ffcc00;
+	color: #000;
 }
 
 #menu .links li a:hover {
@@ -3518,66 +3566,73 @@ body.is-menu-visible #menu .inner {
 /* Banner Superior de Alto Impacto Industrial - GMPC */
 /* Banner Superior de Alto Impacto Industrial - GMPC */
 #banner {
-    padding: 0; /* Se elimina el padding para que la imagen ocupe todo el espacio */
-    background-color: transparent;
-    background-image: url("../../images/montoyaperez/largeheader.png"); /* Asegúrese de subir la imagen con este nombre */
-    
-    /* Configuración para que la imagen de fondo sea heroica y completa */
-    background-size: cover; /* Escala la imagen para cubrir el espacio */
-    background-position: center;
-    background-repeat: no-repeat;
-    background-attachment: fixed; /* Mantenemos el efecto parallax para mayor profesionalismo */
-    
-    /* Definimos una altura fija para asegurar la visibilidad completa de la imagen */
-    height: 700px; /* Ajuste este valor según la altura deseada para el banner */
-    
-    /* Efecto de desvanecimiento sutil al cargar */
-    -moz-transition: opacity 1s ease-in-out, visibility 1s ease-in-out;
-    -webkit-transition: opacity 1s ease-in-out, visibility 1s ease-in-out;
-    -ms-transition: opacity 1s ease-in-out, visibility 1s ease-in-out;
-    transition: opacity 1s ease-in-out, visibility 1s ease-in-out;
+	padding: 0;
+	/* Se elimina el padding para que la imagen ocupe todo el espacio */
+	background-color: transparent;
+	background-image: url("../../images/montoyaperez/largeheader.png");
+	/* Asegúrese de subir la imagen con este nombre */
+
+	/* Configuración para que la imagen de fondo sea heroica y completa */
+	background-size: cover;
+	/* Escala la imagen para cubrir el espacio */
+	background-position: center;
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	/* Mantenemos el efecto parallax para mayor profesionalismo */
+
+	/* Definimos una altura fija para asegurar la visibilidad completa de la imagen */
+	height: 700px;
+	/* Ajuste este valor según la altura deseada para el banner */
+
+	/* Efecto de desvanecimiento sutil al cargar */
+	-moz-transition: opacity 1s ease-in-out, visibility 1s ease-in-out;
+	-webkit-transition: opacity 1s ease-in-out, visibility 1s ease-in-out;
+	-ms-transition: opacity 1s ease-in-out, visibility 1s ease-in-out;
+	transition: opacity 1s ease-in-out, visibility 1s ease-in-out;
 }
 
 #banner .inner {
-    margin: 0 auto;
-    width: 55em;
-    position: relative;
-    z-index: 1; /* Asegura que el contenido esté sobre el fondo */
+	margin: 0 auto;
+	width: 55em;
+	position: relative;
+	z-index: 1;
+	/* Asegura que el contenido esté sobre el fondo */
 }
 
 /* Ajuste sutil del logo y texto sobre el fondo */
 #banner .logo {
-    margin: 0 0 1.3em 0;
+	margin: 0 0 1.3em 0;
 }
 
 #banner .logo .icon {
-    /* Mantenemos el logo, pero el texto es el protagonista */
-    border: none;
-    font-size: 2.5em;
-    width: auto;
-    height: auto;
-    display: inline-block;
+	/* Mantenemos el logo, pero el texto es el protagonista */
+	border: none;
+	font-size: 2.5em;
+	width: auto;
+	height: auto;
+	display: inline-block;
 }
 
 #banner h2 {
-    /* Texto GMPC nítido y heroico */
-    font-size: 2.5em;
-    border-bottom: none;
-    margin-bottom: 0.5em;
+	/* Texto GMPC nítido y heroico */
+	font-size: 2.5em;
+	border-bottom: none;
+	margin-bottom: 0.5em;
 }
 
 #banner p {
-    /* Subtítulo legible y profesional */
-    font-size: 1.1em;
-    line-height: 1.8;
+	/* Subtítulo legible y profesional */
+	font-size: 1.1em;
+	line-height: 1.8;
 }
 
 /* Ajuste para dispositivos móviles (media query) */
 @media screen and (max-width: 980px) {
-    #banner {
-        background-attachment: scroll; /* Deshabilitamos parallax en móvil para rendimiento */
-        padding: 8em 3em 8.375em 3em;
-    }
+	#banner {
+		background-attachment: scroll;
+		/* Deshabilitamos parallax en móvil para rendimiento */
+		padding: 8em 3em 8.375em 3em;
+	}
 }
 
 /* Wrapper */
@@ -3723,7 +3778,7 @@ body.is-menu-visible #menu .inner {
 }
 
 .wrapper.style2 {
-	background-color: #353849;
+	background-color: #fffbe6; /* Amarillo muy suave, fondo cálido y amigable */
 }
 
 .wrapper.style2:before,
@@ -3740,7 +3795,7 @@ body.is-menu-visible #menu .inner {
 }
 
 .wrapper.style3 {
-	background-color: #3d4051;
+	background-color: #f5f5f5; /* Gris claro, neutro para descanso visual */
 }
 
 .wrapper.style3:before,
@@ -3757,7 +3812,8 @@ body.is-menu-visible #menu .inner {
 }
 
 .wrapper.style4 {
-	background-color: #454858;
+	background-color: #e10600; /* Rojo corporativo, para secciones de alto impacto */
+	color: #fff;
 }
 
 .wrapper.style4:before,
@@ -3808,7 +3864,8 @@ body.is-menu-visible #menu .inner {
 }
 
 .wrapper.spotlight {
-	background-color: #4c5c96;
+	background-color: #ffcc00; /* Amarillo Caterpillar, vibrante pero no agresivo */
+	color: #000;
 }
 
 .wrapper.spotlight:before,
@@ -3883,7 +3940,8 @@ body.is-menu-visible #menu .inner {
 }
 
 .wrapper.spotlight.style2 {
-	background-color: #45558d;
+	background-color: #fffbe6; /* Amarillo muy suave, para alternar con el amarillo fuerte */
+	color: #000;
 }
 
 .wrapper.spotlight.style2:before,
@@ -3900,7 +3958,8 @@ body.is-menu-visible #menu .inner {
 }
 
 .wrapper.spotlight.style3 {
-	background-color: #3f4e85;
+	background-color: #f5f5f5; /* Gris claro, descanso visual */
+	color: #000;
 }
 
 .wrapper.spotlight.style3:before,
@@ -3917,7 +3976,8 @@ body.is-menu-visible #menu .inner {
 }
 
 .wrapper.spotlight.style4 {
-	background-color: #39477c;
+	background-color: #e10600; /* Rojo corporativo, para alternar con amarillo */
+	color: #fff;
 }
 
 .wrapper.spotlight.style4:before,
@@ -3934,7 +3994,8 @@ body.is-menu-visible #menu .inner {
 }
 
 .wrapper.spotlight.style5 {
-	background-color: #324072;
+	background-color: #000; /* Negro, para contraste fuerte y elegancia */
+	color: #fff;
 }
 
 .wrapper.spotlight.style5:before,
@@ -3951,7 +4012,8 @@ body.is-menu-visible #menu .inner {
 }
 
 .wrapper.spotlight.style6 {
-	background-color: #2d3a69;
+	background-color: #fff; /* Blanco puro, máxima limpieza visual */
+	color: #000;
 }
 
 .wrapper.spotlight.style6:before,
