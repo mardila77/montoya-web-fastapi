@@ -1,0 +1,273 @@
+<!DOCTYPE HTML>
+<html lang="es">
+    <head>
+        <title>Sector Agrícola - Grupo Montoya-Pérez</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+        <link rel="icon" type="image/png" href="{{ url_for('static', path='assets/css/images/favicon.png') }}" />
+        <link rel="stylesheet" href="{{ url_for('static', path='assets/css/main.css') }}" />
+        <noscript><link rel="stylesheet" href="{{ url_for('static', path='assets/css/noscript.css') }}" /></noscript>
+        <style>
+            :root {
+                --color-primario-rojo: #D32F2F;
+                --color-secundario-amarillo-cat: #FFCD00;
+                --color-acento-verde-deere: #367C2B;
+                --color-acento-azul-holland: #005DAA;
+                --color-fondo: #FFFFFF;
+                --color-texto-principal: #000000;
+                --color-texto-suave: #333333;
+            }
+
+            body {
+                font-family: 'Arial', sans-serif;
+                color: var(--color-texto-principal);
+                background-color: var(--color-fondo);
+            }
+
+            /* Hero Section */
+            #hero {
+                background-image: url("{{ url_for('static', path='images/agricola/hero-agricola.png') }}");
+                background-size: cover;
+                background-position: center;
+                background-attachment: fixed;
+                height: 100vh;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                text-align: center;
+                position: relative;
+            }
+
+            #hero::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background-color: rgba(0, 0, 0, 0.5);
+            }
+
+            #hero .inner {
+                position: relative;
+                z-index: 1;
+                color: white;
+            }
+
+            #hero h1 {
+                font-size: 3em;
+                margin-bottom: 0.5em;
+            }
+
+            #hero p {
+                font-size: 1.5em;
+                font-weight: bold;
+            }
+
+            /* Sección Cimiento Logístico */
+            #cimiento {
+                padding: 4em 2em;
+                display: flex;
+                flex-wrap: wrap;
+                align-items: center;
+                max-width: 1200px;
+                margin: 0 auto;
+            }
+
+            #cimiento .texto {
+                flex: 1;
+                min-width: 300px;
+                padding-right: 2em;
+            }
+
+            #cimiento .imagen {
+                flex: 1;
+                min-width: 300px;
+            }
+
+            #cimiento img {
+                width: 100%;
+                height: auto;
+                border-radius: 8px;
+            }
+
+            /* Sección Compromiso */
+            #compromiso {
+                padding: 4em 2em;
+                background-color: #F4F4F4;
+                text-align: center;
+            }
+
+            #compromiso .cards {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 2em;
+                max-width: 1200px;
+                margin: 0 auto;
+            }
+
+            .card {
+                background-color: white;
+                border-radius: 8px;
+                box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+                padding: 2em;
+                flex: 1;
+                min-width: 250px;
+                max-width: 300px;
+            }
+
+            .card h3 {
+                color: var(--color-primario-rojo);
+                margin-bottom: 1em;
+            }
+
+            /* Sección Beneficios */
+            #beneficios {
+                padding: 4em 2em;
+                background-color: var(--color-fondo);
+                text-align: center;
+            }
+
+            #beneficios h2 {
+                color: var(--color-texto-principal);
+            }
+
+            /* CTA */
+            #cta {
+                padding: 4em 2em;
+                background-color: var(--color-secundario-amarillo-cat);
+                text-align: center;
+            }
+
+            #cta h3 {
+                color: var(--color-texto-principal);
+                margin-bottom: 1em;
+            }
+
+            #cta a {
+                background-color: var(--color-primario-rojo);
+                color: white;
+                padding: 1em 2em;
+                text-decoration: none;
+                border-radius: 5px;
+                font-weight: bold;
+                display: inline-block;
+                transition: background-color 0.3s;
+            }
+
+            #cta a:hover {
+                background-color: #B71C1C;
+            }
+
+            /* Responsive */
+            @media (max-width: 768px) {
+                #cimiento {
+                    flex-direction: column;
+                }
+
+                #cimiento .texto {
+                    padding-right: 0;
+                    margin-bottom: 2em;
+                }
+
+                .cards {
+                    flex-direction: column;
+                    align-items: center;
+                }
+            }
+        </style>
+    </head>
+    <body class="is-preload">
+        <div id="page-wrapper">
+            <!-- Header -->
+            <header id="header">
+                <h1 style="color: white;"><a href="/">Grupo Montoya-Pérez</a></h1>
+                <nav>
+                    <a href="#menu">Menú</a>
+                </nav>
+            </header>
+
+            <!-- Menu -->
+            <nav id="menu">
+                <div class="inner">
+                    <h2>Menú</h2>
+                    <ul class="links">
+                        <li><a href="/">Inicio</a></li>
+                        <li><a href="/contacto">Contacto</a></li>
+                        <li><a href="/agricola">Sector Agrícola</a></li>
+                    </ul>
+                    <a href="#" class="close">Cerrar</a>
+                </div>
+            </nav>
+
+            <!-- Hero Section -->
+            <section id="hero">
+                <div class="inner">
+                    <h1>Sector Agrícola</h1>
+                    <p>EL RESPALDO QUE EL CAMPO NECESITA PARA NUNCA DETENERSE.</p>
+                </div>
+            </section>
+
+            <!-- Sección Cimiento Logístico -->
+            <section id="cimiento">
+                <div class="texto">
+                    <h2>El Cimiento de la Producción Agrícola</h2>
+                    <p>Una empresa de servicios de maquinaria pesada constituye el cimiento logístico del sector agrícola, donde la maquinaria es la herramienta de trabajo diario del sector, vital para la seguridad alimentaria.</p>
+                </div>
+                <div class="imagen">
+                    <img src="{{ url_for('static', path='images/agricola/adecuacion-tierras.png') }}" alt="Adecuación de Tierras" />
+                </div>
+            </section>
+
+            <!-- Sección Compromiso Montoya-Pérez -->
+            <section id="compromiso">
+                <h2>Garantizamos la Continuidad en el Campo</h2>
+                <p>En este entorno, Grupo Montoya-Pérez C.A. garantiza que las labores de Adecuación de Tierras no se detengan, asegurando que la inversión del agricultor se traduzca en una producción eficiente, al ofrecer:</p>
+                <div class="cards">
+                    <div class="card">
+                        <h3>Equipos de Primera Calidad</h3>
+                        <p>Maquinaria robusta y confiable para todas las necesidades del campo.</p>
+                    </div>
+                    <div class="card">
+                        <h3>Mantenimiento Preventivo</h3>
+                        <p>Servicios regulares para evitar fallos y maximizar la productividad.</p>
+                    </div>
+                    <div class="card">
+                        <h3>Repuestos Originales</h3>
+                        <p>Acceso a piezas genuinas para mantener la calidad y durabilidad.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Sección Beneficios y Rendimiento -->
+            <section id="beneficios">
+                <h2>Minimice Riesgos, Maximice Rendimiento</h2>
+                <p>Se minimizan los riesgos de paradas críticas en plena temporada, permitiendo que la infraestructura del campo sea el motor que sostiene el abastecimiento nacional con máxima durabilidad y rendimiento.</p>
+            </section>
+
+            <!-- Llamado a la Acción -->
+            <section id="cta">
+                <h3>¿Necesita maquinaria confiable para su próximo ciclo?</h3>
+                <a href="/contacto">Solicitar Cotización</a>
+            </section>
+
+            <!-- Footer -->
+            <section id="footer">
+                <div class="inner">
+                    <ul class="copyright">
+                        <li>&copy; GMPC. Todos los derechos reservados.</li>
+                        <li>Desarrollo: <a href="https://linkedin.com/in/mardila77">Ing. Manuel Ardila</a></li>
+                    </ul>
+                </div>
+            </section>
+        </div>
+
+        <script src="{{ url_for('static', path='assets/js/jquery.min.js') }}"></script>
+        <script src="{{ url_for('static', path='assets/js/jquery.scrollex.min.js') }}"></script>
+        <script src="{{ url_for('static', path='assets/js/browser.min.js') }}"></script>
+        <script src="{{ url_for('static', path='assets/js/breakpoints.min.js') }}"></script>
+        <script src="{{ url_for('static', path='assets/js/util.js') }}"></script>
+        <script src="{{ url_for('static', path='assets/js/main.js') }}"></script>
+    </body>
+</html>

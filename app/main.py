@@ -36,3 +36,11 @@ async def contacto(request: Request):
         "contacto.html",
         {"request": request, "phone": CONTACTO["telefono"], "email": CONTACTO["email"]},
     )
+
+# Ruta del sector agrícola
+@app.get("/agricola")
+async def agricola(request: Request):
+    return templates.TemplateResponse(
+        "agricola.html",
+        {"request": request, "phone": CONTACTO["telefono"], "email": CONTACTO["email"]},
+    )
