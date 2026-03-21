@@ -493,10 +493,12 @@ sup {
 	top: -0.5em;
 }
 
-border-left: solid 4px #e10600;
-font-style: italic;
-margin: 0 0 2em 0;
-padding: 0.5em 0 0.5em 2em;
+blockquote,
+q {
+	border-left: solid 4px #e10600;
+	font-style: italic;
+	margin: 0 0 2em 0;
+	padding: 0.5em 0 0.5em 2em;
 }
 
 code {
@@ -3925,6 +3927,7 @@ body.is-menu-visible #menu .inner {
 .wrapper.spotlight .content {
 	width: 100%;
 	-ms-flex: 2;
+	flex: 2;
 }
 
 .wrapper.spotlight:nth-child(2n - 1) .inner {
