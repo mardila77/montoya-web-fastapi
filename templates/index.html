@@ -31,6 +31,7 @@
                     <li><a href="#one">Petrolera</a></li>
                     <li><a href="#two">Agrícola</a></li>
                     <li><a href="#four">Infraestructura y Energía</a></li>
+                    <li><a href="#five">Construcción</a></li>
                     <li><a href="#footer">Contacto</a></li>
                 </ul>
                 <a href="#" class="close">Cerrar</a>
@@ -71,27 +72,39 @@
                 </div>
             </section>
 
-            <section id="four" class="wrapper alt style1">
+            <section id="three" class="wrapper spotlight style1">
                 <div class="inner">
-                    <h2 class="major">Infraestructura y Energía</h2>
-                    <section class="features">
-                        <article>
-                            <a href="#" class="image"><img
-                                    src="{{ url_for('static', path='images/mineria/minero_01.png') }}"
-                                    alt="Minería" /></a>
-                            <h3 class="major">Minería</h3>
-                            <p>Equipamiento robusto para extracción y procesamiento.</p>
+                    <a href="#" class="image"><img
+                            src="{{ url_for('static', path='images/mineria/minero_01.png') }}"
+                            alt="Minería" /></a>
+                    <div class="content">
+                        <h2 class="major">Minería</h2>
+                        <p>Equipamiento robusto para extracción y procesamiento.</p>
+                    </div>
+                </div>
+            </section>
 
-                        </article>
-                        <article>
-                            <a href="#" class="image"><img
-                                    src="{{ url_for('static', path='images/solar/paneles_01.png') }}"
-                                    alt="Energía Solar" /></a>
-                            <h3 class="major">Energía Solar</h3>
-                            <p>Soluciones fotovoltaicas para la industria moderna.</p>
+            <section id="four" class="wrapper alt spotlight style2">
+                <div class="inner">
+                    <a href="#" class="image"><img
+                            src="{{ url_for('static', path='images/solar/paneles_01.png') }}"
+                            alt="Energía Solar" /></a>
+                    <div class="content">
+                        <h2 class="major">Energía Solar</h2>
+                        <p>Soluciones fotovoltaicas para la industria moderna.</p>
+                    </div>
+                </div>
+            </section>
 
-                        </article>
-                    </section>
+            <section id="five" class="wrapper spotlight style1">
+                <div class="inner">
+                    <a href="{{ url_for('static', path='images/construccion/sector-construccion.png') }}" class="image" target="_blank" rel="noopener noreferrer"><img
+                            src="{{ url_for('static', path='images/montoyaperez/sector-construccion.png') }}"
+                            alt="Sector Construcción" /></a>
+                    <div class="content">
+                        <h2 class="major">Sector Construcción</h2>
+                        <p>Soluciones integrales para obra civil e infraestructuras industriales.</p>
+                    </div>
                 </div>
             </section>
 

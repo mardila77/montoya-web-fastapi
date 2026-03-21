@@ -17,7 +17,7 @@ app.mount(
 templates = Jinja2Templates(directory=os.path.join(BASE_DIR, "templates"))
 
 # Extraemos las variables para tenerlas listas
-CONTACTO = {"telefono": os.getenv("CONTACT_PHONE"), "email": os.getenv("CONTACT_EMAIL")}
+CONTACTO = {"telefono": os.getenv("CONTACT_PHONE", "584241234567"), "email": os.getenv("CONTACT_EMAIL", "info@grupomontoyaperez.com")}
 
 
 @app.get("/")
