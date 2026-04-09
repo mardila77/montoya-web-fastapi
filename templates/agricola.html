@@ -188,32 +188,26 @@
             <header id="header">
                 <h1 style="color: white;"><a href="/">Grupo Montoya-Pérez</a></h1>
                 <nav>
-                    <a href="#menu">Menú</a>
+                    <a href="#menu" class="btn-menu-header">Menú</a>
                 </nav>
             </header>
 
             <!-- Menu -->
-            <nav id="menu">
-                <div class="inner">
-                    <h2>Menú</h2>
-                    <ul class="links">
-                        <li><a href="/">Inicio</a></li>
-                        <li><a href="/#one">Petrolera</a></li>
-                        <li><a href="/agricola">Agrícola</a></li>
-                        <li><a href="/#four">Infraestructura y Energía</a></li>
-                        <li><a href="/construccion">Construcción</a></li>
-                        <li><a href="/#footer">Contacto</a></li>
-                    </ul>
-                    <a href="#" class="close">Cerrar</a>
-                </div>
-            </nav>
+            {% include 'menu.html' %}
 
             <!-- Hero Section -->
-            <section id="hero">
+            <section id="hero" style="position: relative; padding-bottom: 70px;">
                 <div class="inner">
                     <h1>Sector Agrícola</h1>
                     <p>EL RESPALDO QUE EL CAMPO NECESITA PARA NUNCA DETENERSE.</p>
                 </div>
+                {% set sections = [
+                    {'id': '#cimiento', 'title': 'Logística', 'icon': 'fa-truck'},
+                    {'id': '#compromiso', 'title': 'Compromiso', 'icon': 'fa-handshake'},
+                    {'id': '#beneficios', 'title': 'Beneficios', 'icon': 'fa-chart-line'},
+                    {'id': '#cta', 'title': 'Cotizar', 'icon': 'fa-envelope', 'cta': true}
+                ] %}
+                {% include 'section_carousel.html' %}
             </section>
 
             <!-- Sección Cimiento Logístico -->

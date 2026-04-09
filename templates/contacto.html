@@ -11,12 +11,17 @@
 
     <body class="is-preload">
         <div id="page-wrapper">
-            <section id="banner" style="background: url('{{ url_for('static', path='images/montoyaperez/banner.png') }}') center center/cover no-repeat; min-height: 350px; width: 100vw; position: relative; left: 50%; right: 50%; margin-left: -50vw; margin-right: -50vw; display: flex; align-items: flex-end; justify-content: flex-start;">
+            <section id="banner" style="background: url('/static/images/montoyaperez/banner.png') center center/cover no-repeat; min-height: 350px; width: 100vw; position: relative; left: 50%; right: 50%; margin-left: -50vw; margin-right: -50vw; display: flex; align-items: flex-end; justify-content: flex-start; padding-bottom: 70px;">
                 <div style="width:100vw;height:100%;position:absolute;top:0;left:0;background:rgba(24,24,24,0.45);"></div>
                 <div class="inner" style="position:relative;z-index:2;width:100%;text-align:left;padding:3em 2em 2em 4vw;">
                     <h2 style="color:#fff; text-shadow: 1px 1px 8px #000; letter-spacing: 0.1em; font-size:3em;">CONTACTO</h2>
                     <p style="color:#fff; font-size:2em;">¿Tienes dudas o necesitas soporte? Contáctanos por correo, WhatsApp o el formulario.</p>
                 </div>
+                {% set sections = [
+                    {'id': '#formulario_contacto', 'title': 'Ir al Formulario', 'icon': 'fa-envelope'},
+                    {'id': '#sede_oficial', 'title': 'Oficina Central', 'icon': 'fa-map-marker-alt'}
+                ] %}
+                {% include 'section_carousel.html' %}
             </section>
 
             <header id="header" style="position: absolute; top: 0; left: 0; width: 100vw; background: transparent; z-index: 10;">
@@ -26,28 +31,15 @@
                 </nav>
             </header>
 
-            <nav id="menu">
-                <div class="inner">
-                    <h2>Menú</h2>
-                    <ul class="links">
-                        <li><a href="/">Inicio</a></li>
-                        <li><a href="/#one">Petrolera</a></li>
-                        <li><a href="/agricola">Agrícola</a></li>
-                        <li><a href="/#four">Infraestructura y Energía</a></li>
-                        <li><a href="/construccion">Construcción</a></li>
-                        <li><a href="/#footer">Contacto</a></li>
-                    </ul>
-                    <a href="#" class="close">Cerrar</a>
-                </div>
-            </nav>
+            {% include 'menu.html' %}
 
             <section id="wrapper">
 
 
-                <div class="wrapper" style="background: #181818 url('{{ url_for('static', path='images/montoyaperez/fondoseccioncontato.png') }}') center/cover no-repeat; border-radius: 0 0 1em 1em; box-shadow: 0 8px 32px rgba(0,0,0,0.18); padding: 2em 0; position: relative; min-height: 600px;">
+                <div class="wrapper" style="background: #181818 url('/static/images/montoyaperez/fondoseccioncontato.png') center/cover no-repeat; border-radius: 0 0 1em 1em; box-shadow: 0 8px 32px rgba(0,0,0,0.18); padding: 2em 0; position: relative; min-height: 600px;">
                     <div class="inner" style="max-width: 600px; margin: auto; background: rgba(24,24,24,0.82); border-radius: 1em; box-shadow: 0 2px 12px rgba(255,204,0,0.10); padding: 2em; position: relative; z-index: 2;">
                         <h3 class="major" style="color:#e10600; text-align:center;">Envíanos un mensaje</h3>
-                        <form method="post" action="#" style="background: transparent; border-radius: 1em; box-shadow: none; padding: 0; border: none;">
+                        <form id="formulario_contacto" method="post" action="#" style="background: transparent; border-radius: 1em; box-shadow: none; padding: 0; border: none;">
                             <div class="fields" style="display: flex; flex-direction: column; gap: 1em;">
                                 <div class="field">
                                     <label for="name" style="color:#ffcc00; font-weight:bold;">Nombre</label>
@@ -66,7 +58,7 @@
                                 <li><input type="submit" value="Enviar mensaje" class="primary" style="background:#e10600; border:none; color:#fff; font-weight:bold; font-size:1.1em; border-radius:0.5em; padding:0.7em 2em; box-shadow: 0 2px 8px #ffcc00; transition: background 0.2s; display:flex; align-items:center; justify-content:center; height:3.2em; line-height:1;" onmouseover="this.style.background='#ffcc00';this.style.color='#e10600';" onmouseout="this.style.background='#e10600';this.style.color='#fff';" /></li>
                             </ul>
                         </form>
-                        <div style="margin-top:2.5em; background: #ffcc00; border-radius: 0.7em; padding: 1.5em; box-shadow: 0 2px 8px #e10600;">
+                        <div id="sede_oficial" style="margin-top:2.5em; background: #ffcc00; border-radius: 0.7em; padding: 1.5em; box-shadow: 0 2px 8px #e10600;">
                             <ul class="contact" style="margin:0; color:#000;">
                                 <li class="icon solid fa-home" style="color:#e10600; font-weight:bold;">
                                     Grupo Montoya-Pérez C.A.<br />

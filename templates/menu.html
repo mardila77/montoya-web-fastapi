@@ -1,0 +1,145 @@
+<style>
+/* CSS Premium para el Nav Menu Lateral (Glassmorphism & Animaciones dinámicas) */
+#menu {
+    z-index: 10000;
+}
+#menu .inner {
+    background: rgba(18, 18, 18, 0.70) !important;
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border-left: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: -10px 0 40px rgba(0, 0, 0, 0.6);
+    padding: 2em 1.5em !important;
+    max-width: 300px;
+    display: flex;
+    flex-direction: column;
+}
+
+#menu .inner h2 {
+    color: #FFCD00;
+    font-size: 1.2em;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 1em;
+    border-bottom: 2px solid #D32F2F;
+    padding-bottom: 0.5em;
+    text-shadow: 0 4px 10px rgba(0, 0, 0, 0.7);
+}
+
+#menu .inner .links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    flex-grow: 1;
+}
+
+#menu .inner .links li {
+    margin: 0.5em 0;
+    border-top: none !important;
+    padding: 0 !important;
+}
+
+#menu .inner .links li a {
+    color: #FFFFFF !important;
+    font-size: 0.9em;
+    font-weight: 500;
+    text-decoration: none;
+    display: block;
+    padding: 0.6em 1em;
+    border-radius: 8px;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    position: relative;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+#menu .inner .links li a:hover {
+    color: #121212 !important;
+    background: #FFCD00;
+    transform: translateX(12px);
+    border-color: #FFCD00;
+    box-shadow: 0 8px 20px rgba(255, 205, 0, 0.3);
+    font-weight: bold;
+}
+
+#menu .inner .close {
+    background-image: none !important; 
+    position: absolute;
+    top: 1em;
+    right: 1em;
+    width: 35px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.1) !important;
+    border-radius: 50%;
+    color: white !important;
+    text-decoration: none;
+    transition: all 0.4s ease;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    font-size: 0.9em;
+    text-indent: 0 !important;
+    overflow: visible !important;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+
+#menu .inner .close:hover {
+    background: #D32F2F !important;
+    transform: rotate(90deg) scale(1.1);
+    border-color: #D32F2F !important;
+    box-shadow: 0 0 15px rgba(211, 47, 47, 0.7);
+}
+
+/* Efecto de aparecer suave */
+#menu .inner .links li {
+    opacity: 0.9;
+    transition: opacity 0.3s;
+}
+#menu .inner .links:hover li {
+    opacity: 0.4;
+}
+#menu .inner .links li:hover {
+    opacity: 1;
+}
+
+/* Estilos globales unificados para el botón de apertura del menú (Cabecera) */
+.btn-menu-header {
+    background: rgba(18, 18, 18, 0.7);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    color: #FFCD00 !important;
+    font-weight: bold;
+    text-transform: uppercase;
+    padding: 0.5em 1.5em;
+    border-radius: 30px;
+    border: 1px solid rgba(255, 205, 0, 0.5);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+    letter-spacing: 1px;
+    text-decoration: none;
+}
+
+/* Forzar carga del peso estructural a 900 para que FontAwesome dibuje a la hamburguesa */
+.btn-menu-header:before, .btn-menu-header:after {
+    font-weight: 900 !important;
+    color: inherit;
+    font-size: 1.1em;
+}
+
+</style>
+
+<nav id="menu">
+    <div class="inner">
+        <h2>Grupo M-P</h2>
+        <ul class="links">
+            <li><a href="/">Inicio</a></li>
+            <li><a href="/#one">Petrolera</a></li>
+            <li><a href="/agricola">Agrícola</a></li>
+            <li><a href="/#four">Infraestructura y Energía</a></li>
+            <li><a href="/construccion">Construcción</a></li>
+            <li><a href="/contacto">Contacto</a></li>
+        </ul>
+        <a href="#" class="close" title="Cerrar">✕</a>
+    </div>
+</nav>

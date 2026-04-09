@@ -1,0 +1,129 @@
+<style>
+/* CSS para el Carrusel Marquee Flotante */
+.marquee-wrapper {
+   position: absolute;
+   bottom: 0;
+   left: 0;
+   width: 100%;
+   background: rgba(0,0,0,0.55);
+   backdrop-filter: blur(10px);
+   -webkit-backdrop-filter: blur(10px);
+   z-index: 50;
+   border-top: 1px solid rgba(255, 255, 255, 0.1);
+   box-shadow: 0 -4px 15px rgba(0,0,0,0.4);
+   display: flex;
+   align-items: center;
+   overflow: hidden;
+}
+
+.marquee-track {
+   display: flex;
+   gap: 5rem;
+   padding: 1rem 3rem;
+   width: max-content;
+   /* El keyframe debe rodar de 0% a -50% puesto que el contenido está duplicado al 100% dos veces */
+   animation: marqueeScroll 45s linear infinite;
+   align-items: center;
+}
+
+.marquee-track:hover {
+   animation-play-state: paused;
+}
+
+@keyframes marqueeScroll {
+   from { transform: translateX(0); }
+   to { transform: translateX(-50%); } 
+}
+
+.carousel-item {
+   cursor: pointer !important;
+   color: #FFF !important;
+   text-decoration: none;
+   font-size: 0.9em;
+   font-weight: bold;
+   text-transform: uppercase;
+   padding: 0.7em 1.5em;
+   border-radius: 25px;
+   background: rgba(255, 255, 255, 0.08);
+   border: 1px solid rgba(255, 255, 255, 0.2);
+   transition: all 0.3s ease;
+   white-space: nowrap;
+   display: inline-flex;
+   align-items: center;
+}
+
+.carousel-item:hover, .carousel-item:active {
+    background: #FFCD00;
+    color: #121212 !important;
+    border-color: #FFCD00;
+    box-shadow: 0 0 15px rgba(255, 205, 0, 0.7);
+    transform: scale(1.05);
+}
+
+.carousel-item.cta-item {
+    background: rgba(225, 6, 0, 0.8);
+    border-color: #e10600;
+}
+.carousel-item.cta-item:hover, .carousel-item.cta-item:active {
+    background: #e10600;
+    color: #fff !important;
+    box-shadow: 0 0 15px rgba(225, 6, 0, 0.7);
+}
+</style>
+
+<div class="marquee-wrapper">
+    <div class="marquee-track">
+        <!-- Bloque Primario -->
+        {% for sec in sections %}
+            <a href="{{ sec.id }}" class="carousel-item {% if sec.cta %}cta-item{% endif %}">
+                {% if sec.icon %}<i class="fa {{ sec.icon }}">&nbsp;</i>{% endif %}
+                {{ sec.title }}
+            </a>
+        {% endfor %}
+
+        <!-- Bloque Secundario Clonado para lograr ilusión de bucle continuo del 50% -->
+        {% for sec in sections %}
+            <a href="{{ sec.id }}" aria-hidden="true" class="carousel-item {% if sec.cta %}cta-item{% endif %}">
+                {% if sec.icon %}<i class="fa {{ sec.icon }}">&nbsp;</i>{% endif %}
+                {{ sec.title }}
+            </a>
+        {% endfor %}
+        
+        <!-- Bloque Terciario (Por si el contenido es tan corto que no llega a cubrir las pantallas anchas) -->
+        {% for sec in sections %}
+            <a href="{{ sec.id }}" aria-hidden="true" class="carousel-item {% if sec.cta %}cta-item{% endif %}">
+                {% if sec.icon %}<i class="fa {{ sec.icon }}">&nbsp;</i>{% endif %}
+                {{ sec.title }}
+            </a>
+        {% endfor %}
+        
+        <!-- Bloque Cuaternario (Protección para Monitores 4K) -->
+        {% for sec in sections %}
+            <a href="{{ sec.id }}" aria-hidden="true" class="carousel-item {% if sec.cta %}cta-item{% endif %}">
+                {% if sec.icon %}<i class="fa {{ sec.icon }}">&nbsp;</i>{% endif %}
+                {{ sec.title }}
+            </a>
+        {% endfor %}
+    </div>
+</div>
+
+<script>
+// Manejador de scroll suave general unificado con Vanilla JS
+document.querySelectorAll('.carousel-item').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        if(this.getAttribute('href').startsWith('#')) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href').substring(1);
+            const element = document.getElementById(targetId);
+            if(element) {
+                // Compensamos 20px menos para no ser tapados visualmente si hay sticky futuros.
+                const offsetPosition = element.getBoundingClientRect().top + window.pageYOffset - 20;
+                window.scrollTo({
+                     top: offsetPosition,
+                     behavior: "smooth"
+                });
+            }
+        }
+    });
+});
+</script>

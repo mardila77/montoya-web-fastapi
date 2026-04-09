@@ -20,28 +20,23 @@
 
         <header id="header" class="alt">
             <h1><a href="/">GMPC</a></h1>
-            <nav><a href="#menu">Menú</a></nav>
+            <nav><a href="#menu" class="btn-menu-header">Menú</a></nav>
         </header>
 
-        <nav id="menu">
-            <div class="inner">
-                <h2>Líneas de Negocio</h2>
-                <ul class="links">
-                    <li><a href="/">Inicio</a></li>
-                    <li><a href="#one">Petrolera</a></li>
-                    <li><a href="/agricola">Agrícola</a></li>
-                    <li><a href="#four">Infraestructura y Energía</a></li>
-                    <li><a href="/construccion">Construcción</a></li>
-                    <li><a href="#footer">Contacto</a></li>
-                </ul>
-                <a href="#" class="close">Cerrar</a>
-            </div>
-        </nav>
+        {% include 'menu.html' %}
 
-        <section id="banner">
+        <section id="banner" style="position: relative; padding-bottom: 70px;">
             <div class="inner">
                 &nbsp;
             </div>
+            {% set sections = [
+                {'id': '#one', 'title': 'Petrolera', 'icon': 'fa-oil-can'},
+                {'id': '#two', 'title': 'Agrícola', 'icon': 'fa-tractor'},
+                {'id': '#three', 'title': 'Minería', 'icon': 'fa-hard-hat'},
+                {'id': '#four', 'title': 'Energía Solar', 'icon': 'fa-solar-panel'},
+                {'id': '#five', 'title': 'Construcción', 'icon': 'fa-building'}
+            ] %}
+            {% include 'section_carousel.html' %}
         </section>
 
         <section id="wrapper">
