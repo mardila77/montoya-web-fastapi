@@ -1,5 +1,5 @@
 <style>
-/* CSS para el Carrusel Marquee Flotante */
+/* Estilos de envoltura estructural para el Carrusel Flotante transicional */
 .marquee-wrapper {
    position: absolute;
    bottom: 0;
@@ -21,7 +21,7 @@
    gap: 5rem;
    padding: 1rem 3rem;
    width: max-content;
-   /* El keyframe debe rodar de 0% a -50% puesto que el contenido está duplicado al 100% dos veces */
+   /* Algoritmo de rodamiento infinito: desliza del 0% al -50% compensando la duplicación en DOM */
    animation: marqueeScroll 45s linear infinite;
    align-items: center;
 }

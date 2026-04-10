@@ -24,50 +24,85 @@
                 {% include 'section_carousel.html' %}
             </section>
 
-            <header id="header" style="position: absolute; top: 0; left: 0; width: 100vw; background: transparent; z-index: 10;">
-                <h1><a href="/">Grupo Montoya-Pérez</a></h1>
-                <nav>
-                    <a href="#menu" style="color:#fff; text-shadow: 1px 1px 8px #000; font-weight:bold; border:2px solid #fff; border-radius:0.5em; padding:0.3em 1.2em; background:rgba(24,24,24,0.35);">Menú</a>
-                </nav>
-            </header>
+            <header id="header" style="position: absolute; top: 0; left: 0; width: 100vw; background: transparent; z-index: 10; padding: 1.5em 2em; display: flex; justify-content: space-between; align-items: center; box-sizing: border-box;">
+            <h1 style="margin: 0; padding: 0; display: flex; align-items: center;">
+                <a href="/" style="display: block; line-height: 0; text-decoration: none;">
+                    <img src="{{ url_for('static', path='images/logo1x1.jpeg') }}" alt="Grupo Montoya-Pérez" style="height: 55px; width: auto; border-radius: 50%; box-shadow: 0 4px 15px rgba(0,0,0,1); transition: transform 0.3s ease;" title="Volver al inicio" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+                </a>
+            </h1>
+            <nav style="margin: 0;">
+                <a href="#menu" class="btn-menu-header" style="background: rgba(18, 18, 18, 0.7); backdrop-filter: blur(5px); color: #FFCD00; font-weight: bold; text-transform: uppercase; padding: 0.5em 1.5em; border-radius: 30px; border: 1px solid rgba(255, 205, 0, 0.5);">Menú</a>
+            </nav>
+        </header>
 
             {% include 'menu.html' %}
 
             <section id="wrapper">
 
 
-                <div class="wrapper" style="background: #181818 url('/static/images/montoyaperez/fondoseccioncontato.png') center/cover no-repeat; border-radius: 0 0 1em 1em; box-shadow: 0 8px 32px rgba(0,0,0,0.18); padding: 2em 0; position: relative; min-height: 600px;">
-                    <div class="inner" style="max-width: 600px; margin: auto; background: rgba(24,24,24,0.82); border-radius: 1em; box-shadow: 0 2px 12px rgba(255,204,0,0.10); padding: 2em; position: relative; z-index: 2;">
-                        <h3 class="major" style="color:#e10600; text-align:center;">Envíanos un mensaje</h3>
-                        <form id="formulario_contacto" method="post" action="#" style="background: transparent; border-radius: 1em; box-shadow: none; padding: 0; border: none;">
-                            <div class="fields" style="display: flex; flex-direction: column; gap: 1em;">
-                                <div class="field">
-                                    <label for="name" style="color:#ffcc00; font-weight:bold;">Nombre</label>
-                                    <input type="text" name="name" id="name" required style="border: 1.5px solid #e10600; border-radius: 0.5em; padding: 0.7em; color:#fff; background:#232323;" />
+                <div class="wrapper" style="background: #181818 url('/static/images/montoyaperez/fondoseccioncontato.png') center/cover no-repeat; border-radius: 0 0 1em 1em; box-shadow: 0 8px 32px rgba(0,0,0,0.18); padding: 0.8em 0; position: relative;">
+                    <div class="inner" style="width: 95%; max-width: 750px; margin: auto; background: rgba(20,20,20,0.85); backdrop-filter: blur(10px); border-radius: 12px; box-shadow: 0 8px 32px rgba(0,0,0,0.8); border: 1px solid rgba(255,205,0,0.1); padding: 1em; position: relative; z-index: 2; display: flex; flex-wrap: wrap; gap: 1em;">
+                        
+                        <!-- Columna Izquierda: Formulario -->
+                        <div style="flex: 2 1 280px;">
+                            <h3 style="color:#FFCD00; margin-bottom: 0.5em; font-size: 1.1em; border-bottom: 2px solid #D32F2F; display: inline-block; padding-bottom: 0.2em;">Escríbenos</h3>
+                            <form id="formulario_contacto" method="post" action="#" style="margin: 0;">
+                                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 0.6em;">
+                                    <div>
+                                        <label for="name" style="color:#E0E0E0; font-size: 0.75em; margin-bottom: 0.2em; display: block;">Nombre</label>
+                                        <input type="text" name="name" id="name" required style="width: 100%; border: 1px solid rgba(255,205,0,0.3); border-radius: 6px; padding: 0.3em 0.5em; color:#fff; background: rgba(0,0,0,0.5); outline: none; transition: border-color 0.3s; font-size: 0.85em;" onfocus="this.style.borderColor='#FFCD00'" onblur="this.style.borderColor='rgba(255,205,0,0.3)'" />
+                                    </div>
+                                    <div>
+                                        <label for="email" style="color:#E0E0E0; font-size: 0.75em; margin-bottom: 0.2em; display: block;">Correo</label>
+                                        <input type="email" name="email" id="email" required style="width: 100%; border: 1px solid rgba(255,205,0,0.3); border-radius: 6px; padding: 0.3em 0.5em; color:#fff; background: rgba(0,0,0,0.5); outline: none; transition: border-color 0.3s; font-size: 0.85em;" onfocus="this.style.borderColor='#FFCD00'" onblur="this.style.borderColor='rgba(255,205,0,0.3)'" />
+                                    </div>
                                 </div>
-                                <div class="field">
-                                    <label for="email" style="color:#ffcc00; font-weight:bold;">Correo electrónico</label>
-                                    <input type="email" name="email" id="email" required style="border: 1.5px solid #e10600; border-radius: 0.5em; padding: 0.7em; color:#fff; background:#232323;" />
+                                <div style="margin-top: 0.5em;">
+                                    <label for="message" style="color:#E0E0E0; font-size: 0.75em; margin-bottom: 0.2em; display: block;">Mensaje</label>
+                                    <style>
+                                        #message::-webkit-resizer {
+                                            background-color: transparent;
+                                            border-bottom: 2px solid #FFCD00;
+                                            border-right: 2px solid #FFCD00;
+                                            border-radius: 0 0 4px 0;
+                                            cursor: ns-resize;
+                                            width: 10px; height: 10px;
+                                            opacity: 0.7;
+                                        }
+                                        #message:hover::-webkit-resizer { opacity: 1; border-width: 3px; }
+                                    </style>
+                                    <textarea name="message" id="message" rows="2" required placeholder="Haz transparente tus necesidades..." title="Arrastra la esquina derecha para hacer este cuadro más grande" style="width: 100%; border: 1px solid rgba(255,205,0,0.3); border-radius: 6px; padding: 0.4em 0.6em; color:#fff; background: rgba(0,0,0,0.5); outline: none; transition: border-color 0.3s; resize: vertical; min-height: 55px; font-size: 0.85em;" onfocus="this.style.borderColor='#FFCD00'" onblur="this.style.borderColor='rgba(255,205,0,0.3)'"></textarea>
                                 </div>
-                                <div class="field">
-                                    <label for="message" style="color:#ffcc00; font-weight:bold;">Mensaje</label>
-                                    <textarea name="message" id="message" rows="5" required style="border: 1.5px solid #e10600; border-radius: 0.5em; padding: 0.7em; color:#fff; background:#232323;"></textarea>
+                                <div style="margin-top: 1.2em; text-align: center;">
+                                    <button type="submit" style="background:#D32F2F; border:none; color:#fff; font-weight:bold; font-size:0.9em; border-radius:20px; padding:0.6em 2.5em; cursor: pointer; text-align: center; display: inline-flex; align-items: center; justify-content: center; letter-spacing: 1px; transition: background 0.3s, transform 0.2s;" onmouseover="this.style.background='#FFCD00'; this.style.color='#111'; this.style.transform='scale(1.05)'" onmouseout="this.style.background='#D32F2F'; this.style.color='#fff'; this.style.transform='scale(1)'">ENVIAR MENSAJE</button>
                                 </div>
-                            </div>
-                            <ul class="actions" style="text-align:center; margin-top:1.5em;">
-                                <li><input type="submit" value="Enviar mensaje" class="primary" style="background:#e10600; border:none; color:#fff; font-weight:bold; font-size:1.1em; border-radius:0.5em; padding:0.7em 2em; box-shadow: 0 2px 8px #ffcc00; transition: background 0.2s; display:flex; align-items:center; justify-content:center; height:3.2em; line-height:1;" onmouseover="this.style.background='#ffcc00';this.style.color='#e10600';" onmouseout="this.style.background='#e10600';this.style.color='#fff';" /></li>
-                            </ul>
-                        </form>
-                        <div id="sede_oficial" style="margin-top:2.5em; background: #ffcc00; border-radius: 0.7em; padding: 1.5em; box-shadow: 0 2px 8px #e10600;">
-                            <ul class="contact" style="margin:0; color:#000;">
-                                <li class="icon solid fa-home" style="color:#e10600; font-weight:bold;">
-                                    Grupo Montoya-Pérez C.A.<br />
-                                    <span style="color:#000; font-weight:normal;">Sede Industrial Binacional</span>
-                                </li>
-                                <li class="icon solid fa-phone"><a href="tel:{{ phone }}" style="color:#e10600; font-weight:bold;">+{{ phone }}</a></li>
-                                <li class="icon solid fa-envelope"><a href="mailto:{{ email }}" target="_blank" rel="noopener noreferrer" style="color:#e10600; font-weight:bold;" onclick="event.preventDefault(); window.location.href='mailto:{{ email }}';">{{ email }}</a></li>
-                            </ul>
+                            </form>
                         </div>
+
+                        <!-- Columna Derecha: Información de Contacto -->
+                        <div style="flex: 1 1 180px; display: flex; flex-direction: column;">
+                            <div id="sede_oficial" style="background: linear-gradient(135deg, rgba(255,205,0,0.95), rgba(211,47,47,0.9)); border-radius: 12px; padding: 1.2em; box-shadow: 0 4px 15px rgba(0,0,0,0.5); height: 100%; display: flex; flex-direction: column; justify-content: center; color: #111;">
+                                <h3 style="margin-bottom: 0.6em; font-size: 1em; border-bottom: 1px solid rgba(0,0,0,0.2); padding-bottom: 0.3em; color: #111;">Contacto Directo</h3>
+                                <ul style="list-style: none; padding: 0; margin: 0; line-height: 1.4; font-size: 0.8em;">
+                                    <li style="margin-bottom: 0.8em; display: flex; align-items: flex-start; gap: 0.5em;">
+                                        <i class="fa fa-map-marker-alt" style="margin-top: 0.2em; color: #111;"></i>
+                                        <div>
+                                            <strong style="color: #111;">Sede Binacional</strong><br />
+                                            Grupo Montoya-Pérez
+                                        </div>
+                                    </li>
+                                    <li style="margin-bottom: 0.8em; display: flex; align-items: center; gap: 0.5em;">
+                                        <i class="fa fa-phone" style="color: #111;"></i>
+                                        <a href="tel:{{ phone }}" style="color:#111; text-decoration: none; font-weight: bold;">+{{ phone }}</a>
+                                    </li>
+                                    <li style="display: flex; align-items: center; gap: 0.5em;">
+                                        <i class="fa fa-envelope" style="color: #111;"></i>
+                                        <a href="mailto:{{ email }}" style="color:#111; text-decoration: none; font-weight: bold;">{{ email }}</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </section>
@@ -91,7 +126,7 @@
         <script src="{{ url_for('static', path='assets/js/main.js') }}"></script>
 
         <!-- Botón flotante de WhatsApp -->
-        <a href="https://wa.me/{{ phone }}?text=Hola%20Marco%2C%20quisiera%20informaci%C3%B3n%20sobre%20mi%20equipo.%20Adjunto%20la%20foto%20de%20la%20placa%20identificadora%20para%20ubicarlo%20en%20el%20cat%C3%A1logo." class="whatsapp-float" target="_blank" title="Chatea con Marco Montoya">
+        <a href="https://wa.me/{{ phone }}?text=%C2%A1Hola%2C%20*Marco*%21%20%E2%9C%A8%0A%0AMe%20comunico%20para%20solicitar%20informaci%C3%B3n%20sobre%20mi%20equipo%20%F0%9F%8F%97%EF%B8%8F.%20Para%20facilitar%20la%20b%C3%BAsqueda%20y%20cotizaci%C3%B3n%2C%20te%20env%C3%ADo%20lo%20siguiente%3A%0A%0A%F0%9F%93%B8%20*Archivo%3A*%20Foto%20de%20la%20placa%20identificadora.%0A%F0%9F%94%8D%20*Objetivo%3A*%20Ubicar%20el%20equipo%20correcto%20en%20el%20cat%C3%A1logo.%0A%0A%C2%A1Hablemos%20pronto%20para%20ver%20las%20opciones%21%20%F0%9F%93%9E" class="whatsapp-float" target="_blank" title="Chatea con Marco Montoya">
             <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" />
         </a>
     </body>

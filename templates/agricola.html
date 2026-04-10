@@ -24,7 +24,7 @@
                 background-color: var(--color-fondo);
             }
 
-            /* Hero Section */
+            /* Inicialización de recursos gráficos y anclaje de fondo estático */
             #hero {
                 background-image: url("{{ url_for('static', path='images/agricola/hero-agricola.png') }}");
                 background-size: 100% 100%;
@@ -64,7 +64,7 @@
                 font-weight: bold;
             }
 
-            /* Sección Cimiento Logístico */
+            /* Contenedor divisor para contenido logístico (Grid base) */
             #cimiento {
                 padding: 4em 2em;
                 display: flex;
@@ -91,7 +91,7 @@
                 border-radius: 8px;
             }
 
-            /* Sección Compromiso */
+            /* Caja encapsuladora de compromisos de servicio (Fondo diferencial) */
             #compromiso {
                 padding: 4em 2em;
                 background-color: #F4F4F4;
@@ -122,7 +122,7 @@
                 margin-bottom: 1em;
             }
 
-            /* Sección Beneficios */
+            /* Zona algorítmica para enumerar beneficios operativos */
             #beneficios {
                 padding: 4em 2em;
                 background-color: var(--color-fondo);
@@ -133,7 +133,7 @@
                 color: var(--color-texto-principal);
             }
 
-            /* CTA */
+            /* Banderín inferior tipo CTA (Call To Action) corporativo */
             #cta {
                 padding: 4em 2em;
                 background-color: var(--color-secundario-amarillo-cat);
@@ -160,7 +160,7 @@
                 background-color: #B71C1C;
             }
 
-            /* Responsive */
+            /* Reglas de quiebre algorítmicas para compatibilidad móvil (Breakpoints) */
             @media (max-width: 768px) {
                 #cimiento {
                     flex-direction: column;
@@ -185,10 +185,14 @@
     <body class="is-preload">
         <div id="page-wrapper">
             <!-- Header -->
-            <header id="header">
-                <h1 style="color: white;"><a href="/">Grupo Montoya-Pérez</a></h1>
-                <nav>
-                    <a href="#menu" class="btn-menu-header">Menú</a>
+            <header id="header" style="position: absolute; top: 0; left: 0; width: 100%; background: transparent; z-index: 10; padding: 1.5em 2em; display: flex; justify-content: space-between; align-items: center; box-sizing: border-box;">
+                <h1 style="margin: 0; padding: 0; display: flex; align-items: center;">
+                    <a href="/" style="display: block; line-height: 0; text-decoration: none;">
+                        <img src="{{ url_for('static', path='images/logo1x1.jpeg') }}" alt="Grupo Montoya-Pérez" style="height: 55px; width: auto; border-radius: 50%; box-shadow: 0 4px 15px rgba(0,0,0,1); transition: transform 0.3s ease;" title="Volver al inicio" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+                    </a>
+                </h1>
+                <nav style="margin: 0;">
+                    <a href="#menu" class="btn-menu-header" style="background: rgba(18, 18, 18, 0.7); backdrop-filter: blur(5px); color: #FFCD00; font-weight: bold; text-transform: uppercase; padding: 0.5em 1.5em; border-radius: 30px; border: 1px solid rgba(255, 205, 0, 0.5);">Menú</a>
                 </nav>
             </header>
 

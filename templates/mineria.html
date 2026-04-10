@@ -1,0 +1,176 @@
+<!DOCTYPE HTML>
+<html lang="es">
+    <head>
+        <title>Minería - Grupo Montoya-Pérez</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+        <link rel="icon" type="image/png" href="{{ url_for('static', path='assets/css/images/favicon.png') }}" />
+        <link rel="stylesheet" href="{{ url_for('static', path='assets/css/main.css') }}" />
+        <noscript><link rel="stylesheet" href="{{ url_for('static', path='assets/css/noscript.css') }}" /></noscript>
+        <style>
+            :root {
+                --color-primario-rojo: #D32F2F;
+                --color-secundario-amarillo-cat: #FFCD00;
+            }
+
+            body { font-family: 'Inter', sans-serif; }
+
+            #hero-sector {
+                background-image: url("{{ url_for('static', path='images/mineria/minero_01.png') }}"); 
+                background-size: cover;
+                background-position: center;
+                background-attachment: fixed;
+                min-height: 50vh;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                text-align: center;
+                position: relative;
+                padding: 4em 1em;
+            }
+
+            #hero-sector::before {
+                content: '';
+                position: absolute;
+                top: 0; left: 0; right: 0; bottom: 0;
+                background: linear-gradient(180deg, rgba(18,18,18,0.7) 0%, #121212 100%);
+            }
+
+            #hero-sector .inner {
+                position: relative;
+                z-index: 2;
+                color: white;
+                max-width: 800px;
+                animation: fadeUp 1s ease-out;
+            }
+
+            #hero-sector h1 {
+                font-size: 3.5em;
+                margin-bottom: 0.2em;
+                color: var(--color-secundario-amarillo-cat);
+                letter-spacing: 2px;
+                text-transform: uppercase;
+            }
+
+            #hero-sector p {
+                font-size: 1.3em;
+                color: #e0e0e0;
+                font-style: italic;
+            }
+
+            #sector-content {
+                padding: 4em 2em 7em 2em;
+                background-color: #121212;
+                position: relative;
+            }
+
+            .glass-panel {
+                position: relative;
+                background: rgba(255, 255, 255, 0.02);
+                border: 1px solid rgba(255, 255, 255, 0.05);
+                box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+                border-radius: 15px;
+                padding: 4em;
+                max-width: 900px;
+                margin: -5em auto 0 auto;
+                z-index: 5;
+                color: white;
+                font-size: 1.15em;
+                line-height: 1.8;
+                text-align: justify;
+            }
+
+            .highlight {
+                color: var(--color-secundario-amarillo-cat);
+                font-weight: bold;
+            }
+
+            .cta-box {
+                margin-top: 4em;
+                text-align: center;
+            }
+
+            .cta-box a {
+                background-color: var(--color-primario-rojo);
+                color: white;
+                padding: 1em 2em;
+                text-decoration: none;
+                border-radius: 5px;
+                font-weight: bold;
+                display: inline-block;
+                transition: background-color 0.3s;
+            }
+            .cta-box a:hover { background-color: #B71C1C; }
+
+            @keyframes fadeUp {
+                from { opacity: 0; transform: translateY(30px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+
+            @media (max-width: 768px) {
+                .glass-panel { padding: 2em; border-radius: 10px; }
+                #hero-sector h1 { font-size: 2.5em; }
+            }
+        </style>
+    </head>
+    <body class="is-preload">
+        <div id="page-wrapper">
+            
+            <!-- Header Unificado -->
+            <header id="header" style="position: absolute; top: 0; left: 0; width: 100vw; background: transparent; z-index: 10; padding: 1.5em 2em; display: flex; justify-content: space-between; align-items: center; box-sizing: border-box;">
+                <h1 style="margin: 0; padding: 0; display: flex; align-items: center;">
+                    <a href="/" style="display: block; line-height: 0; text-decoration: none;">
+                        <img src="{{ url_for('static', path='images/logo1x1.jpeg') }}" alt="Grupo Montoya-Pérez" style="height: 55px; width: auto; border-radius: 50%; box-shadow: 0 4px 15px rgba(0,0,0,1); transition: transform 0.3s ease;" title="Volver al inicio" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+                    </a>
+                </h1>
+                <nav style="margin: 0;">
+                    <a href="#menu" class="btn-menu-header" style="background: rgba(18, 18, 18, 0.7); backdrop-filter: blur(5px); color: #FFCD00; font-weight: bold; text-transform: uppercase; padding: 0.5em 1.5em; border-radius: 30px; border: 1px solid rgba(255, 205, 0, 0.5);">Menú</a>
+                </nav>
+            </header>
+
+            {% include 'menu.html' %}
+
+            <section id="hero-sector">
+                <div class="inner">
+                    <h1>Minería</h1>
+                    <p>POTENCIA EXTREMA PARA GRANDES DESAFÍOS MINEROS.</p>
+                </div>
+            </section>
+
+            <section id="sector-content">
+                <div class="glass-panel">
+                    <p>Una empresa de servicios de maquinaria pesada constituye el <span class="highlight">nervio motor de la minería</span>, una industria de gran escala que depende de la fuerza y la constancia de los equipos para cumplir sus objetivos en condiciones extremas 24/7.</p>
+                    
+                    <p>Contar con un aliado que garantice no solo la venta de maquinaria sino también un <strong>soporte técnico inmediato</strong> y un flujo constante de repuestos, es la diferencia entre el éxito operativo y paradas millonarias.</p>
+                    
+                    <p>Este respaldo asegura los grandes movimientos de material de manera <span class="highlight">eficaz y eficiente</span>.</p>
+                    
+                    <div class="cta-box">
+                        <a href="/contacto">Solicitar Asesoría</a>
+                    </div>
+                </div>
+            </section>
+
+            <section id="footer">
+                <div class="inner">
+                    <ul class="copyright">
+                        <li>&copy; GMPC. Todos los derechos reservados.</li>
+                        <li>Desarrollo: <a href="https://linkedin.com/in/mardila77">Ing. Manuel Ardila</a></li>
+                    </ul>
+                </div>
+            </section>
+        </div>
+
+        <script src="{{ url_for('static', path='assets/js/jquery.min.js') }}"></script>
+        <script src="{{ url_for('static', path='assets/js/jquery.scrollex.min.js') }}"></script>
+        <script src="{{ url_for('static', path='assets/js/browser.min.js') }}"></script>
+        <script src="{{ url_for('static', path='assets/js/breakpoints.min.js') }}"></script>
+        <script src="{{ url_for('static', path='assets/js/util.js') }}"></script>
+        <script src="{{ url_for('static', path='assets/js/main.js') }}"></script>
+
+        <!-- Botón flotante de WhatsApp -->
+        <a href="https://wa.me/{{ phone }}?text=%C2%A1Hola%2C%20*Marco*%21%20%E2%9C%A8%0A%0AMe%20comunico%20para%20solicitar%20informaci%C3%B3n%20sobre%20mi%20equipo%20%F0%9F%8F%97%EF%B8%8F.%20Para%20facilitar%20la%20b%C3%BAsqueda%20y%20cotizaci%C3%B3n%2C%20te%20env%C3%ADo%20lo%20siguiente%3A%0A%0A%F0%9F%93%B8%20*Archivo%3A*%20Foto%20de%20la%20placa%20identificadora.%0A%F0%9F%94%8D%20*Objetivo%3A*%20Ubicar%20el%20equipo%20correcto%20en%20el%20cat%C3%A1logo.%0A%0A%C2%A1Hablemos%20pronto%20para%20ver%20las%20opciones%21%20%F0%9F%93%9E" class="whatsapp-float" target="_blank" title="Chatea con Marco Montoya">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" />
+        </a>
+    </body>
+</html>

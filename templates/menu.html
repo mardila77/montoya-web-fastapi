@@ -1,5 +1,5 @@
 <style>
-/* CSS Premium para el Nav Menu Lateral (Glassmorphism & Animaciones dinámicas) */
+/* Define la arquitectura visual principal del menú lateral estilo cristal */
 #menu {
     z-index: 10000;
 }
@@ -92,7 +92,7 @@
     box-shadow: 0 0 15px rgba(211, 47, 47, 0.7);
 }
 
-/* Efecto de aparecer suave */
+/* Control fluido de visibilidad y opacidad para enlaces del menú */
 #menu .inner .links li {
     opacity: 0.9;
     transition: opacity 0.3s;
@@ -104,7 +104,7 @@
     opacity: 1;
 }
 
-/* Estilos globales unificados para el botón de apertura del menú (Cabecera) */
+/* Estructurador unificado y responsivo para el botón global desplegable */
 .btn-menu-header {
     background: rgba(18, 18, 18, 0.7);
     backdrop-filter: blur(5px);
@@ -120,7 +120,7 @@
     text-decoration: none;
 }
 
-/* Forzar carga del peso estructural a 900 para que FontAwesome dibuje a la hamburguesa */
+/* Fuerza la topología de FontAwesome a 900 para asegurar la visibilidad del ícono sólido */
 .btn-menu-header:before, .btn-menu-header:after {
     font-weight: 900 !important;
     color: inherit;
@@ -134,9 +134,11 @@
         <h2>Grupo M-P</h2>
         <ul class="links">
             <li><a href="/">Inicio</a></li>
-            <li><a href="/#one">Petrolera</a></li>
+            <li><a href="/nosotros">Nosotros</a></li>
+            <li><a href="/petrolera">Petrolera</a></li>
             <li><a href="/agricola">Agrícola</a></li>
-            <li><a href="/#four">Infraestructura y Energía</a></li>
+            <li><a href="/mineria">Minería</a></li>
+            <li><a href="/energia">Energía Sistémica</a></li>
             <li><a href="/construccion">Construcción</a></li>
             <li><a href="/contacto">Contacto</a></li>
         </ul>

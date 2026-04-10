@@ -1,0 +1,318 @@
+<!DOCTYPE HTML>
+<html lang="es">
+    <head>
+        <title>Nuestra Empresa - Grupo Montoya-Pérez</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+        <link rel="icon" type="image/png" href="{{ url_for('static', path='assets/css/images/favicon.png') }}" />
+        <link rel="stylesheet" href="{{ url_for('static', path='assets/css/main.css') }}" />
+        <noscript><link rel="stylesheet" href="{{ url_for('static', path='assets/css/noscript.css') }}" /></noscript>
+        <style>
+            :root {
+                --color-primario-rojo: #D32F2F;
+                --color-secundario-amarillo-cat: #FFCD00;
+            }
+
+            body {
+                font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            }
+
+            /* Sección inicial con carga del hero corporativo (Fondo fijo) */
+            #hero-nosotros {
+                background-image: url("{{ url_for('static', path='images/montoyaperez/banner.png') }}"); /* Carga estática de banner base superior */
+                background-size: cover;
+                background-position: center;
+                background-attachment: fixed;
+                min-height: 50vh;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                text-align: center;
+                position: relative;
+                padding: 4em 1em;
+            }
+
+            #hero-nosotros::before {
+                content: '';
+                position: absolute;
+                top: 0; left: 0; right: 0; bottom: 0;
+                background: linear-gradient(180deg, rgba(18,18,18,0.7) 0%, #121212 100%);
+            }
+
+            #hero-nosotros .inner {
+                position: relative;
+                z-index: 2;
+                color: white;
+                max-width: 800px;
+                animation: fadeUp 1s ease-out;
+            }
+
+            #hero-nosotros h1 {
+                font-size: 3.5em;
+                margin-bottom: 0.2em;
+                color: var(--color-secundario-amarillo-cat);
+                letter-spacing: 2px;
+                text-transform: uppercase;
+            }
+
+            #hero-nosotros p {
+                font-size: 1.3em;
+                color: #e0e0e0;
+                letter-spacing: 1px;
+                font-style: italic;
+            }
+
+            /* Envoltura tipo cristal táctico transparente para el ecosistema de texto */
+            #nosotros-content {
+                padding: 4em 2em 7em 2em;
+                background-color: #121212;
+                position: relative;
+            }
+
+            .glass-panel {
+                position: relative;
+                background: rgba(255, 255, 255, 0.02);
+                border: 1px solid rgba(255, 255, 255, 0.05);
+                box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+                border-radius: 15px;
+                padding: 4em;
+                max-width: 1200px;
+                margin: -5em auto 0 auto; /* Eleva el bloque principal causando impacto de flotabilidad sobre el hero principal */
+                z-index: 5;
+                color: white;
+            }
+
+            /* Caja de tipografía para discurso institucional de bienvenida */
+            .nosotros-intro {
+                text-align: center;
+                margin-bottom: 4em;
+            }
+
+            .nosotros-intro h2 {
+                color: var(--color-secundario-amarillo-cat);
+                font-size: 2.2em;
+                text-transform: uppercase;
+                margin-bottom: 0.8em;
+            }
+
+            .nosotros-intro p {
+                font-size: 1.15em;
+                line-height: 1.7;
+                max-width: 900px;
+                margin: 0 auto;
+                color: #cccccc;
+            }
+            
+            .nosotros-intro strong {
+                color: white;
+            }
+
+            /* Tarjetería en grilla responsiva automatizada (5 Pilares Base) */
+            .pillars-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+                gap: 1.5em;
+                margin-top: 3em;
+            }
+
+            .pillar-card {
+                background: rgba(255, 255, 255, 0.03);
+                border-top: 3px solid transparent;
+                padding: 2.5em 2em;
+                text-align: justify;
+                border-radius: 10px;
+                transition: transform 0.3s, background 0.3s, border-color 0.3s;
+                position: relative;
+                overflow: hidden;
+            }
+
+            .pillar-card:hover {
+                transform: translateY(-8px);
+                background: rgba(255, 255, 255, 0.08);
+                border-color: var(--color-primario-rojo);
+            }
+
+            /* Inyecta pseudo-iconografía desvanecida de tamaño gigante tras la tarjeta */
+            .pillar-card::before {
+                content: '';
+                position: absolute;
+                bottom: -20px;
+                right: -20px;
+                font-size: 8em;
+                color: rgba(255, 255, 255, 0.02);
+                z-index: 0;
+            }
+
+            .pillar-card .icon-wrapper {
+                text-align: center;
+                font-size: 2.5em;
+                color: var(--color-secundario-amarillo-cat);
+                margin-bottom: 0.5em;
+                position: relative;
+                z-index: 1;
+            }
+
+            .pillar-card h3 {
+                color: white;
+                text-align: center;
+                font-size: 1.4em;
+                margin-bottom: 1em;
+                position: relative;
+                z-index: 1;
+                border-bottom: 1px solid rgba(255,255,255,0.1);
+                padding-bottom: 0.5em;
+            }
+
+            .pillar-card p {
+                font-size: 0.95em;
+                line-height: 1.6;
+                color: #b3b3b3;
+                position: relative;
+                z-index: 1;
+                margin-bottom: 0;
+            }
+
+            /* Tarjetería horizontal destacada inferior (Pilar Final) */
+            .slogan-box {
+                margin-top: 5em;
+                padding: 2em;
+                text-align: center;
+                background: rgba(211, 47, 47, 0.05); /* Imprime un tinte diluido rojo Caterpillar */
+                border-radius: 8px;
+                border: 1px dotted rgba(211, 47, 47, 0.3);
+            }
+
+            .slogan-box h3 {
+                color: var(--color-secundario-amarillo-cat);
+                font-size: 1.7em;
+                letter-spacing: 1px;
+                margin: 0;
+            }
+            .slogan-box p {
+                margin-top: 0.5em;
+                color: #aaaaaa;
+                font-size: 1.1em;
+                margin-bottom: 0;
+            }
+
+            @keyframes fadeUp {
+                from { opacity: 0; transform: translateY(30px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+
+            @media (max-width: 768px) {
+                .glass-panel { padding: 2em; margin-top: -2em; }
+                #hero-nosotros h1 { font-size: 2.5em; }
+            }
+        </style>
+    </head>
+    <body class="is-preload">
+        <div id="page-wrapper">
+            
+            <!-- Header -->
+            <header id="header" style="position: absolute; top: 0; left: 0; width: 100%; background: transparent; z-index: 10; padding: 1.5em 2em; display: flex; justify-content: space-between; align-items: center; box-sizing: border-box;">
+                <h1 style="margin: 0; padding: 0; display: flex; align-items: center;">
+                    <a href="/" style="display: block; line-height: 0; text-decoration: none;">
+                        <img src="{{ url_for('static', path='images/logo1x1.jpeg') }}" alt="Grupo Montoya-Pérez" style="height: 55px; width: auto; border-radius: 50%; box-shadow: 0 4px 15px rgba(0,0,0,1); transition: transform 0.3s ease;" title="Volver al inicio" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+                    </a>
+                </h1>
+                <nav style="margin: 0;">
+                    <a href="#menu" class="btn-menu-header" style="background: rgba(18, 18, 18, 0.7); backdrop-filter: blur(5px); color: #FFCD00; font-weight: bold; text-transform: uppercase; padding: 0.5em 1.5em; border-radius: 30px; border: 1px solid rgba(255, 205, 0, 0.5);">Menú</a>
+                </nav>
+            </header>
+
+            <!-- Menu -->
+            {% include 'menu.html' %}
+
+            <!-- Hero Section -->
+            <section id="hero-nosotros">
+                <div class="inner">
+                    <h1>Grupo Montoya-Pérez</h1>
+                    <p>Más que maquinaria, somos el soporte que mueve tus proyectos.</p>
+                </div>
+            </section>
+
+            <!-- Main Content Area -->
+            <section id="nosotros-content">
+                <div class="glass-panel">
+                    
+                    <div class="nosotros-intro">
+                        <h2>El Motor Clave para el Progreso</h2>
+                        <p>
+                            Entendemos que el desarrollo de un país exige operaciones ininterrumpidas bajo las condiciones más extremas. Ya sea en zonas de minería, campos agrícolas, pozos petroleros, megaobras de infraestructura o instalaciones energéticas, contar con maquinaria de alto rendimiento y disponer del <strong>respaldo técnico inmediato</strong> hace la diferencia entre el éxito operativo y las paradas millonarias.
+                        </p>
+                    </div>
+
+                    <!-- 5 Pillars -->
+                    <div class="pillars-grid">
+                        
+                        <!-- Construcción -->
+                        <div class="pillar-card">
+                            <div class="icon-wrapper"><span class="icon solid fa-building"></span></div>
+                            <h3>Construcción</h3>
+                            <p>Somos la columna integral para las constructoras. Proveemos precisión, continuidad y soluciones preventivas indispensables para proteger su inversión, asegurar la culminación de sus obras y evitar retrasos imprevistos.</p>
+                        </div>
+
+                        <!-- Petrolero -->
+                        <div class="pillar-card">
+                            <div class="icon-wrapper"><span class="icon solid fa-oil-can"></span></div>
+                            <h3>Sector Petrolero</h3>
+                            <p>Socio estratégico en entornos de altas exigencias. Con una disponibilidad absoluta de reparación especializada, aseguramos que la infraestructura de perforación mantenga la máxima seguridad operativa.</p>
+                        </div>
+
+                        <!-- Agrícola -->
+                        <div class="pillar-card">
+                            <div class="icon-wrapper"><span class="icon solid fa-tractor"></span></div>
+                            <h3>Sector Agrícola</h3>
+                            <p>El cimiento logístico en el campo. Suministramos herramientas de trabajo y repuestos originales para que las labores de adecuación de tierras sostengan sin interrupciones la viabilidad alimentaria de nuestro país.</p>
+                        </div>
+
+                        <!-- Minería -->
+                        <div class="pillar-card">
+                            <div class="icon-wrapper"><span class="icon solid fa-hard-hat"></span></div>
+                            <h3>Minería</h3>
+                            <p>El nervio motor frente a los más grandes desafíos. Garantizamos fuerza y constancia de equipos las 24 horas para operar ágil y eficientemente durante los grandes movimientos a escala masiva.</p>
+                        </div>
+
+                        <!-- Energía -->
+                        <div class="pillar-card">
+                            <div class="icon-wrapper"><span class="icon solid fa-bolt"></span></div>
+                            <h3>Sistemas Energéticos</h3>
+                            <p>Respaldo integral de energía. Manejamos servicio experto en plantas eléctricas industriales, iluminación con tecnología LED, inversores y paneles fotovoltaicos orientados al futuro sostenible.</p>
+                        </div>
+
+                    </div>
+
+                    <!-- Botón/Slogan final -->
+                    <div class="slogan-box">
+                        <h3>Nuestra Sinergia Garantiza Resultados</h3>
+                        <p>Minimizamos riesgos operativos ofreciendo durabilidad, calidad y la maquinaria imparable que demanda cada industria.</p>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- Footer -->
+            <section id="footer">
+                <div class="inner">
+                    <ul class="copyright">
+                        <li>&copy; GMPC. Todos los derechos reservados.</li>
+                        <li>Desarrollo: <a href="https://linkedin.com/in/mardila77">Ing. Manuel Ardila</a></li>
+                    </ul>
+                </div>
+            </section>
+        </div>
+
+        <script src="{{ url_for('static', path='assets/js/jquery.min.js') }}"></script>
+        <script src="{{ url_for('static', path='assets/js/jquery.scrollex.min.js') }}"></script>
+        <script src="{{ url_for('static', path='assets/js/browser.min.js') }}"></script>
+        <script src="{{ url_for('static', path='assets/js/breakpoints.min.js') }}"></script>
+        <script src="{{ url_for('static', path='assets/js/util.js') }}"></script>
+        <script src="{{ url_for('static', path='assets/js/main.js') }}"></script>
+
+        <!-- Botón flotante de WhatsApp -->
+        <a href="https://wa.me/{{ phone }}?text=%C2%A1Hola%2C%20*Marco*%21%20%E2%9C%A8%0A%0AMe%20comunico%20para%20solicitar%20informaci%C3%B3n%20sobre%20mi%20equipo%20%F0%9F%8F%97%EF%B8%8F.%20Para%20facilitar%20la%20b%C3%BAsqueda%20y%20cotizaci%C3%B3n%2C%20te%20env%C3%ADo%20lo%20siguiente%3A%0A%0A%F0%9F%93%B8%20*Archivo%3A*%20Foto%20de%20la%20placa%20identificadora.%0A%F0%9F%94%8D%20*Objetivo%3A*%20Ubicar%20el%20equipo%20correcto%20en%20el%20cat%C3%A1logo.%0A%0A%C2%A1Hablemos%20pronto%20para%20ver%20las%20opciones%21%20%F0%9F%93%9E" class="whatsapp-float" target="_blank" title="Chatea con Marco Montoya">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" />
+        </a>
+    </body>
+</html>

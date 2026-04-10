@@ -52,3 +52,35 @@ async def construccion(request: Request):
         "construccion.html",
         {"request": request, "phone": CONTACTO["telefono"], "email": CONTACTO["email"]},
     )
+
+# Ruta del sector petrolero
+@app.get("/petrolera")
+async def petrolera(request: Request):
+    return templates.TemplateResponse(
+        "petrolera.html",
+        {"request": request, "phone": CONTACTO["telefono"], "email": CONTACTO["email"]},
+    )
+
+# Ruta del sector minería
+@app.get("/mineria")
+async def mineria(request: Request):
+    return templates.TemplateResponse(
+        "mineria.html",
+        {"request": request, "phone": CONTACTO["telefono"], "email": CONTACTO["email"]},
+    )
+
+# Ruta de Energía
+@app.get("/energia")
+async def energia(request: Request):
+    return templates.TemplateResponse(
+        "energia.html",
+        {"request": request, "phone": CONTACTO["telefono"], "email": CONTACTO["email"]},
+    )
+
+# Ruta Nosotros / Quiénes Somos
+@app.get("/nosotros")
+async def nosotros(request: Request):
+    return templates.TemplateResponse(
+        "nosotros.html",
+        {"request": request, "phone": CONTACTO["telefono"], "email": CONTACTO["email"]},
+    )
