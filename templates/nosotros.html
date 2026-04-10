@@ -311,7 +311,7 @@
         <script src="{{ url_for('static', path='assets/js/main.js') }}"></script>
 
         <!-- Botón flotante de WhatsApp -->
-        <a href="https://wa.me/{{ phone }}?text=%C2%A1Hola%2C%20*Marco*%21%20%E2%9C%A8%0A%0AMe%20comunico%20para%20solicitar%20informaci%C3%B3n%20sobre%20mi%20equipo%20%F0%9F%8F%97%EF%B8%8F.%20Para%20facilitar%20la%20b%C3%BAsqueda%20y%20cotizaci%C3%B3n%2C%20te%20env%C3%ADo%20lo%20siguiente%3A%0A%0A%F0%9F%93%B8%20*Archivo%3A*%20Foto%20de%20la%20placa%20identificadora.%0A%F0%9F%94%8D%20*Objetivo%3A*%20Ubicar%20el%20equipo%20correcto%20en%20el%20cat%C3%A1logo.%0A%0A%C2%A1Hablemos%20pronto%20para%20ver%20las%20opciones%21%20%F0%9F%93%9E" class="whatsapp-float" target="_blank" title="Chatea con Marco Montoya">
+        <a href="https://api.whatsapp.com/send?phone={{ phone }}&text=¡Hola, *Marco*! ✨%0A%0AMe comunico para solicitar información sobre mi equipo 🏗️. Para facilitar la búsqueda y cotización, te envío lo siguiente:%0A%0A📸 *Archivo:* Foto de la placa identificadora.%0A🔍 *Objetivo:* Ubicar el equipo correcto en el catálogo.%0A%0A¡Hablemos pronto para ver las opciones! 📞" class="whatsapp-float" target="_blank" title="Chatea con Marco Montoya">
             <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" />
         </a>
     </body>

@@ -14,3 +14,7 @@ wheels/
 
 # M77-info files
 *.pdf
+
+# Archivos de Entorno (Secretos y Contraseñas)
+.env
+.env.*

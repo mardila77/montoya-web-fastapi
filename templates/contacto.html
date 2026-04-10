@@ -1,133 +1,244 @@
 <!DOCTYPE HTML>
 <html>
-    <head>
-        <title>Contacto - Grupo Montoya-Pérez</title>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-        <link rel="icon" type="image/png" href="{{ url_for('static', path='assets/css/images/favicon.png') }}" />
-        <link rel="stylesheet" href="{{ url_for('static', path='assets/css/main.css') }}" />
-        <noscript><link rel="stylesheet" href="{{ url_for('static', path='assets/css/noscript.css') }}" /></noscript>
-    </head>
 
-    <body class="is-preload">
-        <div id="page-wrapper">
-            <section id="banner" style="background: url('/static/images/montoyaperez/banner.png') center center/cover no-repeat; min-height: 350px; width: 100vw; position: relative; left: 50%; right: 50%; margin-left: -50vw; margin-right: -50vw; display: flex; align-items: flex-end; justify-content: flex-start; padding-bottom: 70px;">
-                <div style="width:100vw;height:100%;position:absolute;top:0;left:0;background:rgba(24,24,24,0.45);"></div>
-                <div class="inner" style="position:relative;z-index:2;width:100%;text-align:left;padding:3em 2em 2em 4vw;">
-                    <h2 style="color:#fff; text-shadow: 1px 1px 8px #000; letter-spacing: 0.1em; font-size:3em;">CONTACTO</h2>
-                    <p style="color:#fff; font-size:2em;">¿Tienes dudas o necesitas soporte? Contáctanos por correo, WhatsApp o el formulario.</p>
-                </div>
-                {% set sections = [
-                    {'id': '#formulario_contacto', 'title': 'Ir al Formulario', 'icon': 'fa-envelope'},
-                    {'id': '#sede_oficial', 'title': 'Oficina Central', 'icon': 'fa-map-marker-alt'}
-                ] %}
-                {% include 'section_carousel.html' %}
-            </section>
+<head>
+    <title>Contacto - Grupo Montoya-Pérez</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="icon" type="image/png" href="{{ url_for('static', path='assets/css/images/favicon.png') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', path='assets/css/main.css') }}" />
+    <noscript>
+        <link rel="stylesheet" href="{{ url_for('static', path='assets/css/noscript.css') }}" />
+    </noscript>
+</head>
 
-            <header id="header" style="position: absolute; top: 0; left: 0; width: 100vw; background: transparent; z-index: 10; padding: 1.5em 2em; display: flex; justify-content: space-between; align-items: center; box-sizing: border-box;">
+<body class="is-preload">
+    <div id="page-wrapper">
+        <section id="banner"
+            style="background: url('/static/images/montoyaperez/banner.png') center center/cover no-repeat; min-height: 350px; width: 100vw; position: relative; left: 50%; right: 50%; margin-left: -50vw; margin-right: -50vw; display: flex; align-items: flex-end; justify-content: flex-start; padding-bottom: 70px;">
+            <div style="width:100vw;height:100%;position:absolute;top:0;left:0;background:rgba(24,24,24,0.45);"></div>
+            <div class="inner" style="position:relative;z-index:2;width:100%;text-align:left;padding:3em 2em 2em 4vw;">
+                <h2 style="color:#fff; text-shadow: 1px 1px 8px #000; letter-spacing: 0.1em; font-size:3em;">CONTACTO
+                </h2>
+                <p style="color:#fff; font-size:2em;">¿Tienes dudas o necesitas soporte? Contáctanos por correo,
+                    WhatsApp o el formulario.</p>
+            </div>
+            {% set sections = [
+            {'id': '#wrapper', 'title': 'Ir al Formulario', 'icon': 'fa-envelope'}
+            ] %}
+            {% include 'section_carousel.html' %}
+        </section>
+
+        <header id="header"
+            style="position: absolute; top: 0; left: 0; width: 100vw; background: transparent; z-index: 10; padding: 1.5em 2em; display: flex; justify-content: space-between; align-items: center; box-sizing: border-box;">
             <h1 style="margin: 0; padding: 0; display: flex; align-items: center;">
                 <a href="/" style="display: block; line-height: 0; text-decoration: none;">
-                    <img src="{{ url_for('static', path='images/logo1x1.jpeg') }}" alt="Grupo Montoya-Pérez" style="height: 55px; width: auto; border-radius: 50%; box-shadow: 0 4px 15px rgba(0,0,0,1); transition: transform 0.3s ease;" title="Volver al inicio" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+                    <img src="{{ url_for('static', path='images/logo1x1.jpeg') }}" alt="Grupo Montoya-Pérez"
+                        style="height: 55px; width: auto; border-radius: 50%; box-shadow: 0 4px 15px rgba(0,0,0,1); transition: transform 0.3s ease;"
+                        title="Volver al inicio" onmouseover="this.style.transform='scale(1.05)'"
+                        onmouseout="this.style.transform='scale(1)'">
                 </a>
             </h1>
             <nav style="margin: 0;">
-                <a href="#menu" class="btn-menu-header" style="background: rgba(18, 18, 18, 0.7); backdrop-filter: blur(5px); color: #FFCD00; font-weight: bold; text-transform: uppercase; padding: 0.5em 1.5em; border-radius: 30px; border: 1px solid rgba(255, 205, 0, 0.5);">Menú</a>
+                <a href="#menu" class="btn-menu-header"
+                    style="background: rgba(18, 18, 18, 0.7); backdrop-filter: blur(5px); color: #FFCD00; font-weight: bold; text-transform: uppercase; padding: 0.5em 1.5em; border-radius: 30px; border: 1px solid rgba(255, 205, 0, 0.5);">Menú</a>
             </nav>
         </header>
 
-            {% include 'menu.html' %}
+        {% include 'menu.html' %}
 
-            <section id="wrapper">
+        <section id="wrapper">
 
 
-                <div class="wrapper" style="background: #181818 url('/static/images/montoyaperez/fondoseccioncontato.png') center/cover no-repeat; border-radius: 0 0 1em 1em; box-shadow: 0 8px 32px rgba(0,0,0,0.18); padding: 0.8em 0; position: relative;">
-                    <div class="inner" style="width: 95%; max-width: 750px; margin: auto; background: rgba(20,20,20,0.85); backdrop-filter: blur(10px); border-radius: 12px; box-shadow: 0 8px 32px rgba(0,0,0,0.8); border: 1px solid rgba(255,205,0,0.1); padding: 1em; position: relative; z-index: 2; display: flex; flex-wrap: wrap; gap: 1em;">
-                        
-                        <!-- Columna Izquierda: Formulario -->
-                        <div style="flex: 2 1 280px;">
-                            <h3 style="color:#FFCD00; margin-bottom: 0.5em; font-size: 1.1em; border-bottom: 2px solid #D32F2F; display: inline-block; padding-bottom: 0.2em;">Escríbenos</h3>
-                            <form id="formulario_contacto" method="post" action="#" style="margin: 0;">
-                                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 0.6em;">
-                                    <div>
-                                        <label for="name" style="color:#E0E0E0; font-size: 0.75em; margin-bottom: 0.2em; display: block;">Nombre</label>
-                                        <input type="text" name="name" id="name" required style="width: 100%; border: 1px solid rgba(255,205,0,0.3); border-radius: 6px; padding: 0.3em 0.5em; color:#fff; background: rgba(0,0,0,0.5); outline: none; transition: border-color 0.3s; font-size: 0.85em;" onfocus="this.style.borderColor='#FFCD00'" onblur="this.style.borderColor='rgba(255,205,0,0.3)'" />
-                                    </div>
-                                    <div>
-                                        <label for="email" style="color:#E0E0E0; font-size: 0.75em; margin-bottom: 0.2em; display: block;">Correo</label>
-                                        <input type="email" name="email" id="email" required style="width: 100%; border: 1px solid rgba(255,205,0,0.3); border-radius: 6px; padding: 0.3em 0.5em; color:#fff; background: rgba(0,0,0,0.5); outline: none; transition: border-color 0.3s; font-size: 0.85em;" onfocus="this.style.borderColor='#FFCD00'" onblur="this.style.borderColor='rgba(255,205,0,0.3)'" />
-                                    </div>
-                                </div>
-                                <div style="margin-top: 0.5em;">
-                                    <label for="message" style="color:#E0E0E0; font-size: 0.75em; margin-bottom: 0.2em; display: block;">Mensaje</label>
-                                    <style>
-                                        #message::-webkit-resizer {
-                                            background-color: transparent;
-                                            border-bottom: 2px solid #FFCD00;
-                                            border-right: 2px solid #FFCD00;
-                                            border-radius: 0 0 4px 0;
-                                            cursor: ns-resize;
-                                            width: 10px; height: 10px;
-                                            opacity: 0.7;
-                                        }
-                                        #message:hover::-webkit-resizer { opacity: 1; border-width: 3px; }
-                                    </style>
-                                    <textarea name="message" id="message" rows="2" required placeholder="Haz transparente tus necesidades..." title="Arrastra la esquina derecha para hacer este cuadro más grande" style="width: 100%; border: 1px solid rgba(255,205,0,0.3); border-radius: 6px; padding: 0.4em 0.6em; color:#fff; background: rgba(0,0,0,0.5); outline: none; transition: border-color 0.3s; resize: vertical; min-height: 55px; font-size: 0.85em;" onfocus="this.style.borderColor='#FFCD00'" onblur="this.style.borderColor='rgba(255,205,0,0.3)'"></textarea>
-                                </div>
-                                <div style="margin-top: 1.2em; text-align: center;">
-                                    <button type="submit" style="background:#D32F2F; border:none; color:#fff; font-weight:bold; font-size:0.9em; border-radius:20px; padding:0.6em 2.5em; cursor: pointer; text-align: center; display: inline-flex; align-items: center; justify-content: center; letter-spacing: 1px; transition: background 0.3s, transform 0.2s;" onmouseover="this.style.background='#FFCD00'; this.style.color='#111'; this.style.transform='scale(1.05)'" onmouseout="this.style.background='#D32F2F'; this.style.color='#fff'; this.style.transform='scale(1)'">ENVIAR MENSAJE</button>
-                                </div>
-                            </form>
+            <div class="wrapper"
+                style="background: #181818 url('/static/images/montoyaperez/fondoseccioncontato.png') center/cover no-repeat; border-radius: 0 0 1em 1em; box-shadow: 0 8px 32px rgba(0,0,0,0.18); padding: 0.8em 0; position: relative;">
+                <div class="inner"
+                    style="width: 95%; max-width: 750px; margin: auto; background: rgba(20,20,20,0.85); backdrop-filter: blur(10px); border-radius: 12px; box-shadow: 0 8px 32px rgba(0,0,0,0.8); border: 1px solid rgba(255,205,0,0.1); padding: 1em; position: relative; z-index: 2; display: flex; flex-wrap: wrap; gap: 1em;">
+
+                    <!-- Panel Superior: Información sobre Placa -->
+                    <div
+                        style="flex: 1 1 100%; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 1em; margin-bottom: 0.5em;">
+                        <div
+                            style="background: rgba(255, 205, 0, 0.1); border-left: 4px solid #FFCD00; padding: 1.2em; margin-bottom: 1.5em; border-radius: 4px; text-align: center;">
+                            <h4
+                                style="color: #FFCD00; margin-bottom: 0.5em; font-size: 1.05em; letter-spacing: 1px; text-transform: uppercase;">
+                                Aclaratoria
+                            </h4>
+                            <p style="color: #E0E0E0; font-size: 0.85em; margin: 0; line-height: 1.5;">
+                                Necesitamos la foto de la placa identificadora <strong style="color: #FFF;">solo si su
+                                    requerimiento es para soporte técnico o repuestos</strong> para un equipo.
+                            </p>
                         </div>
 
-                        <!-- Columna Derecha: Información de Contacto -->
-                        <div style="flex: 1 1 180px; display: flex; flex-direction: column;">
-                            <div id="sede_oficial" style="background: linear-gradient(135deg, rgba(255,205,0,0.95), rgba(211,47,47,0.9)); border-radius: 12px; padding: 1.2em; box-shadow: 0 4px 15px rgba(0,0,0,0.5); height: 100%; display: flex; flex-direction: column; justify-content: center; color: #111;">
-                                <h3 style="margin-bottom: 0.6em; font-size: 1em; border-bottom: 1px solid rgba(0,0,0,0.2); padding-bottom: 0.3em; color: #111;">Contacto Directo</h3>
-                                <ul style="list-style: none; padding: 0; margin: 0; line-height: 1.4; font-size: 0.8em;">
-                                    <li style="margin-bottom: 0.8em; display: flex; align-items: flex-start; gap: 0.5em;">
-                                        <i class="fa fa-map-marker-alt" style="margin-top: 0.2em; color: #111;"></i>
-                                        <div>
-                                            <strong style="color: #111;">Sede Binacional</strong><br />
-                                            Grupo Montoya-Pérez
-                                        </div>
-                                    </li>
-                                    <li style="margin-bottom: 0.8em; display: flex; align-items: center; gap: 0.5em;">
-                                        <i class="fa fa-phone" style="color: #111;"></i>
-                                        <a href="tel:{{ phone }}" style="color:#111; text-decoration: none; font-weight: bold;">+{{ phone }}</a>
-                                    </li>
-                                    <li style="display: flex; align-items: center; gap: 0.5em;">
-                                        <i class="fa fa-envelope" style="color: #111;"></i>
-                                        <a href="mailto:{{ email }}" style="color:#111; text-decoration: none; font-weight: bold;">{{ email }}</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
+                        <h3
+                            style="color:#FFCD00; margin-bottom: 0.8em; font-size: 1.1em; line-height: 1.5; text-align: center;">
+                            <i class="fa fa-camera" style="color: #D32F2F; margin-right: 0.3em;"></i> ¿Por qué
+                            necesitamos la<br>
+                            <strong style="color: #FFF; border-bottom: 1px dashed #D32F2F; font-style: italic;">foto de
+                                su placa identificadora</strong>?
+                        </h3>
+                        <p style="color:#E0E0E0; font-size: 0.85em; margin-bottom: 0.8em; line-height: 1.4;">En estos
+                            escenarios técnicos, tener la <strong
+                                style="color:#FFCD00; text-decoration: underline;">imagen de la placa (o
+                                sticker)</strong> de su maquinaria es <strong
+                                style="color:#fff;">indispensable</strong>. Aquí le explicamos por qué:</p>
+                        <ul
+                            style="list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 0.8em; font-size: 0.8em; color: #CCC; line-height: 1.3;">
+                            <li style="display: flex; gap: 0.5em; align-items: flex-start;"><i class="fa fa-bullseye"
+                                    style="color:#FFCD00; margin-top: 0.2em;"></i><span><strong
+                                        style="color:#fff;">Precisión Absoluta:</strong> Accedemos al catálogo digital
+                                    de Caterpillar, con más de 3 Terabytes de información.</span></li>
+                            <li style="display: flex; gap: 0.5em; align-items: flex-start;"><i
+                                    class="fa fa-check-circle"
+                                    style="color:#FFCD00; margin-top: 0.2em;"></i><span><strong style="color:#fff;">Sin
+                                        Errores:</strong> Identificamos el repuesto exacto para su número de serie,
+                                    hasta el tornillo más pequeño.</span></li>
+                            <li style="display: flex; gap: 0.5em; align-items: flex-start;"><i
+                                    class="fa fa-tachometer-alt"
+                                    style="color:#FFCD00; margin-top: 0.2em;"></i><span><strong
+                                        style="color:#fff;">Rapidez en su Trámite:</strong> Eliminamos dudas técnicas y
+                                    agilizamos el proceso de cotización o diagnóstico.</span></li>
+                            <li style="display: flex; gap: 0.5em; align-items: flex-start;"><i class="fa fa-shield-alt"
+                                    style="color:#FFCD00; margin-top: 0.2em;"></i><span><strong
+                                        style="color:#fff;">Garantía de Compatibilidad:</strong> Evitamos confusiones en
+                                    modelos similares con configuraciones distintas.</span></li>
+                        </ul>
 
                     </div>
+
+                    <!-- Formulario de Contacto Principal -->
+                    <div style="flex: 1 1 100%;">
+                        <h3
+                            style="color:#FFCD00; margin-bottom: 0.5em; font-size: 1.1em; border-bottom: 2px solid #D32F2F; display: inline-block; padding-bottom: 0.2em;">
+                            Escríbenos</h3>
+
+                        {% if exito %}
+                        <div
+                            style="background: rgba(46, 204, 113, 0.2); border-left: 4px solid #2ecc71; padding: 1em; margin-bottom: 1em; border-radius: 4px; box-shadow: 0 4px 15px rgba(0,0,0,0.3);">
+                            <strong
+                                style="color: #2ecc71; font-size: 1.1em; display: flex; align-items: center; gap: 0.5em;"><i
+                                    class="fa fa-check-circle"></i> ¡Mensaje Enviado Exitosamente!</strong>
+                            <p style="margin: 0; color: #E0E0E0; font-size: 0.9em; margin-top: 0.5em;">Tu consulta y/o
+                                información ha sido recibida por nuestro equipo técnico y te contactaremos pronto.</p>
+                        </div>
+                        <script>
+                            // Auto-scroll al cargar la página si hubo éxito
+                            document.addEventListener("DOMContentLoaded", function () {
+                                const element = document.getElementById('wrapper');
+                                if (element) {
+                                    const offsetPosition = element.getBoundingClientRect().top + window.pageYOffset - 20;
+                                    window.scrollTo({
+                                        top: offsetPosition,
+                                        behavior: "smooth"
+                                    });
+                                }
+                            });
+                        </script>
+                        {% endif %}
+
+                        <form id="formulario_contacto" method="post" action="/enviar_contacto"
+                            enctype="multipart/form-data" style="margin: 0;">
+                            <div
+                                style="display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 0.6em;">
+                                <div>
+                                    <label for="name"
+                                        style="color:#E0E0E0; font-size: 0.75em; margin-bottom: 0.2em; display: block;">Nombre</label>
+                                    <input type="text" name="name" id="name" required
+                                        style="width: 100%; border: 1px solid rgba(255,205,0,0.3); border-radius: 6px; padding: 0.3em 0.5em; color:#fff; background: rgba(0,0,0,0.5); outline: none; transition: border-color 0.3s; font-size: 0.85em;"
+                                        onfocus="this.style.borderColor='#FFCD00'"
+                                        onblur="this.style.borderColor='rgba(255,205,0,0.3)'" />
+                                </div>
+                                <div>
+                                    <label for="email"
+                                        style="color:#E0E0E0; font-size: 0.75em; margin-bottom: 0.2em; display: block;">Correo</label>
+                                    <input type="email" name="email" id="email" required
+                                        style="width: 100%; border: 1px solid rgba(255,205,0,0.3); border-radius: 6px; padding: 0.3em 0.5em; color:#fff; background: rgba(0,0,0,0.5); outline: none; transition: border-color 0.3s; font-size: 0.85em;"
+                                        onfocus="this.style.borderColor='#FFCD00'"
+                                        onblur="this.style.borderColor='rgba(255,205,0,0.3)'" />
+                                </div>
+                            </div>
+                            <div style="margin-top: 0.5em;">
+                                <label for="message"
+                                    style="color:#E0E0E0; font-size: 0.75em; margin-bottom: 0.2em; display: block;">Mensaje</label>
+                                <style>
+                                    #message::-webkit-resizer {
+                                        background-color: transparent;
+                                        border-bottom: 2px solid #FFCD00;
+                                        border-right: 2px solid #FFCD00;
+                                        border-radius: 0 0 4px 0;
+                                        cursor: ns-resize;
+                                        width: 10px;
+                                        height: 10px;
+                                        opacity: 0.7;
+                                    }
+
+                                    #message:hover::-webkit-resizer {
+                                        opacity: 1;
+                                        border-width: 3px;
+                                    }
+                                </style>
+                                <textarea name="message" id="message" rows="2" required
+                                    placeholder="Haz transparente tus necesidades..."
+                                    title="Arrastra la esquina derecha para hacer este cuadro más grande"
+                                    style="width: 100%; border: 1px solid rgba(255,205,0,0.3); border-radius: 6px; padding: 0.4em 0.6em; color:#fff; background: rgba(0,0,0,0.5); outline: none; transition: border-color 0.3s; resize: vertical; min-height: 55px; font-size: 0.85em;"
+                                    onfocus="this.style.borderColor='#FFCD00'"
+                                    onblur="this.style.borderColor='rgba(255,205,0,0.3)'"></textarea>
+                            </div>
+                            <div style="margin-top: 0.8em;">
+                                <label for="plate_image"
+                                    style="color:#E0E0E0; font-size: 0.75em; margin-bottom: 0.3em; display: block;"><i
+                                        class="fa fa-image" style="color:#D32F2F; margin-right: 0.3em;"></i>Foto de la
+                                    Placa Identificadora</label>
+                                <div style="position: relative; width: 100%; border: 1px dashed rgba(255,205,0,0.5); border-radius: 6px; padding: 0.5em; text-align: center; background: rgba(0,0,0,0.4); transition: background 0.3s, border-color 0.3s;"
+                                    onmouseover="this.style.background='rgba(255,205,0,0.05)'; this.style.borderColor='#FFCD00';"
+                                    onmouseout="this.style.background='rgba(0,0,0,0.4)'; this.style.borderColor='rgba(255,205,0,0.5)';">
+                                    <input type="file" name="plate_image" id="plate_image" accept="image/*"
+                                        style="opacity: 0; width: 100%; height: 100%; position: absolute; top: 0; left: 0; cursor: pointer;"
+                                        onchange="document.getElementById('file-name').innerText = this.files[0] ? this.files[0].name : 'Haz clic o arrastra la imagen aquí...'" />
+                                    <span id="file-name"
+                                        style="color: #FFCD00; font-size: 0.8em; pointer-events: none; font-weight: bold;"><i
+                                            class="fa fa-upload"></i> Subir o Arrastrar Archivo Aquí</span>
+                                </div>
+                            </div>
+                            <div style="margin-top: 1.2em; text-align: center;">
+                                <button type="submit"
+                                    style="background:#D32F2F; border:none; color:#fff; font-weight:bold; font-size:0.9em; border-radius:20px; padding:0.6em 2.5em; cursor: pointer; text-align: center; display: inline-flex; align-items: center; justify-content: center; letter-spacing: 1px; transition: background 0.3s, transform 0.2s;"
+                                    onmouseover="this.style.background='#FFCD00'; this.style.color='#111'; this.style.transform='scale(1.05)'"
+                                    onmouseout="this.style.background='#D32F2F'; this.style.color='#fff'; this.style.transform='scale(1)'">ENVIAR
+                                    MENSAJE</button>
+                            </div>
+                        </form>
+                    </div>
+
+
+
                 </div>
-            </section>
+            </div>
+        </section>
 
-            <section id="footer">
-                <div class="inner">
-                    <ul class="copyright">
-                        <li>&copy; GMPC. Todos los derechos reservados.</li>
-                        <li>Desarrollo: <a href="https://linkedin.com/in/mardila77">Ing. Manuel Ardila</a></li>
-                    </ul>
-                </div>
-            </section>
+        <section id="footer">
+            <div class="inner">
+                <ul class="copyright">
+                    <li>&copy; GMPC. Todos los derechos reservados.</li>
+                    <li>Desarrollo: <a href="https://linkedin.com/in/mardila77">Ing. Manuel Ardila</a></li>
+                </ul>
+            </div>
+        </section>
 
-        </div>
+    </div>
 
-        <script src="{{ url_for('static', path='assets/js/jquery.min.js') }}"></script>
-        <script src="{{ url_for('static', path='assets/js/jquery.scrollex.min.js') }}"></script>
-        <script src="{{ url_for('static', path='assets/js/browser.min.js') }}"></script>
-        <script src="{{ url_for('static', path='assets/js/breakpoints.min.js') }}"></script>
-        <script src="{{ url_for('static', path='assets/js/util.js') }}"></script>
-        <script src="{{ url_for('static', path='assets/js/main.js') }}"></script>
+    <script src="{{ url_for('static', path='assets/js/jquery.min.js') }}"></script>
+    <script src="{{ url_for('static', path='assets/js/jquery.scrollex.min.js') }}"></script>
+    <script src="{{ url_for('static', path='assets/js/browser.min.js') }}"></script>
+    <script src="{{ url_for('static', path='assets/js/breakpoints.min.js') }}"></script>
+    <script src="{{ url_for('static', path='assets/js/util.js') }}"></script>
+    <script src="{{ url_for('static', path='assets/js/main.js') }}"></script>
 
-        <!-- Botón flotante de WhatsApp -->
-        <a href="https://wa.me/{{ phone }}?text=%C2%A1Hola%2C%20*Marco*%21%20%E2%9C%A8%0A%0AMe%20comunico%20para%20solicitar%20informaci%C3%B3n%20sobre%20mi%20equipo%20%F0%9F%8F%97%EF%B8%8F.%20Para%20facilitar%20la%20b%C3%BAsqueda%20y%20cotizaci%C3%B3n%2C%20te%20env%C3%ADo%20lo%20siguiente%3A%0A%0A%F0%9F%93%B8%20*Archivo%3A*%20Foto%20de%20la%20placa%20identificadora.%0A%F0%9F%94%8D%20*Objetivo%3A*%20Ubicar%20el%20equipo%20correcto%20en%20el%20cat%C3%A1logo.%0A%0A%C2%A1Hablemos%20pronto%20para%20ver%20las%20opciones%21%20%F0%9F%93%9E" class="whatsapp-float" target="_blank" title="Chatea con Marco Montoya">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" />
-        </a>
-    </body>
+    <!-- Botón flotante de WhatsApp -->
+    <a href="https://api.whatsapp.com/send?phone={{ phone }}&text=¡Hola, *Marco*! ✨%0A%0AMe comunico para solicitar información sobre mi equipo 🏗️. Para facilitar la búsqueda y cotización, te envío lo siguiente:%0A%0A📸 *Archivo:* Foto de la placa identificadora.%0A🔍 *Objetivo:* Ubicar el equipo correcto en el catálogo.%0A%0A¡Hablemos pronto para ver las opciones! 📞"
+        class="whatsapp-float" target="_blank" title="Chatea con Marco Montoya">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" />
+    </a>
+</body>
+
 </html>

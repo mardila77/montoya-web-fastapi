@@ -73,36 +73,14 @@
 
 <div class="marquee-wrapper">
     <div class="marquee-track">
-        <!-- Bloque Primario -->
-        {% for sec in sections %}
-            <a href="{{ sec.id }}" class="carousel-item {% if sec.cta %}cta-item{% endif %}">
-                {% if sec.icon %}<i class="fa {{ sec.icon }}">&nbsp;</i>{% endif %}
-                {{ sec.title }}
-            </a>
-        {% endfor %}
-
-        <!-- Bloque Secundario Clonado para lograr ilusión de bucle continuo del 50% -->
-        {% for sec in sections %}
-            <a href="{{ sec.id }}" aria-hidden="true" class="carousel-item {% if sec.cta %}cta-item{% endif %}">
-                {% if sec.icon %}<i class="fa {{ sec.icon }}">&nbsp;</i>{% endif %}
-                {{ sec.title }}
-            </a>
-        {% endfor %}
-        
-        <!-- Bloque Terciario (Por si el contenido es tan corto que no llega a cubrir las pantallas anchas) -->
-        {% for sec in sections %}
-            <a href="{{ sec.id }}" aria-hidden="true" class="carousel-item {% if sec.cta %}cta-item{% endif %}">
-                {% if sec.icon %}<i class="fa {{ sec.icon }}">&nbsp;</i>{% endif %}
-                {{ sec.title }}
-            </a>
-        {% endfor %}
-        
-        <!-- Bloque Cuaternario (Protección para Monitores 4K) -->
-        {% for sec in sections %}
-            <a href="{{ sec.id }}" aria-hidden="true" class="carousel-item {% if sec.cta %}cta-item{% endif %}">
-                {% if sec.icon %}<i class="fa {{ sec.icon }}">&nbsp;</i>{% endif %}
-                {{ sec.title }}
-            </a>
+        <!-- Bloque Principal y Clones Automáticos para lograr bucle continuo sin huecos -->
+        {% for i in range(12) %}
+            {% for sec in sections %}
+                <a href="{{ sec.id }}" {% if i > 0 %}aria-hidden="true"{% endif %} class="carousel-item {% if sec.cta %}cta-item{% endif %}">
+                    {% if sec.icon %}<i class="fa {{ sec.icon }}">&nbsp;</i>{% endif %}
+                    {{ sec.title }}
+                </a>
+            {% endfor %}
         {% endfor %}
     </div>
 </div>
