@@ -11,6 +11,7 @@
     <link rel="icon" type="image/png" href="{{ url_for('static', path='assets/css/images/favicon.png') }}" />
 
     <link rel="stylesheet" href="{{ url_for('static', path='assets/css/main.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', path='assets/css/fontawesome-all.min.css') }}" />
     <link rel="stylesheet" href="{{ url_for('static', path='assets/css/industrial-premium.css') }}" />
     <noscript>
         <link rel="stylesheet" href="{{ url_for('static', path='assets/css/noscript.css') }}" />
@@ -360,139 +361,15 @@
             </div>
         </section>
 
-        <!-- Botón flotante de WhatsApp -->
-        <a href="https://api.whatsapp.com/send?phone={{ phone }}&text=¡Hola, *Marco*! ✨%0A%0AMe comunico para solicitar información sobre mi equipo 🏗️. Para facilitar la búsqueda y cotización, te envío lo siguiente:%0A%0A📸 *Archivo:* Foto de la placa identificadora.%0A🔍 *Objetivo:* Ubicar el equipo correcto en el catálogo.%0A%0A¡Hablemos pronto para ver las opciones! 📞"
-            class="whatsapp-float" target="_blank" title="Chatea con Marco Montoya">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" />
+        <!-- Botón flotante de Acceso Rápido (Redirige a Contacto) v5.0 -->
+        <a href="/contacto" class="whatsapp-float" title="Soporte Técnico GMPC">
+            <i class="fas fa-headset"></i>
         </a>
 
     </div>
 
-    <!-- Audio Engine v5.2.1 -->
-    <audio id="siteMusic" loop preload="auto">
-        <source src="{{ url_for('static', path='assets/audio/site-atmosphere.mp3') }}" type="audio/mpeg">
-    </audio>
+    {% include 'audio_engine.html' %}
 
-    <div id="audioControl" class="audio-toggle paused" title="Control de Atmósfera">
-        <!-- Indicador visual v5.5 -->
-        <div id="audioHint" class="audio-hint">
-            <div class="hint-arrow"></div>
-            <span class="hint-text">ACTIVA LA ATMÓSFERA GMPC</span>
-        </div>
-        <div class="bars">
-            <div class="bar"></div>
-            <div class="bar"></div>
-            <div class="bar"></div>
-            <div class="bar"></div>
-        </div>
-    </div>
-
-    <style>
-        .audio-toggle {
-            position: fixed;
-            bottom: 40px;
-            left: 40px;
-            z-index: 5000;
-            width: 50px;
-            height: 50px;
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 12px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.3s ease;
-        }
-
-        .audio-toggle:hover {
-            background: rgba(255, 255, 255, 0.1);
-            border-color: var(--brand-yellow);
-        }
-
-        .audio-hint {
-            position: absolute;
-            left: 65px;
-            white-space: nowrap;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.5s ease;
-        }
-
-        .hint-text {
-            color: var(--brand-yellow);
-            font-size: 0.75rem;
-            letter-spacing: 2px;
-            font-weight: 700;
-            background: rgba(0,0,0,0.4);
-            padding: 0.5rem 1rem;
-            border-radius: 6px;
-            backdrop-filter: blur(5px);
-        }
-
-        .hint-arrow {
-            width: 15px;
-            height: 2px;
-            background: var(--brand-yellow);
-            position: relative;
-            animation: arrowPulse 1s infinite alternate;
-        }
-
-        .hint-arrow::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: -4px;
-            width: 8px;
-            height: 8px;
-            border-left: 2px solid var(--brand-yellow);
-            border-bottom: 2px solid var(--brand-yellow);
-            transform: rotate(45deg);
-        }
-
-        @keyframes arrowPulse {
-            from { transform: translateX(0); opacity: 0.5; }
-            to { transform: translateX(-10px); opacity: 1; }
-        }
-
-        .bars {
-            display: flex;
-            align-items: flex-end;
-            gap: 3px;
-            height: 15px;
-        }
-
-        .bar {
-            width: 3px;
-            background: var(--brand-yellow);
-            height: 100%;
-            border-radius: 2px;
-            transition: height 0.3s ease;
-        }
-
-        .playing .bar {
-            animation: soundWave 0.5s ease-in-out infinite alternate;
-        }
-
-        .playing .bar:nth-child(1) { animation-delay: 0.0s; }
-        .playing .bar:nth-child(2) { animation-delay: 0.1s; }
-        .playing .bar:nth-child(3) { animation-delay: 0.2s; }
-        .playing .bar:nth-child(4) { animation-delay: 0.3s; }
-
-        @keyframes soundWave {
-            from { height: 5px; }
-            to { height: 100%; }
-        }
-
-        .paused .bar {
-            height: 3px !important;
-            opacity: 0.5;
-        }
-    </style>
 
     <script src="{{ url_for('static', path='assets/js/jquery.min.js') }}"></script>
     <script src="{{ url_for('static', path='assets/js/jquery.scrollex.min.js') }}"></script>
@@ -502,30 +379,17 @@
     <script src="{{ url_for('static', path='assets/js/main.js') }}"></script>
 
     <script>
+        // Forzar scroll al inicio antes de cualquier renderizado para Intro Cinemático v5.6
+        if ('scrollRestoration' in history) {
+            history.scrollRestoration = 'manual';
+        }
+        window.scrollTo(0, 0);
+
         document.addEventListener('DOMContentLoaded', () => {
+            // Re-confirmar scroll al inicio en DOMContentLoaded
             window.scrollTo(0, 0);
 
             const intro = document.getElementById('cinematic-intro');
-            const music = document.getElementById('siteMusic');
-            const control = document.getElementById('audioControl');
-            const hint = document.getElementById('audioHint');
-            const hintText = hint ? hint.querySelector('.hint-text') : null;
-
-            if(music) music.volume = 0.33;
-
-            function updateUI() {
-                if (!music || !control || !hintText) return;
-                
-                if (music.paused) {
-                    control.classList.remove('playing');
-                    control.classList.add('paused');
-                    hintText.textContent = "ACTIVA LA ATMÓSFERA GMPC";
-                } else {
-                    control.classList.add('playing');
-                    control.classList.remove('paused');
-                    hintText.textContent = "DESACTIVA LA ATMÓSFERA GMPC";
-                }
-            }
 
             // Sequence timing
             setTimeout(() => {
@@ -539,28 +403,12 @@
                     document.body.style.overflow = 'auto';
                     document.body.classList.remove('is-preload');
                     
-                    // Mostrar invitación visual constante tras intro
-                    if (hint) hint.style.opacity = '1';
+                    // Mostrar invitación visual constante tras intro si el audio no está sonando
+                    const hint = document.getElementById('audioHint');
+                    const music = document.getElementById('siteMusic');
+                    if (hint && music && music.paused) hint.style.opacity = '1';
                 }, 1000);
             }, 2500);
-
-            // Audio Toggle Manual
-            if(control) {
-                control.addEventListener('click', (e) => {
-                    e.stopPropagation();
-                    if (music.paused) {
-                        music.play();
-                    } else {
-                        music.pause();
-                    }
-                    updateUI();
-                });
-            }
-
-            // Primer clic global podría activar música si el usuario no usa el botón
-            document.addEventListener('mousedown', () => {
-                // No ocultamos el hint, solo permitimos interacción
-            }, { once: true });
 
             // Dynamic Scroll Logic
             window.addEventListener('scroll', () => {

@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
     <link rel="icon" type="image/png" href="{{ url_for('static', path='assets/css/images/favicon.png') }}" />
     <link rel="stylesheet" href="{{ url_for('static', path='assets/css/main.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', path='assets/css/fontawesome-all.min.css') }}" />
     <link rel="stylesheet" href="{{ url_for('static', path='assets/css/industrial-premium.css') }}" />
     <noscript>
         <link rel="stylesheet" href="{{ url_for('static', path='assets/css/noscript.css') }}" />
@@ -104,6 +105,14 @@
             box-shadow: 0 0 15px rgba(255, 205, 0, 0.1) !important;
         }
 
+        /* Ajuste de listas desplegables para evitar corte de texto (v5.1) */
+        select.form-control {
+            height: auto !important;
+            min-height: 3.8rem !important;
+            padding: 0.8rem 1.2rem !important;
+            line-height: normal !important;
+        }
+
         .upload-area {
             border: 2px dashed rgba(255, 255, 255, 0.1);
             border-radius: 1rem;
@@ -137,6 +146,101 @@
             text-align: center; /* Título centrado v4.7 */
             display: inline-block;
         }
+
+        /* --- Channel Selector v7.0 (Lógica Condicional) --- */
+        .channel-selector {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 4rem;
+            width: 100%;
+        }
+
+        .channel-option {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 1rem;
+            padding: 2.5rem 1.5rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.8rem;
+            position: relative;
+            overflow: hidden;
+            border-bottom: 3px solid transparent;
+        }
+
+        .channel-option:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(255, 205, 0, 0.3);
+            transform: translateY(-5px);
+        }
+
+        .channel-option.active {
+            background: rgba(255, 205, 0, 0.05);
+            border-color: var(--brand-yellow);
+            box-shadow: 0 0 30px rgba(255, 205, 0, 0.15);
+            border-bottom: 3px solid var(--brand-yellow);
+        }
+
+        .channel-option.active::after {
+            content: '\f058'; /* fa-check-circle */
+            font-family: 'Font Awesome 5 Free';
+            font-weight: 900;
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            color: var(--brand-yellow);
+            font-size: 1.2em;
+        }
+
+        .channel-option i {
+            font-size: 3em;
+            margin-bottom: 0.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        .channel-option:hover i { transform: scale(1.1); }
+
+        .channel-option[data-channel="email"] i { color: var(--brand-yellow); }
+        .channel-option[data-channel="whatsapp"] i { color: #25D366; }
+
+        .channel-option strong {
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 1em;
+            color: white;
+        }
+
+        .channel-option span {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.85em;
+            line-height: 1.4;
+        }
+
+        /* Bloqueo de Formulario */
+        .form-locked {
+            opacity: 0.3;
+            pointer-events: none;
+            filter: blur(4px) grayscale(50%);
+            transition: all 0.6s ease;
+            user-select: none;
+        }
+
+        .form-active {
+            opacity: 1;
+            pointer-events: auto;
+            filter: none;
+            user-select: auto;
+        }
+        
+        /* Controles Dinámicos */
+        .hidden-flow {
+            display: none !important;
+        }
     </style>
 </head>
 
@@ -164,42 +268,65 @@
                     <h3 class="section-header-premium">Solicitud de Asistencia Técnica</h3>
                 </div>
 
-                {% if exito %}
-                <div style="background: rgba(46, 204, 113, 0.15); border: 2px solid #2ecc71; padding: 1.5em; margin-bottom: 2.5rem; border-radius: 1rem; text-align: center;">
-                    <strong style="color: #2ecc71; font-size: 1.2em;"><i class="fa fa-paper-plane"></i> ENVIADO CORRECTAMENTE</strong>
+                <!-- Selector de Canal Inicial v7.0 -->
+                <div class="channel-selector">
+                    <div class="channel-option" data-channel="email" id="opt_email">
+                        <i class="fa fa-envelope"></i>
+                        <strong>Vía Correo Electrónico</strong>
+                        <span>Gestión técnica con adjunto de<br>foto de placa identificadora.</span>
+                    </div>
+                    <div class="channel-option" data-channel="whatsapp" id="opt_whatsapp">
+                        <i class="fab fa-whatsapp"></i>
+                        <strong>Consulta vía WhatsApp</strong>
+                        <span>Contacto comercial directo para<br>atención rápida inmediata.</span>
+                    </div>
                 </div>
-                {% endif %}
 
                 <form id="formulario_contacto" method="post" action="/enviar_contacto" enctype="multipart/form-data">
-                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-bottom: 2rem;">
-                        <div class="form-group">
-                            <label style="color:rgba(255,255,255,0.7); font-size: 0.75em; margin-bottom: 0.8em; display: block; font-weight: 600; text-transform: uppercase;">Nombre y Apellido</label>
-                            <input type="text" name="name" required class="form-control" placeholder="Ej: Manuel Ardila" />
-                        </div>
-                        <div class="form-group">
-                            <label style="color:rgba(255,255,255,0.7); font-size: 0.75em; margin-bottom: 0.8em; display: block; font-weight: 600; text-transform: uppercase;">E-mail Corporativo</label>
-                            <input type="email" name="email" required class="form-control" placeholder="ejemplo@corporativo.com" />
-                        </div>
-                    </div>
-
-                    <div style="display: grid; grid-template-columns: 1.3fr 0.7fr; gap: 2rem; margin-bottom: 3rem;">
-                        <div class="form-group">
-                            <label style="color:rgba(255,255,255,0.7); font-size: 0.75em; margin-bottom: 0.8em; display: block; font-weight: 600; text-transform: uppercase;">Descripción del Requerimiento</label>
-                            <textarea name="message" required placeholder="Falla detectada o solicitud de repuesto..." class="form-control" style="resize: none; height: 250px;"></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label style="color:rgba(255,255,255,0.7); font-size: 0.75em; margin-bottom: 0.8em; display: block; font-weight: 600; text-transform: uppercase;">Foto de Placa (Opcional)</label>
-                            <div class="upload-area" onclick="document.getElementById('plate_image').click();">
-                                <input type="file" name="plate_image" id="plate_image" accept="image/*" style="display: none;"
-                                    onchange="document.getElementById('file-name').innerText = this.files[0] ? this.files[0].name : 'Cargando...'" />
-                                <i class="fa fa-camera-retro" style="color: var(--brand-yellow); font-size: 2.5em; margin-bottom: 1.5rem;"></i>
-                                <span id="file-name" style="color: white; font-size: 0.9em; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;">ARRASTRE Y SUELTE PARA ADJUNTAR</span>
-                                <p style="margin-top: 0.8rem; color: rgba(255,255,255,0.5); font-size: 0.8em; font-weight: 400;">o presione para adjuntar la imagen</p>
+                    <div id="form_logic_wrapper" class="form-locked">
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-bottom: 2rem;">
+                            <div class="form-group">
+                                <label style="color:rgba(255,255,255,0.7); font-size: 0.75em; margin-bottom: 0.8em; display: block; font-weight: 600; text-transform: uppercase;">Nombre y Apellido</label>
+                                <input type="text" name="name" id="contact_name" required class="form-control" placeholder="Ej: Manuel Ardila" />
+                            </div>
+                            <div class="form-group">
+                                <label style="color:rgba(255,255,255,0.7); font-size: 0.75em; margin-bottom: 0.8em; display: block; font-weight: 600; text-transform: uppercase;">E-mail Corporativo</label>
+                                <input type="email" name="email" id="contact_email" required class="form-control" placeholder="ejemplo@corporativo.com" />
                             </div>
                         </div>
-                    </div>
 
-                        <div style="border-top: 1px solid rgba(255,255,255,0.05); padding-top: 2.5rem; margin-bottom: 3rem;">
+                        <!-- Segmentación por Departamento o Servicio -->
+                        <div style="margin-bottom: 2rem;">
+                            <div class="form-group">
+                                <label style="color:rgba(255,255,255,0.7); font-size: 0.75em; margin-bottom: 0.8em; display: block; font-weight: 600; text-transform: uppercase;">Departamento / Servicio</label>
+                                <select name="service" id="contact_service" required class="form-control">
+                                    <option value="" disabled selected>Seleccione servicio...</option>
+                                    <option value="Ventas">Ventas</option>
+                                    <option value="Soporte Técnico">Soporte Técnico</option>
+                                    <option value="Repuestos">Repuestos</option>
+                                    <option value="Reparaciones">Reparaciones</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div style="display: grid; grid-template-columns: 1.3fr 0.7fr; gap: 2rem; margin-bottom: 3rem;">
+                            <div class="form-group">
+                                <label style="color:rgba(255,255,255,0.7); font-size: 0.75em; margin-bottom: 0.8em; display: block; font-weight: 600; text-transform: uppercase;">Descripción del Requerimiento</label>
+                                <textarea name="message" id="contact_message" required placeholder="Falla detectada o solicitud de repuesto..." class="form-control" style="resize: none; height: 250px;"></textarea>
+                            </div>
+                            <div class="form-group" id="plate_upload_section">
+                                <label style="color:rgba(255,255,255,0.7); font-size: 0.75em; margin-bottom: 0.8em; display: block; font-weight: 600; text-transform: uppercase;">Foto de Placa (Opcional)</label>
+                                <div class="upload-area" id="drop_zone" onclick="document.getElementById('plate_image').click();">
+                                    <input type="file" name="plate_image" id="plate_image" accept="image/*" style="display: none;"
+                                        onchange="handleFileSelect(this.files)" />
+                                    <i class="fa fa-camera-retro" style="color: var(--brand-yellow); font-size: 2.5em; margin-bottom: 1.5rem;"></i>
+                                    <span id="file-name" style="color: white; font-size: 0.9em; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;">ARRASTRE Y SUELTE PARA ADJUNTAR</span>
+                                    <p style="margin-top: 0.8rem; color: rgba(255,255,255,0.5); font-size: 0.8em; font-weight: 400;">o presione para adjuntar la imagen</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="plate_info_section" style="border-top: 1px solid rgba(255,255,255,0.05); padding-top: 2.5rem; margin-bottom: 3rem;">
                             <h4 style="color:var(--brand-yellow); margin-bottom: 2rem; font-size: 1.1em; text-align: center; text-transform: uppercase; letter-spacing: 3px; font-weight: 700;">¿POR QUÉ ES VITAL LA FOTO DE TU PLACA?</h4>
                             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.5rem;">
                                 <div class="plate-feature" style="flex-direction: column; text-align: center; padding: 1.5rem;">
@@ -230,8 +357,19 @@
                             </div>
                         </div>
 
-                    <div style="display: flex; justify-content: center; width: 100%; margin-top: 2rem;">
-                        <button type="submit" class="button primary large" style="padding: 1.5rem 6rem; letter-spacing: 3px; font-weight: 800; border-radius: 0.5rem; background-color: var(--brand-yellow) !important; color: #000 !important; box-shadow: 0 10px 30px rgba(255, 205, 0, 0.2) !important;">ENVIAR REQUERIMIENTO</button>
+                        <!-- Mensaje Dinámico de Prioridad de Email (v5.0) -->
+                        <div id="email_priority_box" class="alert-box-industrial" style="display: none;">
+                            <i class="fa fa-info-circle"></i>
+                            <p><strong>RECOMENDACIÓN:</strong> Al incluir una imagen de la placa identificadora, el <strong>Correo Electrónico</strong> es el canal prioritario para garantizar que los datos técnicos lleguen con la máxima fidelidad a nuestro equipo de ingeniería.</p>
+                        </div>
+
+                        <!-- Botón de Envío Unificado v7.1 -->
+                        <div id="submit_container" class="hidden-flow" style="display: flex; flex-direction: column; align-items: center; gap: 1.5rem; width: 100%; margin-top: 2rem;">
+                            <button id="btn_unified_submit" type="submit" class="button large" style="width: 380px !important; height: 80px !important; padding: 0 !important; letter-spacing: 1px; font-weight: 800; border-radius: 0.75rem; display: flex; align-items: center; justify-content: center; gap: 10px; text-align: center; font-size: 0.85em !important;">
+                                <!-- El contenido se inyecta vía JS -->
+                                ENVIAR SOLICITUD
+                            </button>
+                        </div>
                     </div>
                 </form>
             </div>
@@ -254,6 +392,155 @@
     <script src="{{ url_for('static', path='assets/js/util.js') }}"></script>
     <script src="{{ url_for('static', path='assets/js/main.js') }}"></script>
 
-    <a href="https://api.whatsapp.com/send?phone={{ phone }}&text=Solicitud Técnica Montoya-Pérez..." class="whatsapp-float" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WA" /></a>
+    <!-- Lógica de Contacto Condicional & Segmentación de Canales v7.0 -->
+    <script>
+        function handleFileSelect(files) {
+            const fileNameSpan = document.getElementById('file-name');
+            const plateInput = document.getElementById('plate_image');
+            const emailBox = document.getElementById('email_priority_box');
+
+            if (files && files.length > 0) {
+                fileNameSpan.innerText = files[0].name;
+                plateInput.files = files; 
+                emailBox.style.display = 'flex';
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const form = document.getElementById('formulario_contacto');
+            const dropZone = document.getElementById('drop_zone');
+            const plateInput = document.getElementById('plate_image');
+            const emailBox = document.getElementById('email_priority_box');
+            
+            // Elementos del Flujo Condicional v7.1
+            const optEmail = document.getElementById('opt_email');
+            const optWhatsapp = document.getElementById('opt_whatsapp');
+            const formWrapper = document.getElementById('form_logic_wrapper');
+            const plateUploadSection = document.getElementById('plate_upload_section');
+            const plateInfoSection = document.getElementById('plate_info_section');
+            const submitContainer = document.getElementById('submit_container');
+            const btnUnified = document.getElementById('btn_unified_submit');
+
+            let selectedChannel = null;
+
+            // 1. Selector de Canal
+            const switchChannel = (channel) => {
+                selectedChannel = channel;
+                
+                // Actualizar UI del selector
+                optEmail.classList.toggle('active', channel === 'email');
+                optWhatsapp.classList.toggle('active', channel === 'whatsapp');
+                
+                // Desbloquear formulario y mostrar botón
+                formWrapper.classList.remove('form-locked');
+                formWrapper.classList.add('form-active');
+                submitContainer.classList.remove('hidden-flow');
+
+                // Lógica de visibilidad y apariencia del botón ÚNICO
+                if (channel === 'email') {
+                    // Configuración Email
+                    plateUploadSection.classList.remove('hidden-flow');
+                    plateInfoSection.classList.remove('hidden-flow');
+                    
+                    btnUnified.innerHTML = 'ENVIAR CORREO ELECTRÓNICO';
+                    btnUnified.className = 'button primary large';
+                    btnUnified.type = 'submit';
+                } else {
+                    // Configuración WhatsApp
+                    plateUploadSection.classList.add('hidden-flow');
+                    plateInfoSection.classList.add('hidden-flow');
+                    emailBox.style.display = 'none';
+                    
+                    btnUnified.innerHTML = '<i class="fab fa-whatsapp" style="font-size: 1.6em;"></i> CONSULTA RÁPIDA VÍA WHATSAPP';
+                    btnUnified.className = 'button large btn-whatsapp-dynamic';
+                    btnUnified.type = 'button';
+                }
+
+                // Scroll suave al inicio de los campos
+                const offset = formWrapper.offsetTop - 100;
+                window.scrollTo({ top: offset, behavior: 'smooth' });
+            };
+
+            optEmail.addEventListener('click', () => switchChannel('email'));
+            optWhatsapp.addEventListener('click', () => switchChannel('whatsapp'));
+
+            // 2. Drag and Drop
+            ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+                dropZone.addEventListener(eventName, e => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                }, false);
+            });
+
+            ['dragenter', 'dragover'].forEach(eventName => {
+                dropZone.addEventListener(eventName, () => {
+                    if (selectedChannel === 'email') dropZone.style.borderColor = 'var(--brand-yellow)';
+                }, false);
+            });
+
+            ['dragleave', 'drop'].forEach(eventName => {
+                dropZone.addEventListener(eventName, () => dropZone.style.borderColor = 'rgba(255, 255, 255, 0.1)', false);
+            });
+
+            dropZone.addEventListener('drop', e => {
+                if (selectedChannel === 'email') handleFileSelect(e.dataTransfer.files);
+            }, false);
+
+            plateInput.addEventListener('change', function() {
+                if (this.files && this.files.length > 0) {
+                    handleFileSelect(this.files);
+                } else {
+                    emailBox.style.display = 'none';
+                }
+            });
+
+            // 3. Acción del Botón Unificado
+            btnUnified.addEventListener('click', (e) => {
+                if (selectedChannel === 'whatsapp') {
+                    const name = document.getElementById('contact_name').value;
+                    const email = document.getElementById('contact_email').value;
+                    const service = document.getElementById('contact_service').value;
+                    const message = document.getElementById('contact_message').value;
+
+                    if(!name || !email || !service || !message) {
+                        alert('Por favor complete todos los campos obligatorios para el contacto vía WhatsApp.');
+                        return;
+                    }
+
+                    const text = `¡Hola *Marco Montoya*! ✨
+                
+Me comunico desde el portal GMPC para una consulta rápida:
+
+🔍 *Servicio:* ${service}
+👤 *Nombre:* ${name}
+📧 *Email:* ${email}
+
+📝 *Detalles:*
+${message}
+
+_Solicitud enviada vía WhatsApp._`;
+
+                    const encodedText = encodeURIComponent(text);
+                    const phone = "{{ phone }}"; 
+                    window.open(`https://api.whatsapp.com/send?phone=${phone}&text=${encodedText}`, '_blank');
+                }
+                // Si es email, type="submit" hará el trabajo automáticamente
+            });
+
+            // 4. Protección contra interacción sin canal
+            formWrapper.addEventListener('click', (e) => {
+                if (!selectedChannel) {
+                    alert('Por favor, selecciona primero el canal de comunicación (Correo o WhatsApp) para habilitar el formulario.');
+                    document.querySelector('.channel-selector').scrollIntoView({ behavior: 'smooth' });
+                }
+            }, true);
+        });
+    </script>
+
+    <!-- Botón flotante de Acceso Rápido (v5.0) -->
+    <a href="/contacto" class="whatsapp-float" title="Soporte Técnico GMPC">
+        <i class="fas fa-headset"></i>
+    </a>
+    {% include 'audio_engine.html' %}
 </body>
 </html>

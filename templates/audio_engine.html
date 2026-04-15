@@ -1,0 +1,120 @@
+<!-- Audio Engine & Control Surface v6.0 -->
+<audio id="siteMusic" loop preload="auto">
+    <source src="{{ url_for('static', path='assets/audio/site-atmosphere.mp3') }}" type="audio/mpeg">
+</audio>
+
+<div id="audioControl" class="audio-toggle paused" title="Control de Atmósfera">
+    <!-- Indicador visual -->
+    <div id="audioHint" class="audio-hint">
+        <div class="hint-arrow"></div>
+        <span class="hint-text">ACTIVA LA ATMÓSFERA GMPC</span>
+    </div>
+    
+    <!-- Barras de sonido -->
+    <div class="bars">
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+    </div>
+
+    <!-- Control de Volumen (Hover) -->
+    <div class="volume-slider-container">
+        <input type="range" class="volume-slider" id="volumeSlider" min="0" max="1" step="0.01" value="0.33">
+    </div>
+</div>
+
+<script>
+    (function() {
+        const music = document.getElementById('siteMusic');
+        const control = document.getElementById('audioControl');
+        const slider = document.getElementById('volumeSlider');
+        const hintText = document.querySelector('.hint-text');
+        const STORAGE_KEY = 'gmpc_audio_state';
+
+        // 1. Cargar Estado
+        const savedState = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+        const defaultVolume = 0.33;
+        
+        music.volume = savedState.volume !== undefined ? savedState.volume : defaultVolume;
+        slider.value = music.volume;
+
+        if (savedState.currentTime) {
+            music.currentTime = savedState.currentTime;
+        }
+
+        function updateUI() {
+            if (music.paused) {
+                control.classList.remove('playing');
+                control.classList.add('paused');
+                if (hintText) hintText.textContent = "ACTIVA LA ATMÓSFERA GMPC";
+            } else {
+                control.classList.add('playing');
+                control.classList.remove('paused');
+                if (hintText) hintText.textContent = "DESACTIVA LA ATMÓSFERA GMPC";
+            }
+        }
+
+        // 2. Intentar Auto-reproducción si estaba activo
+        if (savedState.isPlaying) {
+            // Un pequeño delay ayuda a que el navegador procese el estado de interacción
+            setTimeout(() => {
+                music.play().then(() => {
+                    updateUI();
+                }).catch(e => {
+                    console.log("Auto-play bloqueado por el navegador. Esperando interacción.");
+                    updateUI();
+                });
+            }, 100);
+        }
+
+        // 3. Persistencia Periódica
+        setInterval(() => {
+            const state = {
+                isPlaying: !music.paused,
+                currentTime: music.currentTime,
+                volume: music.volume
+            };
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+        }, 2000);
+
+        // Guardar al salir
+        window.addEventListener('beforeunload', () => {
+            const state = {
+                isPlaying: !music.paused,
+                currentTime: music.currentTime,
+                volume: music.volume
+            };
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+        });
+
+        // 4. Controles Manuales
+        control.addEventListener('click', (e) => {
+            // Evitar que el clic en el slider dispare el toggle de pausa
+            if (e.target.closest('.volume-slider-container')) return;
+
+            if (music.paused) {
+                music.play().then(() => updateUI()).catch(e => console.log(e));
+            } else {
+                music.pause();
+                updateUI();
+            }
+        });
+
+        slider.addEventListener('input', (e) => {
+            music.volume = parseFloat(e.target.value);
+            // Sincronización inmediata de volumen para mejor UX
+            const state = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+            state.volume = music.volume;
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+        });
+
+        // Listener para cambios de volumen externos (si los hubiera)
+        music.addEventListener('volumechange', () => {
+             slider.value = music.volume;
+        });
+        
+        // Sincronización inicial de UI
+        updateUI();
+    })();
+</script>

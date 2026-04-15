@@ -6,6 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
         <link rel="icon" type="image/png" href="{{ url_for('static', path='assets/css/images/favicon.png') }}" />
         <link rel="stylesheet" href="{{ url_for('static', path='assets/css/main.css') }}" />
+        <link rel="stylesheet" href="{{ url_for('static', path='assets/css/fontawesome-all.min.css') }}" />
         <link rel="stylesheet" href="{{ url_for('static', path='assets/css/industrial-premium.css') }}" />
         <noscript><link rel="stylesheet" href="{{ url_for('static', path='assets/css/noscript.css') }}" /></noscript>
         <style>
@@ -205,6 +206,8 @@
 
             <section id="footer">
                 <div class="inner">
+                    <a href="/contacto" class="button primary large"
+                        style="margin: 0 auto 3em auto; display: block; width: fit-content; padding: 1.2rem 3.5rem; letter-spacing: 2px;">CONTACTAR AHORA</a>
                     <ul class="copyright">
                         <li>&copy; GMPC. Todos los derechos reservados.</li>
                         <li>Desarrollo: <a href="https://linkedin.com/in/mardila77">Ing. Manuel Ardila</a></li>
@@ -220,9 +223,10 @@
         <script src="{{ url_for('static', path='assets/js/util.js') }}"></script>
         <script src="{{ url_for('static', path='assets/js/main.js') }}"></script>
 
-        <!-- Botón flotante de WhatsApp -->
-        <a href="https://api.whatsapp.com/send?phone={{ phone }}&text=¡Hola, *Marco*! ✨%0A%0AMe comunico para solicitar información sobre mi equipo 🏗️. Para facilitar la búsqueda y cotización, te envío lo siguiente:%0A%0A📸 *Archivo:* Foto de la placa identificadora.%0A🔍 *Objetivo:* Ubicar el equipo correcto en el catálogo.%0A%0A¡Hablemos pronto para ver las opciones! 📞" class="whatsapp-float" target="_blank" title="Chatea con Marco Montoya">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" />
+        <!-- Botón flotante de Acceso Rápido (Redirige a Contacto) v5.0 -->
+        <a href="/contacto" class="whatsapp-float" title="Soporte Técnico GMPC">
+            <i class="fas fa-headset"></i>
         </a>
+        {% include 'audio_engine.html' %}
     </body>
 </html>
