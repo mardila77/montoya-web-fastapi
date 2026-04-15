@@ -18,3 +18,8 @@ wheels/
 # Archivos de Entorno (Secretos y Contraseñas)
 .env
 .env.*
+
+# Medios de referencia (excluidos de Git)
+montoya-media/
+Montoya-Media/
+Montoya Media/

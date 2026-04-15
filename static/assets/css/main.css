@@ -225,10 +225,10 @@ html {
 
 body {
 	background-color: #000000;
-	background-image: linear-gradient(to top, rgba(0, 0, 0, 0.85), rgba(255, 255, 255, 0.05)), url("../../images/bg.jpg");
-	background-size: auto, cover;
-	background-attachment: fixed, fixed;
-	background-position: center, center;
+	background-image: linear-gradient(to top, rgba(0, 0, 0, 0.85), rgba(255, 255, 255, 0.05));
+	background-size: auto;
+	background-attachment: fixed;
+	background-position: center;
 }
 
 body.is-preload *,

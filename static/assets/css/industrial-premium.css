@@ -1,0 +1,462 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap');
+
+:root {
+    /* Brand Colors (HSL) */
+    --brand-yellow: hsla(48, 100%, 50%, 1);
+    --brand-red: hsla(0, 80%, 50%, 1);
+    --brand-blue-industrial: hsla(205, 70%, 45%, 1);
+    --brand-white: hsla(0, 0%, 100%, 1);
+    --brand-black: hsla(0, 0%, 0%, 1);
+    
+    /* UI Backgrounds */
+    --premium-bg: hsla(220, 15%, 4%, 1); /* Ultra dark with a hint of blue */
+    --glass-bg: hsla(0, 0%, 100%, 0.03);
+    --glass-bg-hover: hsla(0, 0%, 100%, 0.06);
+    --glass-border: hsla(0, 0%, 100%, 0.08);
+    --glass-border-accent: hsla(48, 100%, 50%, 0.3);
+    
+    /* Effects */
+    --blur-intensity: blur(25px) saturate(180%);
+    --transition-snappy: 350ms cubic-bezier(0.16, 1, 0.3, 1);
+    --shadow-soft: 0 10px 40px 0 rgba(0, 0, 0, 0.8);
+}
+
+/* Global Reset Overrides */
+body {
+    background-color: var(--premium-bg) !important;
+    font-family: 'Outfit', sans-serif !important;
+    color: var(--brand-white) !important;
+}
+
+/* Glassmorphism Classes */
+.premium-glass {
+    background: var(--glass-bg) !important;
+    backdrop-filter: var(--blur-intensity) !important;
+    -webkit-backdrop-filter: var(--blur-intensity) !important;
+    border: 1px solid var(--glass-border) !important;
+    border-radius: 1.5rem !important;
+    box-shadow: var(--shadow-soft) !important;
+    transition: all var(--transition-snappy) !important;
+}
+
+.premium-glass:hover {
+    background: var(--glass-bg-hover) !important;
+    border-color: var(--glass-border-accent) !important;
+    transform: translateY(-4px);
+    box-shadow: 0 12px 48px 0 rgba(0, 0, 0, 0.9);
+}
+
+/* Bento Grid System */
+.bento-grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-gap: 1.5rem;
+    padding: 2rem 0;
+}
+
+.bento-item {
+    grid-column: span 4;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+@media screen and (max-width: 980px) {
+    .bento-item {
+        grid-column: span 6;
+    }
+}
+
+@media screen and (max-width: 736px) {
+    .bento-item {
+        grid-column: span 12;
+    }
+}
+
+/* Specific Spotlight Elevation */
+section.spotlight {
+    background-color: var(--premium-bg) !important;
+    border-bottom: 1px solid var(--glass-border) !important;
+    padding: 6em 0 !important;
+}
+
+.spotlight .image {
+    border-radius: 1.5rem !important;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.8) !important;
+}
+
+.spotlight .content {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    backdrop-filter: none !important;
+}
+
+.spotlight .content h2.major {
+    color: var(--brand-yellow) !important;
+    font-family: 'Outfit', sans-serif !important;
+    font-weight: 700 !important;
+    border-bottom: 3px solid var(--brand-red) !important;
+    letter-spacing: 2px !important;
+}
+
+/* WhatsApp Redesign */
+.whatsapp-float {
+    background: hsla(142, 70%, 45%, 0.1) !important;
+    backdrop-filter: blur(10px) !important;
+    -webkit-backdrop-filter: blur(10px) !important;
+    border: 1px solid hsla(142, 70%, 45%, 0.3) !important;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5) !important;
+    width: 65px !important;
+    height: 65px !important;
+    right: 40px !important;
+    bottom: 40px !important;
+    border-radius: 20px !important; /* Squircle style */
+    transition: all var(--transition-snappy) !important;
+}
+
+.whatsapp-float:hover {
+    background: hsla(142, 70%, 45%, 0.2) !important;
+    transform: scale(1.1) rotate(5deg);
+    border-color: hsla(142, 70%, 45%, 0.6) !important;
+    box-shadow: 0 15px 40px rgba(37, 211, 102, 0.2) !important;
+}
+
+/* Button & Typography Polish */
+h1, h2, h3, .major {
+    text-transform: uppercase !important;
+    letter-spacing: 0.15em !important;
+}
+
+.button {
+    font-family: 'Outfit', sans-serif !important;
+    border-radius: 0.75rem !important;
+    transition: all var(--transition-snappy) !important;
+    background: transparent !important;
+    border: 1px solid var(--brand-red) !important;
+    color: var(--brand-white) !important;
+    font-weight: 600 !important;
+    letter-spacing: 1px !important;
+}
+
+.button:hover {
+    background: var(--brand-red) !important;
+    box-shadow: 0 10px 25px hsla(0, 80%, 50%, 0.3) !important;
+    transform: translateY(-2px);
+}
+
+.button.primary {
+    background: var(--brand-yellow) !important;
+    color: var(--brand-black) !important;
+    border: none !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 0 2.5rem !important;
+    height: 3.5rem !important; /* Ligeramente más pequeño */
+    font-size: 0.9em !important;
+}
+
+.button.primary:hover {
+    background: hsla(48, 100%, 40%, 1) !important;
+    box-shadow: 0 10px 25px hsla(48, 100%, 50%, 0.3) !important;
+}
+
+/* Footer Glass */
+#footer {
+    background-color: hsla(220, 15%, 2%, 1) !important;
+    border-top: 1px solid var(--glass-border) !important;
+}
+
+/* Hamburger Icon (3 Lines) */
+.hamburger {
+    width: 32px;
+    height: 18px;
+    position: relative;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.hamburger span {
+    display: block;
+    width: 100%;
+    height: 2px;
+    background-color: var(--brand-white);
+    border-radius: 2px;
+    transition: all var(--transition-snappy);
+}
+
+.hamburger:hover span:nth-child(2) {
+    transform: translateX(5px);
+    background-color: var(--brand-yellow);
+}
+
+.hamburger:hover span:nth-child(3) {
+    transform: translateX(10px);
+}
+
+/* Header Adjustments for Rectangular Logo */
+#header .logo-container {
+    height: 80px; /* Escalado final (v3.3) para distinción absoluta según feedback */
+    display: flex;
+    align-items: center;
+}
+
+#header img.logo-rect {
+    height: 100%;
+    width: auto;
+    filter: drop-shadow(0 0 8px rgba(255,255,255,0.1));
+}
+
+/* Cinematic Intro Experience v2.5 */
+#cinematic-intro {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: #000 url('../../images/premium/tech-hex-bg.png') no-repeat center center;
+    background-size: cover;
+    z-index: 2000;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    transition: transform 1.2s cubic-bezier(0.77, 0, 0.175, 1);
+}
+
+#cinematic-intro.split-active {
+    animation: hydraulicSplit 1.5s cubic-bezier(0.77, 0, 0.175, 1) forwards;
+}
+
+@keyframes hydraulicSplit {
+    0% { clip-path: inset(0 0 0 0); }
+    100% { clip-path: inset(0 50% 0 50%); opacity: 0; visibility: hidden; }
+}
+
+.intro-content {
+    text-align: center;
+    width: 100%;
+    max-width: 1400px;
+    padding: 2rem;
+    z-index: 2;
+}
+
+.intro-logo-container {
+    opacity: 0;
+    transform: scale(0.7);
+    animation: revealBranding 1.8s cubic-bezier(0.16, 1, 0.3, 1) forwards 0.3s; /* Delay reducido de 0.5s a 0.3s */
+    margin-bottom: 4rem;
+    position: relative;
+}
+
+.intro-logo-container img {
+    height: 180px; /* Masivo para Smart TV */
+    width: auto;
+    filter: drop-shadow(0 0 30px rgba(255, 0, 0, 0.3));
+}
+
+@media screen and (max-width: 735px) {
+    .intro-logo-container img { height: 100px; }
+}
+
+@keyframes revealBranding {
+    0% { opacity: 0; transform: scale(0.7); filter: brightness(0); }
+    50% { filter: brightness(2) drop-shadow(0 0 60px rgba(255, 255, 255, 0.6)); }
+    100% { opacity: 1; transform: scale(1); filter: brightness(1) drop-shadow(0 0 40px rgba(255, 0, 0, 0.4)); }
+}
+
+.intro-brands-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-gap: 2rem;
+    opacity: 0;
+    animation: fadeInBrands v2.5 1.5s ease forwards 2.5s;
+    margin-bottom: 5rem;
+    padding: 0 4rem;
+}
+
+@media screen and (max-width: 980px) {
+    .intro-brands-grid { grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+}
+
+@media screen and (max-width: 480px) {
+    .intro-brands-grid { grid-template-columns: repeat(2, 1fr); gap: 1rem; padding: 0 1rem; }
+}
+
+@keyframes fadeInBrands {
+    to { opacity: 1; }
+}
+
+.brand-badge {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 12px;
+    padding: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(5px);
+    transition: all 0.4s ease;
+    animation: brandArrive 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    opacity: 0;
+}
+
+@keyframes brandArrive {
+    from { opacity: 0; transform: scale(0.5); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+.brand-badge img {
+    max-width: 100%;
+    height: 60px;
+    object-fit: contain;
+    filter: brightness(1.1) contrast(1.1);
+}
+
+@media screen and (max-width: 735px) {
+    .brand-badge img { height: 40px; }
+}
+
+.brand-badge:hover {
+    background: rgba(255,255,255,0.08);
+    border-color: var(--brand-yellow);
+    box-shadow: 0 0 20px rgba(255, 205, 0, 0.2);
+    transform: translateY(-5px);
+}
+
+/* Staggering 12 brands */
+.brand-badge:nth-child(1) { animation-delay: 2.6s; }
+.brand-badge:nth-child(2) { animation-delay: 2.7s; }
+.brand-badge:nth-child(3) { animation-delay: 2.8s; }
+.brand-badge:nth-child(4) { animation-delay: 2.9s; }
+.brand-badge:nth-child(5) { animation-delay: 3.0s; }
+.brand-badge:nth-child(6) { animation-delay: 3.1s; }
+.brand-badge:nth-child(7) { animation-delay: 3.2s; }
+.brand-badge:nth-child(8) { animation-delay: 3.3s; }
+.brand-badge:nth-child(9) { animation-delay: 3.4s; }
+.brand-badge:nth-child(10) { animation-delay: 3.5s; }
+.brand-badge:nth-child(11) { animation-delay: 3.6s; }
+.brand-badge:nth-child(12) { animation-delay: 3.7s; }
+
+.intro-pillars-v2 {
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+    opacity: 0;
+    animation: fadeIn 1s ease forwards 4.5s;
+}
+
+@media screen and (max-width: 735px) {
+    .intro-pillars-v2 { flex-direction: column; gap: 1rem; align-items: center; }
+}
+
+.pillar-v2 {
+    font-size: 1.5rem;
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    font-weight: 700;
+    color: #fff;
+    border-left: 4px solid var(--brand-red);
+    padding-left: 1.5rem;
+    opacity: 0;
+    transform: translateX(-20px);
+    animation: slideInPillar 0.8s ease forwards;
+}
+
+.pillar-v2 span { color: var(--brand-yellow); }
+
+.pillar-v2:nth-child(1) { animation-delay: 5.0s; }
+.pillar-v2:nth-child(2) { animation-delay: 5.3s; }
+.pillar-v2:nth-child(3) { animation-delay: 5.6s; }
+
+@keyframes slideInPillar {
+    to { opacity: 1; transform: translateX(0); }
+}
+
+/* Audio Control */
+.audio-toggle {
+    position: fixed;
+    bottom: 40px;
+    left: 40px;
+    z-index: 2001;
+    background: rgba(255,255,255,0.05);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.1);
+    color: #fff;
+    padding: 1rem;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.audio-toggle:hover {
+    background: rgba(255,255,255,0.15);
+    transform: scale(1.1);
+}
+
+.audio-toggle i { font-size: 1.2rem; }
+
+/* Hero Branding & Glass Logo v3.0 */
+.hero-branding {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    will-change: opacity, transform;
+}
+
+.glass-logo-wrapper {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 3rem 5rem;
+    border-radius: 2rem;
+    display: inline-block;
+    box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+    position: relative;
+    overflow: hidden;
+    animation: floatingLogo 6s ease-in-out infinite;
+}
+
+.glass-logo-wrapper::before {
+    content: '';
+    position: absolute;
+    top: -50%; left: -50%;
+    width: 200%; height: 200%;
+    background: radial-gradient(circle, rgba(255,255,255,0.05) 0%, transparent 70%);
+    pointer-events: none;
+}
+
+@keyframes floatingLogo {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
+}
+
+@media screen and (max-width: 735px) {
+    .glass-logo-wrapper { padding: 1.5rem 2rem; border-radius: 1rem; }
+}
+
+/* Staggering 12 brands */
+.brand-badge:nth-child(1) { animation-delay: 2.6s; }
+.brand-badge:nth-child(2) { animation-delay: 2.7s; }
+.brand-badge:nth-child(3) { animation-delay: 2.8s; }
+.brand-badge:nth-child(4) { animation-delay: 2.9s; }
+.brand-badge:nth-child(5) { animation-delay: 3.0s; }
+.brand-badge:nth-child(6) { animation-delay: 3.1s; }
+.brand-badge:nth-child(7) { animation-delay: 3.2s; }
+.brand-badge:nth-child(8) { animation-delay: 3.3s; }
+.brand-badge:nth-child(9) { animation-delay: 3.4s; }
+.brand-badge:nth-child(10) { animation-delay: 3.5s; }
+.brand-badge:nth-child(11) { animation-delay: 3.6s; }
+.brand-badge:nth-child(12) { animation-delay: 3.7s; }
+
+/* Obsolete Overlays Removed */
+.persistence-overlay {
+    display: none !important;
+}

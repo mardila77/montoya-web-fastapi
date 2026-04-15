@@ -6,18 +6,12 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
         <link rel="icon" type="image/png" href="{{ url_for('static', path='assets/css/images/favicon.png') }}" />
         <link rel="stylesheet" href="{{ url_for('static', path='assets/css/main.css') }}" />
+        <link rel="stylesheet" href="{{ url_for('static', path='assets/css/industrial-premium.css') }}" />
         <noscript><link rel="stylesheet" href="{{ url_for('static', path='assets/css/noscript.css') }}" /></noscript>
         <style>
-            :root {
-                --color-primario-rojo: #D32F2F;
-                --color-secundario-amarillo-cat: #FFCD00;
-            }
-
-            body { font-family: 'Inter', sans-serif; }
-
             #hero-sector {
-                background-image: url("{{ url_for('static', path='images/mineria/minero_01.png') }}"); 
-                background-size: cover;
+                background-image: url("{{ url_for('static', path='images/premium/sector_mineria_v3.png') }}") !important; 
+                background-size: cover !important;
                 background-position: center;
                 background-attachment: fixed;
                 min-height: 50vh;
@@ -26,50 +20,34 @@
                 justify-content: center;
                 text-align: center;
                 position: relative;
-                padding: 4em 1em;
+                padding: 6em 1em;
+                filter: brightness(1.1) saturate(1.1) contrast(1.05);
             }
 
             #hero-sector::before {
                 content: '';
                 position: absolute;
                 top: 0; left: 0; right: 0; bottom: 0;
-                background: linear-gradient(180deg, rgba(18,18,18,0.7) 0%, #121212 100%);
+                background: linear-gradient(180deg, rgba(0,0,0,0) 0%, var(--premium-bg) 100%);
             }
 
-            #hero-sector .inner {
-                position: relative;
-                z-index: 2;
-                color: white;
-                max-width: 800px;
-                animation: fadeUp 1s ease-out;
-            }
-
-            #hero-sector h1 {
-                font-size: 3.5em;
-                margin-bottom: 0.2em;
-                color: var(--color-secundario-amarillo-cat);
-                letter-spacing: 2px;
-                text-transform: uppercase;
-            }
-
-            #hero-sector p {
-                font-size: 1.3em;
-                color: #e0e0e0;
-                font-style: italic;
+            #hero-sector .inner h1 {
+                text-shadow: 0 4px 10px rgba(0,0,0,0.5);
             }
 
             #sector-content {
                 padding: 4em 2em 7em 2em;
-                background-color: #121212;
+                background-color: var(--premium-bg);
                 position: relative;
             }
 
             .glass-panel {
                 position: relative;
-                background: rgba(255, 255, 255, 0.02);
-                border: 1px solid rgba(255, 255, 255, 0.05);
-                box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
-                border-radius: 15px;
+                background: hsla(0, 0%, 100%, 0.02) !important;
+                backdrop-filter: var(--blur-intensity) !important;
+                border: 1px solid var(--glass-border) !important;
+                box-shadow: var(--shadow-soft) !important;
+                border-radius: 1.5rem !important;
                 padding: 4em;
                 max-width: 900px;
                 margin: -5em auto 0 auto;
@@ -78,11 +56,68 @@
                 font-size: 1.15em;
                 line-height: 1.8;
                 text-align: justify;
+                transition: all var(--transition-snappy);
+            }
+            
+            .glass-panel:hover {
+                border-color: var(--brand-yellow) !important;
+                transform: translateY(-5px);
             }
 
             .highlight {
-                color: var(--color-secundario-amarillo-cat);
-                font-weight: bold;
+                color: var(--brand-yellow) !important;
+                font-weight: 700;
+            }
+
+            /* Secciones dinámicas Intercaladas */
+            .sector-section {
+                display: flex;
+                align-items: center;
+                gap: 4em;
+                margin-bottom: 6em;
+            }
+
+            .sector-section:nth-child(even) {
+                flex-direction: row-reverse;
+            }
+
+            .sector-section .image-side {
+                flex: 1;
+                position: relative;
+            }
+
+            .sector-section .image-side img {
+                width: 100%;
+                aspect-ratio: 1 / 1; /* Forzado de simetría cuadrada v3.9.4 */
+                object-fit: cover;
+                border-radius: 1.5rem;
+                box-shadow: var(--shadow-soft);
+                border: 1px solid var(--glass-border);
+                transition: transform 0.5s ease;
+            }
+
+            .sector-section:hover .image-side img {
+                transform: scale(1.02) translateY(-10px);
+                border-color: var(--brand-yellow);
+            }
+
+            .sector-section .text-side {
+                flex: 1.2;
+                color: rgba(255,255,255,0.9);
+                font-size: 1.1em;
+                line-height: 1.8;
+                text-align: justify;
+            }
+
+            .sector-section .text-side h3 {
+                color: var(--brand-yellow);
+                font-size: 1.8em;
+                margin-bottom: 1em;
+                text-transform: uppercase;
+                letter-spacing: 2px;
+                border-bottom: 2px solid var(--brand-red);
+                display: inline-block;
+                padding-bottom: 0.2em;
             }
 
             .cta-box {
@@ -90,26 +125,15 @@
                 text-align: center;
             }
 
-            .cta-box a {
-                background-color: var(--color-primario-rojo);
-                color: white;
-                padding: 1em 2em;
-                text-decoration: none;
-                border-radius: 5px;
-                font-weight: bold;
-                display: inline-block;
-                transition: background-color 0.3s;
-            }
-            .cta-box a:hover { background-color: #B71C1C; }
-
-            @keyframes fadeUp {
-                from { opacity: 0; transform: translateY(30px); }
-                to { opacity: 1; transform: translateY(0); }
-            }
-
-            @media (max-width: 768px) {
-                .glass-panel { padding: 2em; border-radius: 10px; }
-                #hero-sector h1 { font-size: 2.5em; }
+            @media screen and (max-width: 980px) {
+                .sector-section {
+                    flex-direction: column !important;
+                    gap: 2em;
+                    text-align: center;
+                }
+                .sector-section .text-side h3 {
+                    display: block;
+                }
             }
         </style>
     </head>
@@ -119,12 +143,18 @@
             <!-- Header Unificado -->
             <header id="header" style="position: absolute; top: 0; left: 0; width: 100vw; background: transparent; z-index: 10; padding: 1.5em 2em; display: flex; justify-content: space-between; align-items: center; box-sizing: border-box;">
                 <h1 style="margin: 0; padding: 0; display: flex; align-items: center;">
-                    <a href="/" style="display: block; line-height: 0; text-decoration: none;">
-                        <img src="{{ url_for('static', path='images/logo1x1.jpeg') }}" alt="Grupo Montoya-Pérez" style="height: 55px; width: auto; border-radius: 50%; box-shadow: 0 4px 15px rgba(0,0,0,1); transition: transform 0.3s ease;" title="Volver al inicio" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+                    <a href="/" class="logo-container">
+                        <img src="{{ url_for('static', path='images/logo-premium.png') }}" alt="Grupo Montoya-Pérez" class="logo-rect">
                     </a>
                 </h1>
                 <nav style="margin: 0;">
-                    <a href="#menu" class="btn-menu-header" style="background: rgba(18, 18, 18, 0.7); backdrop-filter: blur(5px); color: #FFCD00; font-weight: bold; text-transform: uppercase; padding: 0.5em 1.5em; border-radius: 30px; border: 1px solid rgba(255, 205, 0, 0.5);">Menú</a>
+                    <a href="#menu" class="hamburger-trigger" style="text-decoration: none;">
+                        <div class="hamburger">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </a>
                 </nav>
             </header>
 
@@ -132,21 +162,43 @@
 
             <section id="hero-sector">
                 <div class="inner">
-                    <h1>Minería</h1>
-                    <p>POTENCIA EXTREMA PARA GRANDES DESAFÍOS MINEROS.</p>
+                    <h1>Minería de Gran Escala</h1>
+                    <p>POTENCIA EXTREMA PARA LOS DESAFÍOS MÁS EXIGENTES DE LA TIERRA.</p>
                 </div>
             </section>
 
             <section id="sector-content">
-                <div class="glass-panel">
-                    <p>Una empresa de servicios de maquinaria pesada constituye el <span class="highlight">nervio motor de la minería</span>, una industria de gran escala que depende de la fuerza y la constancia de los equipos para cumplir sus objetivos en condiciones extremas 24/7.</p>
+                <div class="glass-panel" style="max-width: 1100px;">
                     
-                    <p>Contar con un aliado que garantice no solo la venta de maquinaria sino también un <strong>soporte técnico inmediato</strong> y un flujo constante de repuestos, es la diferencia entre el éxito operativo y paradas millonarias.</p>
-                    
-                    <p>Este respaldo asegura los grandes movimientos de material de manera <span class="highlight">eficaz y eficiente</span>.</p>
-                    
-                    <div class="cta-box">
-                        <a href="/contacto">Solicitar Asesoría</a>
+                    <div class="nosotros-intro" style="text-align: center; margin-bottom: 5em;">
+                        <h2 style="color: var(--brand-yellow); font-size: 2.2em; letter-spacing: 3px; text-transform: uppercase;">POTENCIA EXTREMA 24/7</h2>
+                        <p style="font-size: 1.2em; color: rgba(255,255,255,0.8);">En la minería, la fuerza mecánica es el nervio que mueve la industria. Garantizamos operaciones ágiles y eficientes bajo las condiciones más desafiantes.</p>
+                    </div>
+
+                    <!-- Sección 1 -->
+                    <div class="sector-section">
+                        <div class="image-side">
+                            <img src="{{ url_for('static', path='images/premium/sector_mineria_v3.png') }}" alt="Operación Minera a Gran Escala">
+                        </div>
+                        <div class="text-side">
+                            <h3>Fuerza y Constancia</h3>
+                            <p>Entendemos que la minería de gran escala depende de la resistencia absoluta de sus equipos. Nuestra maquinaria pesada está seleccionada para operar sin descanso, permitiendo grandes movimientos de material de manera <span class="highlight">eficaz y segura</span>, sin importar la dureza del terreno.</p>
+                        </div>
+                    </div>
+
+                    <!-- Sección 2 -->
+                    <div class="sector-section">
+                        <div class="image-side">
+                            <img src="{{ url_for('static', path='images/nosotros/trayectoria.png') }}" alt="Ingeniería de Campo Minera">
+                        </div>
+                        <div class="text-side">
+                            <h3>Respaldo Vital</h3>
+                            <p>Contar con un socio que garantice soporte técnico inmediato y un flujo constante de repuestos es la diferencia estratégica en el sector minero. Minimizamos las paradas imprevistas mediante soluciones preventivas e ingeniería de campo de alto nivel.</p>
+                        </div>
+                    </div>
+
+                    <div class="cta-box" style="text-align: center; margin-top: 4em;">
+                        <a href="/contacto" class="button primary" style="width: fit-content; margin: 0 auto;">Consultar Soluciones Mineras</a>
                     </div>
                 </div>
             </section>

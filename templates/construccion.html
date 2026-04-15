@@ -6,259 +6,203 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
         <link rel="icon" type="image/png" href="{{ url_for('static', path='assets/css/images/favicon.png') }}" />
         <link rel="stylesheet" href="{{ url_for('static', path='assets/css/main.css') }}" />
+        <link rel="stylesheet" href="{{ url_for('static', path='assets/css/industrial-premium.css') }}" />
         <noscript><link rel="stylesheet" href="{{ url_for('static', path='assets/css/noscript.css') }}" /></noscript>
         <style>
-            :root {
-                --color-primario-rojo: #D32F2F;
-                --color-secundario-amarillo-cat: #FFCD00;
-                --color-acento-verde-deere: #367C2B;
-                --color-acento-azul-holland: #005DAA;
-                --color-fondo: #FFFFFF;
-                --color-texto-principal: #000000;
-                --color-texto-suave: #333333;
-            }
-
-            body {
-                font-family: 'Arial', sans-serif;
-                color: var(--color-texto-principal);
-                background-color: var(--color-fondo);
-            }
-
-            /* Inicialización de recursos gráficos y anclaje de fondo estático */
-            #hero {
-                background-image: url("{{ url_for('static', path='images/construccion/sector-construccion.png') }}");
-                background-size: cover;
+            #hero-sector {
+                background-image: url("{{ url_for('static', path='images/premium/sector_construccion_v3.png') }}") !important; 
+                background-size: cover !important;
                 background-position: center;
                 background-attachment: fixed;
-                height: 100vh;
+                min-height: 50vh;
                 display: flex;
                 align-items: center;
                 justify-content: center;
                 text-align: center;
                 position: relative;
+                padding: 6em 1em;
+                filter: brightness(1.15) saturate(1.15) contrast(1.05); /* Brillo +15% v4.1.3 */
             }
 
-            #hero::before {
+            #hero-sector::before {
                 content: '';
                 position: absolute;
-                top: 0;
-                left: 0;
-                right: 0;
-                bottom: 0;
-                background-color: rgba(0, 0, 0, 0.5);
+                top: 0; left: 0; right: 0; bottom: 0;
+                background: linear-gradient(180deg, rgba(0,0,0,0.05) 0%, var(--premium-bg) 100%);
             }
 
-            #hero .inner {
+            #hero-sector .inner h1 {
+                text-shadow: 0 4px 10px rgba(0,0,0,0.5);
+            }
+
+            #sector-content {
+                padding: 4em 2em 7em 2em;
+                background-color: var(--premium-bg);
                 position: relative;
-                z-index: 1;
+            }
+
+            .glass-panel {
+                position: relative;
+                background: hsla(0, 0%, 100%, 0.02) !important;
+                backdrop-filter: var(--blur-intensity) !important;
+                border: 1px solid var(--glass-border) !important;
+                box-shadow: var(--shadow-soft) !important;
+                border-radius: 1.5rem !important;
+                padding: 4em;
+                max-width: 900px;
+                margin: -5em auto 0 auto;
+                z-index: 5;
                 color: white;
+                font-size: 1.15em;
+                line-height: 1.8;
+                text-align: justify;
+                transition: all var(--transition-snappy);
+            }
+            
+            .glass-panel:hover {
+                border-color: var(--brand-yellow) !important;
+                transform: translateY(-5px);
             }
 
-            #hero h1 {
-                font-size: 3em;
-                margin-bottom: 0.5em;
+            .highlight {
+                color: var(--brand-yellow) !important;
+                font-weight: 700;
             }
 
-            #hero p {
-                font-size: 1.5em;
-                font-weight: bold;
-            }
-
-            /* Contenedor divisor para contenido logístico (Grid base) */
-            #cimiento {
-                padding: 4em 2em;
+            /* Secciones dinámicas Intercaladas */
+            .sector-section {
                 display: flex;
-                flex-wrap: wrap;
                 align-items: center;
-                max-width: 1200px;
-                margin: 0 auto;
+                gap: 4em;
+                margin-bottom: 6em;
             }
 
-            #cimiento .texto {
+            .sector-section:nth-child(even) {
+                flex-direction: row-reverse;
+            }
+
+            .sector-section .image-side {
                 flex: 1;
-                min-width: 300px;
-                padding-right: 2em;
+                position: relative;
             }
 
-            #cimiento .imagen {
-                flex: 1;
-                min-width: 300px;
-            }
-
-            #cimiento img {
+            .sector-section .image-side img {
                 width: 100%;
-                height: auto;
-                border-radius: 8px;
+                aspect-ratio: 1 / 1; /* Forzado de simetría cuadrada v3.9.4 */
+                object-fit: cover;
+                border-radius: 1.5rem;
+                box-shadow: var(--shadow-soft);
+                border: 1px solid var(--glass-border);
+                transition: transform 0.5s ease;
             }
 
-            /* Caja encapsuladora de compromisos de servicio (Fondo diferencial) */
-            #compromiso {
-                padding: 4em 2em;
-                background-color: #F4F4F4;
-                text-align: center;
+            .sector-section:hover .image-side img {
+                transform: scale(1.02) translateY(-10px);
+                border-color: var(--brand-yellow);
             }
 
-            #compromiso .cards {
-                display: flex;
-                flex-wrap: wrap;
-                justify-content: center;
-                gap: 2em;
-                max-width: 1200px;
-                margin: 0 auto;
+            .sector-section .text-side {
+                flex: 1.2;
+                color: rgba(255,255,255,0.9);
+                font-size: 1.1em;
+                line-height: 1.8;
+                text-align: justify;
             }
 
-            .card {
-                background-color: white;
-                border-radius: 8px;
-                box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-                padding: 2em;
-                flex: 1;
-                min-width: 250px;
-                max-width: 300px;
-            }
-
-            .card h3 {
-                color: var(--color-primario-rojo);
+            .sector-section .text-side h3 {
+                color: var(--brand-yellow);
+                font-size: 1.8em;
                 margin-bottom: 1em;
-            }
-
-            /* Zona algorítmica para enumerar beneficios operativos */
-            #beneficios {
-                padding: 4em 2em;
-                background-color: var(--color-fondo);
-                text-align: center;
-            }
-
-            #beneficios h2 {
-                color: var(--color-texto-principal);
-            }
-
-            /* Banderín inferior tipo CTA (Call To Action) corporativo */
-            #cta {
-                padding: 4em 2em;
-                background-color: var(--color-secundario-amarillo-cat);
-                text-align: center;
-            }
-
-            #cta h3 {
-                color: var(--color-texto-principal);
-                margin-bottom: 1em;
-            }
-
-            #cta a {
-                background-color: var(--color-primario-rojo);
-                color: white;
-                padding: 1em 2em;
-                text-decoration: none;
-                border-radius: 5px;
-                font-weight: bold;
+                text-transform: uppercase;
+                letter-spacing: 2px;
+                border-bottom: 2px solid var(--brand-red);
                 display: inline-block;
-                transition: background-color 0.3s;
+                padding-bottom: 0.2em;
             }
 
-            #cta a:hover {
-                background-color: #B71C1C;
+            .cta-box {
+                margin-top: 4em;
+                text-align: center;
             }
 
-            /* Reglas de quiebre algorítmicas para compatibilidad móvil (Breakpoints) */
-            @media (max-width: 768px) {
-                #cimiento {
-                    flex-direction: column;
+            @media screen and (max-width: 980px) {
+                .sector-section {
+                    flex-direction: column !important;
+                    gap: 2em;
+                    text-align: center;
                 }
-
-                #cimiento .texto {
-                    padding-right: 0;
-                    margin-bottom: 2em;
+                .sector-section .text-side h3 {
+                    display: block;
                 }
-
-                .cards {
-                    flex-direction: column;
-                    align-items: center;
-                }
-            }
-
-            #menu .inner {
-                background-color: rgba(0, 0, 0, 0.75) !important;
             }
         </style>
     </head>
     <body class="is-preload">
         <div id="page-wrapper">
-            <!-- Header -->
-            <header id="header" style="position: absolute; top: 0; left: 0; width: 100%; background: transparent; z-index: 10; padding: 1.5em 2em; display: flex; justify-content: space-between; align-items: center; box-sizing: border-box;">
+            
+            <!-- Header Unificado -->
+            <header id="header" style="position: absolute; top: 0; left: 0; width: 100vw; background: transparent; z-index: 10; padding: 1.5em 2em; display: flex; justify-content: space-between; align-items: center; box-sizing: border-box;">
                 <h1 style="margin: 0; padding: 0; display: flex; align-items: center;">
-                    <a href="/" style="display: block; line-height: 0; text-decoration: none;">
-                        <img src="{{ url_for('static', path='images/logo1x1.jpeg') }}" alt="Grupo Montoya-Pérez" style="height: 55px; width: auto; border-radius: 50%; box-shadow: 0 4px 15px rgba(0,0,0,1); transition: transform 0.3s ease;" title="Volver al inicio" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+                    <a href="/" class="logo-container">
+                        <img src="{{ url_for('static', path='images/logo-premium.png') }}" alt="Grupo Montoya-Pérez" class="logo-rect">
                     </a>
                 </h1>
                 <nav style="margin: 0;">
-                    <a href="#menu" class="btn-menu-header" style="background: rgba(18, 18, 18, 0.7); backdrop-filter: blur(5px); color: #FFCD00; font-weight: bold; text-transform: uppercase; padding: 0.5em 1.5em; border-radius: 30px; border: 1px solid rgba(255, 205, 0, 0.5);">Menú</a>
+                    <a href="#menu" class="hamburger-trigger" style="text-decoration: none;">
+                        <div class="hamburger">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </a>
                 </nav>
             </header>
 
-            <!-- Menu -->
             {% include 'menu.html' %}
 
-            <!-- Hero Section -->
-            <section id="hero" style="position: relative; padding-bottom: 70px;">
+            <section id="hero-sector">
                 <div class="inner">
-                    <h1>Sector Construcción</h1>
-                    <p>MÁS QUE MAQUINARIA, SOMOS EL SOPORTE QUE MUEVE TUS PROYECTOS.</p>
-                </div>
-                {% set sections = [
-                    {'id': '#cimiento', 'title': 'La Columna', 'icon': 'fa-cogs'},
-                    {'id': '#compromiso', 'title': 'Continuidad', 'icon': 'fa-hard-hat'},
-                    {'id': '#beneficios', 'title': 'Inversión', 'icon': 'fa-shield-alt'},
-                    {'id': '#cta', 'title': 'Cotizar', 'icon': 'fa-envelope', 'cta': true}
-                ] %}
-                {% include 'section_carousel.html' %}
-            </section>
-
-            <!-- Sección Cimiento Logístico -->
-            <section id="cimiento">
-                <div class="texto">
-                    <h2>La Columna Integral en Maquinaria Pesada</h2>
-                    <p>Grupo Montoya-Pérez C.A. es la columna integral en maquinaria pesada para el sector construcción, el cual es el motor clave para el progreso de un país.</p>
-                </div>
-                <div class="imagen">
-                    <!-- He colocado una imagen de muestra para la sección, idealmente suba una imagen de obra aquí -->
-                    <img src="{{ url_for('static', path='images/construccion/sector-construccion.png') }}" alt="Maquinaria en Obra de Construcción" />
+                    <h1>Infraestructura Imparable</h1>
+                    <p>MAQUINARIA DE ALTA ESCALA PARA MEGAOBRAS DE INGENIERÍA CIVIL.</p>
                 </div>
             </section>
 
-            <!-- Sección Compromiso Montoya-Pérez -->
-            <section id="compromiso">
-                <h2>Precisión y Continuidad en la Construcción</h2>
-                <p>Nosotros en Grupo Montoya-Pérez C.A. sabemos que la construcción exige precisión y continuidad. Contar con un aliado que provea no solo la venta de equipos, sino también un respaldo técnico preventivo y respuestas inmediatas, es crucial para evitar costosos retrasos en las obras.</p>
-                <div class="cards">
-                    <div class="card">
-                        <h3>Venta de Equipos</h3>
-                        <p>Maquinaria de alto rendimiento para satisfacer las demandas de cualquier terreno o proyecto estructural.</p>
+            <section id="sector-content">
+                <div class="glass-panel" style="max-width: 1100px;">
+                    
+                    <div class="nosotros-intro" style="text-align: center; margin-bottom: 5em;">
+                        <h2 style="color: var(--brand-yellow); font-size: 2.2em; letter-spacing: 3px; text-transform: uppercase;">LA COLUMNA DEL PROGRESO</h2>
+                        <p style="font-size: 1.2em; color: rgba(255,255,255,0.8);">En la construcción, la precisión es ley y la continuidad es éxito. Somos el aliado estratégico que garantiza la potencia necesaria para cada megaobra.</p>
                     </div>
-                    <div class="card">
-                        <h3>Respaldo Técnico Preventivo</h3>
-                        <p>Planes de mantenimiento diseñados para proteger su inversión y evitar averías imprevistas.</p>
+
+                    <!-- Sección 1 -->
+                    <div class="sector-section">
+                        <div class="image-side">
+                            <img src="{{ url_for('static', path='images/premium/sector_construccion_v3.png') }}" alt="Maquinaria en Obra de Construcción">
+                        </div>
+                        <div class="text-side">
+                            <h3>Infraestructura Imparable</h3>
+                            <p>Grupo Montoya-Pérez es la base logística para las constructoras que mueven el país. Proveemos maquinaria de alto rendimiento diseñada para las condiciones más exigentes de terreno, asegurando que la fuerza mecánica esté siempre a la altura de sus ambiciones estructurales.</p>
+                        </div>
                     </div>
-                    <div class="card">
-                        <h3>Respuestas Inmediatas</h3>
-                        <p>Asistencia ágil y soluciones en campo para asegurar la continuidad y los plazos de su obra.</p>
+
+                    <!-- Sección 2 -->
+                    <div class="sector-section">
+                        <div class="image-side">
+                            <img src="{{ url_for('static', path='images/nosotros/soportetecnico.png') }}" alt="Respaldo Técnico en Obra">
+                        </div>
+                        <div class="text-side">
+                            <h3>Precisión y Campo</h3>
+                            <p>Sabemos que cada centímetro cuenta. Nuestras soluciones de maquinaria pesada garantizan una nivelación y preparación de superficies de máxima exactitud. Protegemos la inversión de las constructoras mediante una logística de repuestos original y una respuesta inmediata.</p>
+                        </div>
+                    </div>
+
+                    <div class="cta-box" style="text-align: center; margin-top: 4em;">
+                        <a href="/contacto" class="button primary" style="width: fit-content; margin: 0 auto;">Solicitar Cotización Constructora</a>
                     </div>
                 </div>
             </section>
 
-            <!-- Sección Beneficios y Rendimiento -->
-            <section id="beneficios">
-                <h2>Protegiendo la Inversión de las Constructoras</h2>
-                <p>Esta sinergia garantiza que la maquinaria opere a su máximo rendimiento, protegiendo la inversión de las constructoras y asegurando la culminación exitosa de los proyectos.</p>
-            </section>
-
-            <!-- Llamado a la Acción -->
-            <section id="cta">
-                <h3>¿Necesita maquinaria confiable para su próxima obra?</h3>
-                <a href="/contacto">Solicitar Cotización</a>
-            </section>
-
-            <!-- Footer -->
             <section id="footer">
                 <div class="inner">
                     <ul class="copyright">
@@ -275,5 +219,10 @@
         <script src="{{ url_for('static', path='assets/js/breakpoints.min.js') }}"></script>
         <script src="{{ url_for('static', path='assets/js/util.js') }}"></script>
         <script src="{{ url_for('static', path='assets/js/main.js') }}"></script>
+
+        <!-- Botón flotante de WhatsApp -->
+        <a href="https://api.whatsapp.com/send?phone={{ phone }}&text=¡Hola, *Marco*! ✨%0A%0AMe comunico para solicitar información sobre mi equipo 🏗️. Para facilitar la búsqueda y cotización, te envío lo siguiente:%0A%0A📸 *Archivo:* Foto de la placa identificadora.%0A🔍 *Objetivo:* Ubicar el equipo correcto en el catálogo.%0A%0A¡Hablemos pronto para ver las opciones! 📞" class="whatsapp-float" target="_blank" title="Chatea con Marco Montoya">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" />
+        </a>
     </body>
 </html>

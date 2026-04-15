@@ -6,258 +6,209 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
         <link rel="icon" type="image/png" href="{{ url_for('static', path='assets/css/images/favicon.png') }}" />
         <link rel="stylesheet" href="{{ url_for('static', path='assets/css/main.css') }}" />
+        <link rel="stylesheet" href="{{ url_for('static', path='assets/css/industrial-premium.css') }}" />
         <noscript><link rel="stylesheet" href="{{ url_for('static', path='assets/css/noscript.css') }}" /></noscript>
         <style>
-            :root {
-                --color-primario-rojo: #D32F2F;
-                --color-secundario-amarillo-cat: #FFCD00;
-                --color-acento-verde-deere: #367C2B;
-                --color-acento-azul-holland: #005DAA;
-                --color-fondo: #FFFFFF;
-                --color-texto-principal: #000000;
-                --color-texto-suave: #333333;
-            }
-
-            body {
-                font-family: 'Arial', sans-serif;
-                color: var(--color-texto-principal);
-                background-color: var(--color-fondo);
-            }
-
-            /* Inicialización de recursos gráficos y anclaje de fondo estático */
-            #hero {
-                background-image: url("{{ url_for('static', path='images/agricola/hero-agricola.png') }}");
-                background-size: 100% 100%;
+            #hero-sector {
+                background-image: url("{{ url_for('static', path='images/agricola/tractor_banner.png') }}") !important; 
+                background-size: cover !important;
                 background-position: center;
                 background-attachment: fixed;
-                height: 100vh;
+                min-height: 50vh;
                 display: flex;
                 align-items: center;
                 justify-content: center;
                 text-align: center;
                 position: relative;
+                padding: 6em 1em;
+                filter: brightness(1.1) saturate(1.1) contrast(1.05);
             }
 
-            #hero::before {
+            #hero-sector::before {
                 content: '';
                 position: absolute;
-                top: 0;
-                left: 0;
-                right: 0;
-                bottom: 0;
-                background-color: rgba(0, 0, 0, 0.5);
+                top: 0; left: 0; right: 0; bottom: 0;
+                background: linear-gradient(180deg, rgba(0,0,0,0) 0%, var(--premium-bg) 100%);
             }
 
-            #hero .inner {
+            #hero-sector .inner h1 {
+                text-shadow: 0 4px 10px rgba(0,0,0,0.5);
+            }
+
+            #sector-content {
+                padding: 4em 2em 7em 2em;
+                background-color: var(--premium-bg);
                 position: relative;
-                z-index: 1;
+            }
+
+            .glass-panel {
+                position: relative;
+                background: hsla(0, 0%, 100%, 0.02) !important;
+                backdrop-filter: var(--blur-intensity) !important;
+                border: 1px solid var(--glass-border) !important;
+                box-shadow: var(--shadow-soft) !important;
+                border-radius: 1.5rem !important;
+                padding: 4em;
+                max-width: 900px;
+                margin: -5em auto 0 auto;
+                z-index: 5;
                 color: white;
+                font-size: 1.15em;
+                line-height: 1.8;
+                text-align: justify;
+                transition: all var(--transition-snappy);
+            }
+            
+            .glass-panel:hover {
+                border-color: var(--brand-yellow) !important;
+                transform: translateY(-5px);
             }
 
-            #hero h1 {
-                font-size: 3em;
-                margin-bottom: 0.5em;
+            .highlight {
+                color: var(--brand-yellow) !important;
+                font-weight: 700;
             }
 
-            #hero p {
-                font-size: 1.5em;
-                font-weight: bold;
-            }
-
-            /* Contenedor divisor para contenido logístico (Grid base) */
-            #cimiento {
-                padding: 4em 2em;
+            /* Secciones dinámicas Intercaladas */
+            .sector-section {
                 display: flex;
-                flex-wrap: wrap;
                 align-items: center;
-                max-width: 1200px;
-                margin: 0 auto;
+                gap: 4em;
+                margin-bottom: 6em;
             }
 
-            #cimiento .texto {
+            .sector-section:nth-child(even) {
+                flex-direction: row-reverse;
+            }
+
+            .sector-section .image-side {
                 flex: 1;
-                min-width: 300px;
-                padding-right: 2em;
+                position: relative;
             }
 
-            #cimiento .imagen {
-                flex: 1;
-                min-width: 300px;
-            }
-
-            #cimiento img {
+            .sector-section .image-side img {
                 width: 100%;
-                height: auto;
-                border-radius: 8px;
+                aspect-ratio: 1 / 1; /* Forzado de simetría cuadrada v3.9.3 */
+                object-fit: cover;
+                border-radius: 1.5rem;
+                box-shadow: var(--shadow-soft);
+                border: 1px solid var(--glass-border);
+                transition: transform 0.5s ease;
             }
 
-            /* Caja encapsuladora de compromisos de servicio (Fondo diferencial) */
-            #compromiso {
-                padding: 4em 2em;
-                background-color: #F4F4F4;
-                text-align: center;
+            .sector-section:hover .image-side img {
+                transform: scale(1.02) translateY(-10px);
+                border-color: var(--brand-yellow);
             }
 
-            #compromiso .cards {
-                display: flex;
-                flex-wrap: wrap;
-                justify-content: center;
-                gap: 2em;
-                max-width: 1200px;
-                margin: 0 auto;
+            .sector-section .text-side {
+                flex: 1.2;
+                color: rgba(255,255,255,0.9);
+                font-size: 1.1em;
+                line-height: 1.8;
+                text-align: justify;
             }
 
-            .card {
-                background-color: white;
-                border-radius: 8px;
-                box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-                padding: 2em;
-                flex: 1;
-                min-width: 250px;
-                max-width: 300px;
-            }
-
-            .card h3 {
-                color: var(--color-primario-rojo);
+            .sector-section .text-side h3 {
+                color: var(--brand-yellow);
+                font-size: 1.8em;
                 margin-bottom: 1em;
-            }
-
-            /* Zona algorítmica para enumerar beneficios operativos */
-            #beneficios {
-                padding: 4em 2em;
-                background-color: var(--color-fondo);
-                text-align: center;
-            }
-
-            #beneficios h2 {
-                color: var(--color-texto-principal);
-            }
-
-            /* Banderín inferior tipo CTA (Call To Action) corporativo */
-            #cta {
-                padding: 4em 2em;
-                background-color: var(--color-secundario-amarillo-cat);
-                text-align: center;
-            }
-
-            #cta h3 {
-                color: var(--color-texto-principal);
-                margin-bottom: 1em;
-            }
-
-            #cta a {
-                background-color: var(--color-primario-rojo);
-                color: white;
-                padding: 1em 2em;
-                text-decoration: none;
-                border-radius: 5px;
-                font-weight: bold;
+                text-transform: uppercase;
+                letter-spacing: 2px;
+                border-bottom: 2px solid var(--brand-red);
                 display: inline-block;
-                transition: background-color 0.3s;
+                padding-bottom: 0.2em;
             }
 
-            #cta a:hover {
-                background-color: #B71C1C;
+            .cta-box {
+                margin-top: 5em;
+                text-align: center;
+                background: hsla(48, 100%, 50%, 0.05);
+                border-radius: 1.5rem;
+                border: 1px dashed hsla(48, 100%, 50%, 0.3);
+                padding: 3em;
             }
 
-            /* Reglas de quiebre algorítmicas para compatibilidad móvil (Breakpoints) */
-            @media (max-width: 768px) {
-                #cimiento {
-                    flex-direction: column;
+            @media screen and (max-width: 980px) {
+                .sector-section {
+                    flex-direction: column !important;
+                    gap: 2em;
+                    text-align: center;
                 }
-
-                #cimiento .texto {
-                    padding-right: 0;
-                    margin-bottom: 2em;
+                .sector-section .text-side h3 {
+                    display: block;
                 }
-
-                .cards {
-                    flex-direction: column;
-                    align-items: center;
-                }
-            }
-
-            #menu .inner {
-                background-color: rgba(0, 0, 0, 0.75) !important;
             }
         </style>
     </head>
     <body class="is-preload">
         <div id="page-wrapper">
-            <!-- Header -->
-            <header id="header" style="position: absolute; top: 0; left: 0; width: 100%; background: transparent; z-index: 10; padding: 1.5em 2em; display: flex; justify-content: space-between; align-items: center; box-sizing: border-box;">
+            
+            <!-- Header Unificado -->
+            <header id="header" style="position: absolute; top: 0; left: 0; width: 100vw; background: transparent; z-index: 10; padding: 1.5em 2em; display: flex; justify-content: space-between; align-items: center; box-sizing: border-box;">
                 <h1 style="margin: 0; padding: 0; display: flex; align-items: center;">
-                    <a href="/" style="display: block; line-height: 0; text-decoration: none;">
-                        <img src="{{ url_for('static', path='images/logo1x1.jpeg') }}" alt="Grupo Montoya-Pérez" style="height: 55px; width: auto; border-radius: 50%; box-shadow: 0 4px 15px rgba(0,0,0,1); transition: transform 0.3s ease;" title="Volver al inicio" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+                    <a href="/" class="logo-container">
+                        <img src="{{ url_for('static', path='images/logo-premium.png') }}" alt="Grupo Montoya-Pérez" class="logo-rect">
                     </a>
                 </h1>
                 <nav style="margin: 0;">
-                    <a href="#menu" class="btn-menu-header" style="background: rgba(18, 18, 18, 0.7); backdrop-filter: blur(5px); color: #FFCD00; font-weight: bold; text-transform: uppercase; padding: 0.5em 1.5em; border-radius: 30px; border: 1px solid rgba(255, 205, 0, 0.5);">Menú</a>
+                    <a href="#menu" class="hamburger-trigger" style="text-decoration: none;">
+                        <div class="hamburger">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </a>
                 </nav>
             </header>
 
-            <!-- Menu -->
             {% include 'menu.html' %}
 
-            <!-- Hero Section -->
-            <section id="hero" style="position: relative; padding-bottom: 70px;">
+            <section id="hero-sector">
                 <div class="inner">
-                    <h1>Sector Agrícola</h1>
-                    <p>EL RESPALDO QUE EL CAMPO NECESITA PARA NUNCA DETENERSE.</p>
-                </div>
-                {% set sections = [
-                    {'id': '#cimiento', 'title': 'Logística', 'icon': 'fa-truck'},
-                    {'id': '#compromiso', 'title': 'Compromiso', 'icon': 'fa-handshake'},
-                    {'id': '#beneficios', 'title': 'Beneficios', 'icon': 'fa-chart-line'},
-                    {'id': '#cta', 'title': 'Cotizar', 'icon': 'fa-envelope', 'cta': true}
-                ] %}
-                {% include 'section_carousel.html' %}
-            </section>
-
-            <!-- Sección Cimiento Logístico -->
-            <section id="cimiento">
-                <div class="texto">
-                    <h2>El Cimiento de la Producción Agrícola</h2>
-                    <p>Una empresa de servicios de maquinaria pesada constituye el cimiento logístico del sector agrícola, donde la maquinaria es la herramienta de trabajo diario del sector, vital para la seguridad alimentaria.</p>
-                </div>
-                <div class="imagen">
-                    <img src="{{ url_for('static', path='images/agricola/adecuacion-tierras.png') }}" alt="Adecuación de Tierras" />
+                    <h1>Cimiento del Campo</h1>
+                    <p>EL RESPALDO MECÁNICO QUE LA SEGURIDAD ALIMENTARIA DEMANDA.</p>
                 </div>
             </section>
 
-            <!-- Sección Compromiso Montoya-Pérez -->
-            <section id="compromiso">
-                <h2>Garantizamos la Continuidad en el Campo</h2>
-                <p>En este entorno, Grupo Montoya-Pérez C.A. garantiza que las labores de Adecuación de Tierras no se detengan, asegurando que la inversión del agricultor se traduzca en una producción eficiente, al ofrecer:</p>
-                <div class="cards">
-                    <div class="card">
-                        <h3>Equipos de Primera Calidad</h3>
-                        <p>Maquinaria robusta y confiable para todas las necesidades del campo.</p>
+            <section id="sector-content">
+                <div class="glass-panel" style="max-width: 1100px;">
+                    
+                    <div class="nosotros-intro" style="text-align: center; margin-bottom: 5em;">
+                        <h2 style="color: var(--brand-yellow); font-size: 2.2em; letter-spacing: 3px; text-transform: uppercase;">EL CIMIENTO DE LA SEGURIDAD ALIMENTARIA</h2>
+                        <p style="font-size: 1.2em; color: rgba(255,255,255,0.8);">La maquinaria pesada es el corazón del campo venezolano. Proveemos la infraestructura logística y técnica necesaria para que cada ciclo de siembra sea un éxito rotundo.</p>
                     </div>
-                    <div class="card">
-                        <h3>Mantenimiento Preventivo</h3>
-                        <p>Servicios regulares para evitar fallos y maximizar la productividad.</p>
+
+                    <!-- Sección 1 -->
+                    <div class="sector-section">
+                        <div class="image-side">
+                            <img src="{{ url_for('static', path='images/agricola/adecuacion-tierras.png') }}" alt="Maquinaria Agrícola en Operación">
+                        </div>
+                        <div class="text-side">
+                            <h3>Respaldo Mecánico Imparable</h3>
+                            <p>En el sector agrícola, la maquinaria es la herramienta de trabajo diario. Entendemos que un día de parada es un retraso crítico para la cosecha. Por ello, ofrecemos equipos de alta fiabilidad y durabilidad, adaptados a las condiciones más exigentes del suelo nacional.</p>
+                        </div>
                     </div>
-                    <div class="card">
-                        <h3>Repuestos Originales</h3>
-                        <p>Acceso a piezas genuinas para mantener la calidad y durabilidad.</p>
+
+                    <!-- Sección 2 -->
+                    <div class="sector-section">
+                        <div class="image-side">
+                            <img src="{{ url_for('static', path='images/agricola/tractor_wheel.png') }}" alt="Detalle Rueda de Tractor y Suelo">
+                        </div>
+                        <div class="text-side">
+                            <h3>Adecuación de Tierras</h3>
+                            <p>Garantizamos que las labores de preparación y adecuación de tierras sostengan la viabilidad de sus proyectos. Nuestra sinergia operativa minimiza los riesgos de fallos mecánicos mediante un mantenimiento preventivo riguroso y el suministro ininterrumpido de repuestos originales.</p>
+                        </div>
+                    </div>
+
+                    <div class="cta-box">
+                        <h3 style="color: var(--brand-yellow); font-size: 1.8em; letter-spacing: 1px;">MINIMICE RIESGOS, MAXIMICE COSECHAS</h3>
+                        <p>Asegure que su infraestructura de campo sea el motor que sostiene el abastecimiento nacional con calidad y rendimiento absoluto.</p>
+                        <a href="/contacto" class="button primary" style="margin-top: 1.5em; width: fit-content; margin-left: auto; margin-right: auto;">Solicitar Presupuesto Agrícola</a>
                     </div>
                 </div>
             </section>
 
-            <!-- Sección Beneficios y Rendimiento -->
-            <section id="beneficios">
-                <h2>Minimice Riesgos, Maximice Rendimiento</h2>
-                <p>Se minimizan los riesgos de paradas críticas en plena temporada, permitiendo que la infraestructura del campo sea el motor que sostiene el abastecimiento nacional con máxima durabilidad y rendimiento.</p>
-            </section>
-
-            <!-- Llamado a la Acción -->
-            <section id="cta">
-                <h3>¿Necesita maquinaria confiable para su próximo ciclo?</h3>
-                <a href="/contacto">Solicitar Cotización</a>
-            </section>
-
-            <!-- Footer -->
             <section id="footer">
                 <div class="inner">
                     <ul class="copyright">
@@ -274,5 +225,10 @@
         <script src="{{ url_for('static', path='assets/js/breakpoints.min.js') }}"></script>
         <script src="{{ url_for('static', path='assets/js/util.js') }}"></script>
         <script src="{{ url_for('static', path='assets/js/main.js') }}"></script>
+
+        <!-- Botón flotante de WhatsApp -->
+        <a href="https://api.whatsapp.com/send?phone={{ phone }}&text=¡Hola, *Marco*! ✨%0A%0AMe comunico para solicitar información sobre mi equipo 🏗️. Para facilitar la búsqueda y cotización, te envío lo siguiente:%0A%0A📸 *Archivo:* Foto de la placa identificadora.%0A🔍 *Objetivo:* Ubicar el equipo correcto en el catálogo.%0A%0A¡Hablemos pronto para ver las opciones! 📞" class="whatsapp-float" target="_blank" title="Chatea con Marco Montoya">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" />
+        </a>
     </body>
 </html>

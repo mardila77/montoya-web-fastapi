@@ -6,203 +6,161 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
         <link rel="icon" type="image/png" href="{{ url_for('static', path='assets/css/images/favicon.png') }}" />
         <link rel="stylesheet" href="{{ url_for('static', path='assets/css/main.css') }}" />
+        <link rel="stylesheet" href="{{ url_for('static', path='assets/css/industrial-premium.css') }}" />
         <noscript><link rel="stylesheet" href="{{ url_for('static', path='assets/css/noscript.css') }}" /></noscript>
         <style>
-            :root {
-                --color-primario-rojo: #D32F2F;
-                --color-secundario-amarillo-cat: #FFCD00;
-            }
-
-            body {
-                font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            }
-
-            /* Sección inicial con carga del hero corporativo (Fondo fijo) */
             #hero-nosotros {
-                background-image: url("{{ url_for('static', path='images/montoyaperez/banner.png') }}"); /* Carga estática de banner base superior */
-                background-size: cover;
+                background-image: url("{{ url_for('static', path='images/premium/hero_industrial.png') }}") !important; 
+                background-size: cover !important;
                 background-position: center;
                 background-attachment: fixed;
-                min-height: 50vh;
+                min-height: 60vh !important;
                 display: flex;
                 align-items: center;
                 justify-content: center;
                 text-align: center;
                 position: relative;
-                padding: 4em 1em;
+                padding: 6em 1em;
+                filter: brightness(1.1) saturate(1.1) contrast(1.05);
             }
 
             #hero-nosotros::before {
                 content: '';
                 position: absolute;
                 top: 0; left: 0; right: 0; bottom: 0;
-                background: linear-gradient(180deg, rgba(18,18,18,0.7) 0%, #121212 100%);
+                background: linear-gradient(180deg, rgba(0,0,0,0) 0%, var(--premium-bg) 100%);
             }
 
-            #hero-nosotros .inner {
-                position: relative;
-                z-index: 2;
-                color: white;
-                max-width: 800px;
-                animation: fadeUp 1s ease-out;
+            #hero-nosotros .inner h1 {
+                text-shadow: 0 4px 10px rgba(0,0,0,0.5);
             }
 
-            #hero-nosotros h1 {
-                font-size: 3.5em;
-                margin-bottom: 0.2em;
-                color: var(--color-secundario-amarillo-cat);
-                letter-spacing: 2px;
-                text-transform: uppercase;
-            }
-
-            #hero-nosotros p {
-                font-size: 1.3em;
-                color: #e0e0e0;
-                letter-spacing: 1px;
-                font-style: italic;
-            }
-
-            /* Envoltura tipo cristal táctico transparente para el ecosistema de texto */
             #nosotros-content {
                 padding: 4em 2em 7em 2em;
-                background-color: #121212;
+                background-color: var(--premium-bg);
                 position: relative;
             }
 
             .glass-panel {
                 position: relative;
-                background: rgba(255, 255, 255, 0.02);
-                border: 1px solid rgba(255, 255, 255, 0.05);
-                box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
-                border-radius: 15px;
+                background: hsla(0, 0%, 100%, 0.02) !important;
+                backdrop-filter: var(--blur-intensity) !important;
+                border: 1px solid var(--glass-border) !important;
+                box-shadow: var(--shadow-soft) !important;
+                border-radius: 1.5rem !important;
                 padding: 4em;
                 max-width: 1200px;
-                margin: -5em auto 0 auto; /* Eleva el bloque principal causando impacto de flotabilidad sobre el hero principal */
+                margin: -8em auto 0 auto;
                 z-index: 5;
                 color: white;
             }
 
-            /* Caja de tipografía para discurso institucional de bienvenida */
             .nosotros-intro {
                 text-align: center;
-                margin-bottom: 4em;
+                margin-bottom: 5em;
             }
 
             .nosotros-intro h2 {
-                color: var(--color-secundario-amarillo-cat);
-                font-size: 2.2em;
+                color: var(--brand-yellow) !important;
+                font-size: 2.5em;
+                font-weight: 700 !important;
                 text-transform: uppercase;
-                margin-bottom: 0.8em;
+                margin-bottom: 0.5em;
+                letter-spacing: 2px;
             }
 
-            .nosotros-intro p {
-                font-size: 1.15em;
-                line-height: 1.7;
-                max-width: 900px;
-                margin: 0 auto;
-                color: #cccccc;
-            }
-            
-            .nosotros-intro strong {
-                color: white;
+            /* Secciones dinámicas Intercaladas */
+            .nosotros-section {
+                display: flex;
+                align-items: center;
+                gap: 4em;
+                margin-bottom: 6em;
             }
 
-            /* Tarjetería en grilla responsiva automatizada (5 Pilares Base) */
+            .nosotros-section:nth-child(even) {
+                flex-direction: row-reverse;
+            }
+
+            .nosotros-section .image-side {
+                flex: 1;
+                position: relative;
+            }
+
+            .nosotros-section .image-side img {
+                width: 100%;
+                border-radius: 1.5rem;
+                box-shadow: var(--shadow-soft);
+                border: 1px solid var(--glass-border);
+                transition: transform 0.5s ease;
+            }
+
+            .nosotros-section:hover .image-side img {
+                transform: scale(1.02) translateY(-10px);
+                border-color: var(--brand-yellow);
+            }
+
+            .nosotros-section .text-side {
+                flex: 1.2;
+            }
+
+            .nosotros-section .text-side h3 {
+                color: var(--brand-white);
+                font-size: 1.8em;
+                margin-bottom: 1em;
+                border-bottom: 2px solid var(--brand-red);
+                display: inline-block;
+                padding-bottom: 0.2em;
+            }
+
+            .nosotros-section .text-side p {
+                font-size: 1.1em;
+                line-height: 1.8;
+                color: rgba(255,255,255,0.8);
+            }
+
+            /* Pillars Grid Centered v3.3 */
             .pillars-grid {
-                display: grid;
-                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-                gap: 1.5em;
-                margin-top: 3em;
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 2em;
+                margin: 5rem 0;
             }
 
             .pillar-card {
-                background: rgba(255, 255, 255, 0.03);
-                border-top: 3px solid transparent;
-                padding: 2.5em 2em;
-                text-align: justify;
-                border-radius: 10px;
-                transition: transform 0.3s, background 0.3s, border-color 0.3s;
-                position: relative;
-                overflow: hidden;
+                background: hsla(0, 0%, 100%, 0.02) !important;
+                border: 1px solid var(--glass-border) !important;
+                padding: 3em 2em;
+                border-radius: 1.5rem !important;
+                transition: all var(--transition-snappy) !important;
+                text-align: center;
+                flex: 1 1 300px;
+                max-width: 350px;
             }
 
             .pillar-card:hover {
-                transform: translateY(-8px);
-                background: rgba(255, 255, 255, 0.08);
-                border-color: var(--color-primario-rojo);
+                transform: translateY(-15px) !important;
+                background: hsla(0, 0%, 100%, 0.05) !important;
+                border-color: var(--brand-yellow) !important;
+                box-shadow: 0 20px 50px rgba(0,0,0,0.7) !important;
             }
 
-            /* Inyecta pseudo-iconografía desvanecida de tamaño gigante tras la tarjeta */
-            .pillar-card::before {
-                content: '';
-                position: absolute;
-                bottom: -20px;
-                right: -20px;
-                font-size: 8em;
-                color: rgba(255, 255, 255, 0.02);
-                z-index: 0;
-            }
-
-            .pillar-card .icon-wrapper {
-                text-align: center;
-                font-size: 2.5em;
-                color: var(--color-secundario-amarillo-cat);
+            .pillar-card i {
+                font-size: 3em;
+                color: var(--brand-yellow);
                 margin-bottom: 0.5em;
-                position: relative;
-                z-index: 1;
+                display: block;
             }
 
-            .pillar-card h3 {
-                color: white;
-                text-align: center;
-                font-size: 1.4em;
-                margin-bottom: 1em;
-                position: relative;
-                z-index: 1;
-                border-bottom: 1px solid rgba(255,255,255,0.1);
-                padding-bottom: 0.5em;
-            }
-
-            .pillar-card p {
-                font-size: 0.95em;
-                line-height: 1.6;
-                color: #b3b3b3;
-                position: relative;
-                z-index: 1;
-                margin-bottom: 0;
-            }
-
-            /* Tarjetería horizontal destacada inferior (Pilar Final) */
-            .slogan-box {
-                margin-top: 5em;
-                padding: 2em;
-                text-align: center;
-                background: rgba(211, 47, 47, 0.05); /* Imprime un tinte diluido rojo Caterpillar */
-                border-radius: 8px;
-                border: 1px dotted rgba(211, 47, 47, 0.3);
-            }
-
-            .slogan-box h3 {
-                color: var(--color-secundario-amarillo-cat);
-                font-size: 1.7em;
-                letter-spacing: 1px;
-                margin: 0;
-            }
-            .slogan-box p {
-                margin-top: 0.5em;
-                color: #aaaaaa;
-                font-size: 1.1em;
-                margin-bottom: 0;
-            }
-
-            @keyframes fadeUp {
-                from { opacity: 0; transform: translateY(30px); }
-                to { opacity: 1; transform: translateY(0); }
-            }
-
-            @media (max-width: 768px) {
-                .glass-panel { padding: 2em; margin-top: -2em; }
-                #hero-nosotros h1 { font-size: 2.5em; }
+            @media screen and (max-width: 980px) {
+                .nosotros-section {
+                    flex-direction: column !important;
+                    gap: 2em;
+                    text-align: center;
+                }
+                .nosotros-section .text-side h3 {
+                    display: block;
+                }
             }
         </style>
     </head>
@@ -212,12 +170,18 @@
             <!-- Header -->
             <header id="header" style="position: absolute; top: 0; left: 0; width: 100%; background: transparent; z-index: 10; padding: 1.5em 2em; display: flex; justify-content: space-between; align-items: center; box-sizing: border-box;">
                 <h1 style="margin: 0; padding: 0; display: flex; align-items: center;">
-                    <a href="/" style="display: block; line-height: 0; text-decoration: none;">
-                        <img src="{{ url_for('static', path='images/logo1x1.jpeg') }}" alt="Grupo Montoya-Pérez" style="height: 55px; width: auto; border-radius: 50%; box-shadow: 0 4px 15px rgba(0,0,0,1); transition: transform 0.3s ease;" title="Volver al inicio" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+                    <a href="/" class="logo-container">
+                        <img src="{{ url_for('static', path='images/logo-premium.png') }}" alt="Grupo Montoya-Pérez" class="logo-rect">
                     </a>
                 </h1>
                 <nav style="margin: 0;">
-                    <a href="#menu" class="btn-menu-header" style="background: rgba(18, 18, 18, 0.7); backdrop-filter: blur(5px); color: #FFCD00; font-weight: bold; text-transform: uppercase; padding: 0.5em 1.5em; border-radius: 30px; border: 1px solid rgba(255, 205, 0, 0.5);">Menú</a>
+                    <a href="#menu" class="hamburger-trigger" style="text-decoration: none;">
+                        <div class="hamburger">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </a>
                 </nav>
             </header>
 
@@ -237,56 +201,89 @@
                 <div class="glass-panel">
                     
                     <div class="nosotros-intro">
-                        <h2>El Motor Clave para el Progreso</h2>
+                        <h2>El Motor del Progreso</h2>
                         <p>
-                            Entendemos que el desarrollo de un país exige operaciones ininterrumpidas bajo las condiciones más extremas. Ya sea en zonas de minería, campos agrícolas, pozos petroleros, megaobras de infraestructura o instalaciones energéticas, contar con maquinaria de alto rendimiento y disponer del <strong>respaldo técnico inmediato</strong> hace la diferencia entre el éxito operativo y las paradas millonarias.
+                            En un país que exige operaciones ininterrumpidas, Grupo Montoya-Pérez se erige como el aliado estratégico que garantiza la continuidad operativa mediante maquinaria de alto rendimiento y un soporte técnico sin precedentes.
                         </p>
                     </div>
 
-                    <!-- 5 Pillars -->
-                    <div class="pillars-grid">
-                        
-                        <!-- Construcción -->
-                        <div class="pillar-card">
-                            <div class="icon-wrapper"><span class="icon solid fa-building"></span></div>
-                            <h3>Construcción</h3>
-                            <p>Somos la columna integral para las constructoras. Proveemos precisión, continuidad y soluciones preventivas indispensables para proteger su inversión, asegurar la culminación de sus obras y evitar retrasos imprevistos.</p>
+                    <!-- Trayectoria Section -->
+                    <div class="nosotros-section">
+                        <div class="image-side">
+                            <img src="{{ url_for('static', path='images/nosotros/trayectoria.png') }}" alt="Trayectoria GMPC">
                         </div>
-
-                        <!-- Petrolero -->
-                        <div class="pillar-card">
-                            <div class="icon-wrapper"><span class="icon solid fa-oil-can"></span></div>
-                            <h3>Sector Petrolero</h3>
-                            <p>Socio estratégico en entornos de altas exigencias. Con una disponibilidad absoluta de reparación especializada, aseguramos que la infraestructura de perforación mantenga la máxima seguridad operativa.</p>
+                        <div class="text-side">
+                            <h3>Nuestra Trayectoria</h3>
+                            <p>Con décadas de experiencia en el mercado venezolano, hemos consolidado una reputación basada en la confianza y la excelencia. No solo suministramos máquinas; entregamos soluciones de ingeniería que impulsan la economía nacional en sus sectores más críticos.</p>
                         </div>
-
-                        <!-- Agrícola -->
-                        <div class="pillar-card">
-                            <div class="icon-wrapper"><span class="icon solid fa-tractor"></span></div>
-                            <h3>Sector Agrícola</h3>
-                            <p>El cimiento logístico en el campo. Suministramos herramientas de trabajo y repuestos originales para que las labores de adecuación de tierras sostengan sin interrupciones la viabilidad alimentaria de nuestro país.</p>
-                        </div>
-
-                        <!-- Minería -->
-                        <div class="pillar-card">
-                            <div class="icon-wrapper"><span class="icon solid fa-hard-hat"></span></div>
-                            <h3>Minería</h3>
-                            <p>El nervio motor frente a los más grandes desafíos. Garantizamos fuerza y constancia de equipos las 24 horas para operar ágil y eficientemente durante los grandes movimientos a escala masiva.</p>
-                        </div>
-
-                        <!-- Energía -->
-                        <div class="pillar-card">
-                            <div class="icon-wrapper"><span class="icon solid fa-bolt"></span></div>
-                            <h3>Sistemas Energéticos</h3>
-                            <p>Respaldo integral de energía. Manejamos servicio experto en plantas eléctricas industriales, iluminación con tecnología LED, inversores y paneles fotovoltaicos orientados al futuro sostenible.</p>
-                        </div>
-
                     </div>
 
-                    <!-- Botón/Slogan final -->
+                    <!-- Soporte Técnico Section -->
+                    <div class="nosotros-section">
+                        <div class="image-side">
+                            <img src="{{ url_for('static', path='images/nosotros/soportetecnico.png') }}" alt="Soporte Técnico Especializado">
+                        </div>
+                        <div class="text-side">
+                            <h3>Soporte Técnico 24/7</h3>
+                            <p>Entendemos que el tiempo es el recurso más valioso. Por ello, nuestro equipo de ingenieros y técnicos certificados está siempre listo para intervenir en campo, minimizando los tiempos de parada y optimizando la vida útil de sus activos.</p>
+                        </div>
+                    </div>
+
+                    <!-- Repuestos Section -->
+                    <div class="nosotros-section">
+                        <div class="image-side">
+                            <img src="{{ url_for('static', path='images/nosotros/repuestosycomponentes.png') }}" alt="Repuestos Originales">
+                        </div>
+                        <div class="text-side">
+                            <h3>Respaldo en Componentes</h3>
+                            <p>Contamos con un amplio inventario de repuestos originales y componentes críticos para las marcas líderes del mercado. Nuestra logística está diseñada para que usted nunca se detenga por falta de una pieza esencial.</p>
+                        </div>
+                    </div>
+
+                    <!-- Liderazgo Section -->
+                    <div class="nosotros-section">
+                        <div class="image-side">
+                            <img src="{{ url_for('static', path='images/nosotros/gerentegeneral.png') }}" alt="Liderazgo Montoya-Pérez">
+                        </div>
+                        <div class="text-side">
+                            <h3>Liderazgo y Visión</h3>
+                            <p>Bajo la dirección estratégica de Marco Montoya, nuestro grupo mantiene un compromiso inquebrantable con la modernización industrial. Nuestra visión es liderar la transformación hacia una industria más eficiente, segura y sostenible.</p>
+                        </div>
+                    </div>
+
+                    <!-- Pillars Grid (Sectors) -->
+                    <h2 style="text-align: center; color: var(--brand-red); margin-top: 4em; letter-spacing: 3px; font-weight: 700;">Nuestros Sectores Clave</h2>
+                    <div class="pillars-grid" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 2rem; margin-top: 3rem;">
+                        <div class="pillar-card" style="flex: 1 1 300px; max-width: 350px;">
+                            <i class="fas fa-building"></i>
+                            <h3>Construcción</h3>
+                            <p>Optimización de flotas para megaobras de infraestructura y proyectos urbanos.</p>
+                        </div>
+                        <div class="pillar-card" style="flex: 1 1 300px; max-width: 350px;">
+                            <i class="fas fa-oil-can"></i>
+                            <h3>Petróleo</h3>
+                            <p>Soluciones críticas para perforación y mantenimiento en pozos petroleros.</p>
+                        </div>
+                        <div class="pillar-card" style="flex: 1 1 300px; max-width: 350px;">
+                            <i class="fas fa-tractor"></i>
+                            <h3>Agrícola</h3>
+                            <p>Equipamiento robusto para la adecuación de tierras y producción alimentaria.</p>
+                        </div>
+                        <div class="pillar-card" style="flex: 1 1 300px; max-width: 350px;">
+                            <i class="fas fa-hard-hat"></i>
+                            <h3>Minería</h3>
+                            <p>Respaldo a escala masiva para las operaciones de extracción más exigentes.</p>
+                        </div>
+                        <div class="pillar-card" style="flex: 1 1 300px; max-width: 350px;">
+                            <i class="fas fa-bolt"></i>
+                            <h3>Energía</h3>
+                            <p>Suministro eléctrico, paneles solares y tecnología LED para el futuro.</p>
+                        </div>
+                    </div>
+
                     <div class="slogan-box">
-                        <h3>Nuestra Sinergia Garantiza Resultados</h3>
-                        <p>Minimizamos riesgos operativos ofreciendo durabilidad, calidad y la maquinaria imparable que demanda cada industria.</p>
+                        <h3>Maquinaria Imparable. Soporte Inquebrantable.</h3>
+                        <p>Nuestra sinergia garantiza que su proyecto avance con la fuerza que el país demanda.</p>
                     </div>
 
                 </div>

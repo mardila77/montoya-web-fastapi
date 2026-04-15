@@ -2,23 +2,28 @@
 <html>
 
 <head>
-    <title>Grupo Montoya-Pérez C.A. | Soluciones Industriales</title>
+    <title>Grupo Montoya-Pérez C.A. | Soluciones Industriales Premium</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <meta name="description" content="Grupo Montoya-Pérez C.A. - Especialistas en soporte, repuestos y servicio técnico premium para maquinaria Caterpillar y John Deere. Potenciamos los sectores petróleo, minería, construcción y agricultura." />
+    <meta name="keywords" content="maquinaria pesada, repuestos caterpillar, john deere, venezuela, servicio tecnico industrial, plantas electricas, energia solar" />
 
     <link rel="icon" type="image/png" href="{{ url_for('static', path='assets/css/images/favicon.png') }}" />
 
     <link rel="stylesheet" href="{{ url_for('static', path='assets/css/main.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', path='assets/css/industrial-premium.css') }}" />
     <noscript>
         <link rel="stylesheet" href="{{ url_for('static', path='assets/css/noscript.css') }}" />
     </noscript>
     <style>
         /* Anula la paleta base del template HTML5UP para permitir fondos personalizados corporativos */
+        .wrapper,
         .wrapper.style1,
         .wrapper.style2,
         .wrapper.style3,
         .wrapper.alt,
-        .spotlight {
+        .spotlight,
+        #banner {
             background-image: none !important;
             background-color: transparent !important;
         }
@@ -160,33 +165,87 @@
         .spotlight .image:hover img {
             transform: scale(1.05) !important;
         }
+
+        #banner {
+            background-image: url("{{ url_for('static', path='images/premium/hero_industrial.png') }}") !important;
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            height: 100vh;
+        }
+
+        #banner::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(180deg, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.8) 100%);
+        }
     </style>
 </head>
 
 <body class="is-preload">
+
+    <!-- Cinematic Intro Experience Overlay v2.5 -->
+    <div id="cinematic-intro">
+        <div class="intro-content">
+            <div class="intro-logo-container">
+                <img src="{{ url_for('static', path='images/logo-premium.png') }}" alt="Grupo Montoya-Pérez">
+            </div>
+            
+            <div class="intro-brands-grid">
+                <div class="brand-badge"><img src="{{ url_for('static', path='images/marcas/premium/logo_cat_premium.png') }}" alt="Caterpillar"></div>
+                <div class="brand-badge"><img src="{{ url_for('static', path='images/marcas/premium/logo_cummins_premium.png') }}" alt="Cummins"></div>
+                <div class="brand-badge"><img src="{{ url_for('static', path='images/marcas/premium/logo_doosan_premium.png') }}" alt="Doosan"></div>
+                <div class="brand-badge"><img src="{{ url_for('static', path='images/marcas/premium/logo_hyundai_premium.png') }}" alt="Hyundai"></div>
+                <div class="brand-badge"><img src="{{ url_for('static', path='images/marcas/premium/logo_international_premium.png') }}" alt="International"></div>
+                <div class="brand-badge"><img src="{{ url_for('static', path='images/marcas/premium/logo_iveco_premium.png') }}" alt="Iveco"></div>
+                <div class="brand-badge"><img src="{{ url_for('static', path='images/marcas/premium/logo_jcb_premium.png') }}" alt="JCB"></div>
+                <div class="brand-badge"><img src="{{ url_for('static', path='images/marcas/premium/logo_komatsu_premium.png') }}" alt="Komatsu"></div>
+                <div class="brand-badge"><img src="{{ url_for('static', path='images/marcas/premium/logo_kubota_premium.png') }}" alt="Kubota"></div>
+                <div class="brand-badge"><img src="{{ url_for('static', path='images/marcas/premium/logo_mitsubishi_premium.png') }}" alt="Mitsubishi"></div>
+                <div class="brand-badge"><img src="{{ url_for('static', path='images/marcas/premium/logo_perkins_premium.png') }}" alt="Perkins"></div>
+                <div class="brand-badge"><img src="{{ url_for('static', path='images/marcas/premium/logo_volvo_premium.png') }}" alt="Volvo"></div>
+            </div>
+
+            <div class="intro-pillars-v2">
+                <div class="pillar-v2">ALQUILER Y <span>VENTA</span></div>
+                <div class="pillar-v2">REPARACIÓN Y <span>SOPORTE</span></div>
+                <div class="pillar-v2">REPUESTOS <span>ORIGINALES</span></div>
+            </div>
+        </div>
+    </div>
 
     <div id="page-wrapper">
 
         <header id="header"
             style="position: absolute; top: 0; left: 0; width: 100vw; background: transparent; z-index: 10; padding: 1.5em 2em; display: flex; justify-content: space-between; align-items: center; box-sizing: border-box;">
             <h1 style="margin: 0; padding: 0; display: flex; align-items: center;">
-                <a href="/" style="display: block; line-height: 0; text-decoration: none;">
-                    <img src="{{ url_for('static', path='images/logo1x1.jpeg') }}" alt="Grupo Montoya-Pérez"
-                        style="height: 55px; width: auto; border-radius: 50%; box-shadow: 0 4px 15px rgba(0,0,0,1); transition: transform 0.3s ease;"
-                        title="Volver al inicio" onmouseover="this.style.transform='scale(1.05)'"
-                        onmouseout="this.style.transform='scale(1)'">
+                <a href="/" class="logo-container">
+                    <img src="{{ url_for('static', path='images/logo-premium.png') }}" alt="Grupo Montoya-Pérez" class="logo-rect">
                 </a>
             </h1>
             <nav style="margin: 0;">
-                <a href="#menu" class="btn-menu-header"
-                    style="background: rgba(18, 18, 18, 0.7); backdrop-filter: blur(5px); color: #FFCD00; font-weight: bold; text-transform: uppercase; padding: 0.5em 1.5em; border-radius: 30px; border: 1px solid rgba(255, 205, 0, 0.5);">Menú</a>
+                <a href="#menu" class="hamburger-trigger" style="text-decoration: none;">
+                    <div class="hamburger">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </a>
             </nav>
         </header>
 
         {% include 'menu.html' %}
 
-        <section id="banner" style="position: relative; padding-bottom: 70px;">
-            <div class="inner">
+        <section id="banner" class="animated-bg" style="position: relative; padding-bottom: 70px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;">
+            <div class="hero-branding" style="z-index: 5; margin-bottom: 2rem;">
+                <div class="glass-logo-wrapper">
+                    <img src="{{ url_for('static', path='images/logo-glass-v3.png') }}" alt="GMPC Premium" style="max-width: 600px; width: 85vw; filter: drop-shadow(0 0 50px rgba(255,0,0,0.3));">
+                </div>
+                <h2 style="color: white; font-size: 1.2rem; letter-spacing: 12px; margin-top: 1.5rem; opacity: 0.8; font-weight: 300;">MONTOYA - PÉREZ</h2>
+            </div>
+            
+            <div class="inner" style="opacity: 0;">
                 &nbsp;
             </div>
             {% set sections = [
@@ -205,7 +264,7 @@
             <section id="nosotros-preview" class="wrapper style3 alt spotlight">
                 <div class="inner">
                     <a href="/nosotros" class="image">
-                        <img src="{{ url_for('static', path='images/montoyaperez/banner.png') }}" alt="Nosotros GMPC" />
+                        <img src="{{ url_for('static', path='images/premium/hero_industrial.png') }}" alt="Nosotros GMPC" />
                     </a>
                     <div class="content">
                         <h2 class="major"><a href="/nosotros">Nosotros</a></h2>
@@ -222,7 +281,7 @@
             <section id="one" class="wrapper spotlight style1">
                 <div class="inner">
                     <a href="/petrolera" class="image"><img
-                            src="{{ url_for('static', path='images/petrolera/banner_petrolero.png') }}"
+                            src="{{ url_for('static', path='images/premium/sector_petrolera.png') }}"
                             alt="División Petrolera" /></a>
                     <div class="content">
                         <h2 class="major"><a href="/petrolera" style="color: inherit; text-decoration: none;">División
@@ -237,7 +296,7 @@
             <section id="two" class="wrapper alt spotlight style2">
                 <div class="inner">
                     <a href="/agricola" class="image"><img
-                            src="{{ url_for('static', path='images/agricola/tractor_banner.png') }}"
+                            src="{{ url_for('static', path='images/premium/sector_agricola.png') }}"
                             alt="Tecnificación Agrícola" /></a>
                     <div class="content">
                         <h2 class="major"><a href="/agricola"
@@ -252,7 +311,7 @@
             <section id="three" class="wrapper spotlight style1">
                 <div class="inner">
                     <a href="/mineria" class="image"><img
-                            src="{{ url_for('static', path='images/mineria/minero_01.png') }}" alt="Minería" /></a>
+                            src="{{ url_for('static', path='images/premium/sector_mineria.png') }}" alt="Minería" /></a>
                     <div class="content">
                         <h2 class="major"><a href="/mineria" style="color: inherit; text-decoration: none;">Minería</a>
                         </h2>
@@ -265,7 +324,7 @@
             <section id="four" class="wrapper alt spotlight style2">
                 <div class="inner">
                     <a href="/energia" class="image"><img
-                            src="{{ url_for('static', path='images/solar/paneles_01.png') }}" alt="Energía Solar" /></a>
+                            src="{{ url_for('static', path='images/premium/sector_energia.png') }}" alt="Energía Solar" /></a>
                     <div class="content">
                         <h2 class="major"><a href="/energia" style="color: inherit; text-decoration: none;">Sistemas
                                 Energéticos</a></h2>
@@ -278,7 +337,7 @@
             <section id="five" class="wrapper spotlight style1">
                 <div class="inner">
                     <a href="/construccion" class="image"><img
-                            src="{{ url_for('static', path='images/montoyaperez/sector-construccion.png') }}"
+                            src="{{ url_for('static', path='images/premium/sector_construccion.png') }}"
                             alt="Sector Construcción" /></a>
                     <div class="content">
                         <h2 class="major"><a href="/construccion" style="color: inherit; text-decoration: none;">Sector
@@ -292,29 +351,231 @@
 
         <section id="footer">
             <div class="inner">
-                <a href="/contacto" class="button special"
-                    style="margin: 0 auto 1em auto; display: block; width: fit-content;">Ir a la página de contacto</a>
+                <a href="/contacto" class="button primary large"
+                    style="margin: 0 auto 3em auto; display: block; width: fit-content; padding: 1.2rem 3.5rem; letter-spacing: 2px;">CONTACTAR AHORA</a>
                 <ul class="copyright">
                     <li>&copy; GMPC. Todos los derechos reservados.</li>
                     <li>Desarrollo: <a href="https://linkedin.com/in/mardila77">Ing. Manuel Ardila</a></li>
                 </ul>
             </div>
         </section>
+
+        <!-- Botón flotante de WhatsApp -->
+        <a href="https://api.whatsapp.com/send?phone={{ phone }}&text=¡Hola, *Marco*! ✨%0A%0AMe comunico para solicitar información sobre mi equipo 🏗️. Para facilitar la búsqueda y cotización, te envío lo siguiente:%0A%0A📸 *Archivo:* Foto de la placa identificadora.%0A🔍 *Objetivo:* Ubicar el equipo correcto en el catálogo.%0A%0A¡Hablemos pronto para ver las opciones! 📞"
+            class="whatsapp-float" target="_blank" title="Chatea con Marco Montoya">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" />
+        </a>
+
+    </div>
+
+    <!-- Audio Engine v5.2.1 -->
+    <audio id="siteMusic" loop preload="auto">
+        <source src="{{ url_for('static', path='assets/audio/site-atmosphere.mp3') }}" type="audio/mpeg">
+    </audio>
+
+    <div id="audioControl" class="audio-toggle paused" title="Control de Atmósfera">
+        <!-- Indicador visual v5.5 -->
+        <div id="audioHint" class="audio-hint">
+            <div class="hint-arrow"></div>
+            <span class="hint-text">ACTIVA LA ATMÓSFERA GMPC</span>
+        </div>
+        <div class="bars">
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+        </div>
+    </div>
+
+    <style>
+        .audio-toggle {
+            position: fixed;
+            bottom: 40px;
+            left: 40px;
+            z-index: 5000;
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .audio-toggle:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: var(--brand-yellow);
+        }
+
+        .audio-hint {
+            position: absolute;
+            left: 65px;
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.5s ease;
+        }
+
+        .hint-text {
+            color: var(--brand-yellow);
+            font-size: 0.75rem;
+            letter-spacing: 2px;
+            font-weight: 700;
+            background: rgba(0,0,0,0.4);
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            backdrop-filter: blur(5px);
+        }
+
+        .hint-arrow {
+            width: 15px;
+            height: 2px;
+            background: var(--brand-yellow);
+            position: relative;
+            animation: arrowPulse 1s infinite alternate;
+        }
+
+        .hint-arrow::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: -4px;
+            width: 8px;
+            height: 8px;
+            border-left: 2px solid var(--brand-yellow);
+            border-bottom: 2px solid var(--brand-yellow);
+            transform: rotate(45deg);
+        }
+
+        @keyframes arrowPulse {
+            from { transform: translateX(0); opacity: 0.5; }
+            to { transform: translateX(-10px); opacity: 1; }
+        }
+
+        .bars {
+            display: flex;
+            align-items: flex-end;
+            gap: 3px;
+            height: 15px;
+        }
+
+        .bar {
+            width: 3px;
+            background: var(--brand-yellow);
+            height: 100%;
+            border-radius: 2px;
+            transition: height 0.3s ease;
+        }
+
+        .playing .bar {
+            animation: soundWave 0.5s ease-in-out infinite alternate;
+        }
+
+        .playing .bar:nth-child(1) { animation-delay: 0.0s; }
+        .playing .bar:nth-child(2) { animation-delay: 0.1s; }
+        .playing .bar:nth-child(3) { animation-delay: 0.2s; }
+        .playing .bar:nth-child(4) { animation-delay: 0.3s; }
+
+        @keyframes soundWave {
+            from { height: 5px; }
+            to { height: 100%; }
+        }
+
+        .paused .bar {
+            height: 3px !important;
+            opacity: 0.5;
+        }
+    </style>
+
+    <script src="{{ url_for('static', path='assets/js/jquery.min.js') }}"></script>
+    <script src="{{ url_for('static', path='assets/js/jquery.scrollex.min.js') }}"></script>
+    <script src="{{ url_for('static', path='assets/js/browser.min.js') }}"></script>
+    <script src="{{ url_for('static', path='assets/js/breakpoints.min.js') }}"></script>
+    <script src="{{ url_for('static', path='assets/js/util.js') }}"></script>
+    <script src="{{ url_for('static', path='assets/js/main.js') }}"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            window.scrollTo(0, 0);
+
+            const intro = document.getElementById('cinematic-intro');
+            const music = document.getElementById('siteMusic');
+            const control = document.getElementById('audioControl');
+            const hint = document.getElementById('audioHint');
+            const hintText = hint ? hint.querySelector('.hint-text') : null;
+
+            if(music) music.volume = 0.33;
+
+            function updateUI() {
+                if (!music || !control || !hintText) return;
+                
+                if (music.paused) {
+                    control.classList.remove('playing');
+                    control.classList.add('paused');
+                    hintText.textContent = "ACTIVA LA ATMÓSFERA GMPC";
+                } else {
+                    control.classList.add('playing');
+                    control.classList.remove('paused');
+                    hintText.textContent = "DESACTIVA LA ATMÓSFERA GMPC";
+                }
+            }
+
+            // Sequence timing
+            setTimeout(() => {
+                if (intro) {
+                    intro.classList.add('split-active');
+                    intro.style.pointerEvents = 'none';
+                }
+                
+                setTimeout(() => {
+                    if (intro) intro.style.display = 'none';
+                    document.body.style.overflow = 'auto';
+                    document.body.classList.remove('is-preload');
+                    
+                    // Mostrar invitación visual constante tras intro
+                    if (hint) hint.style.opacity = '1';
+                }, 1000);
+            }, 2500);
+
+            // Audio Toggle Manual
+            if(control) {
+                control.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    if (music.paused) {
+                        music.play();
+                    } else {
+                        music.pause();
+                    }
+                    updateUI();
+                });
+            }
+
+            // Primer clic global podría activar música si el usuario no usa el botón
+            document.addEventListener('mousedown', () => {
+                // No ocultamos el hint, solo permitimos interacción
+            }, { once: true });
+
+            // Dynamic Scroll Logic
+            window.addEventListener('scroll', () => {
+                const heroBranding = document.querySelector('.hero-branding');
+                if (heroBranding) {
+                    let scrollValue = window.scrollY;
+                    heroBranding.style.opacity = Math.max(0, 1 - scrollValue / 400);
+                    heroBranding.style.transform = `translateY(${scrollValue * 0.4}px)`;
+                }
+            });
+        });
+    </script>
 </body>
-<!-- Botón flotante de WhatsApp -->
-<a href="https://api.whatsapp.com/send?phone={{ phone }}&text=¡Hola, *Marco*! ✨%0A%0AMe comunico para solicitar información sobre mi equipo 🏗️. Para facilitar la búsqueda y cotización, te envío lo siguiente:%0A%0A📸 *Archivo:* Foto de la placa identificadora.%0A🔍 *Objetivo:* Ubicar el equipo correcto en el catálogo.%0A%0A¡Hablemos pronto para ver las opciones! 📞"
-    class="whatsapp-float" target="_blank" title="Chatea con Marco Montoya">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" />
-</a>
 
-</div>
-
-<script src="{{ url_for('static', path='assets/js/jquery.min.js') }}"></script>
-<script src="{{ url_for('static', path='assets/js/jquery.scrollex.min.js') }}"></script>
-<script src="{{ url_for('static', path='assets/js/browser.min.js') }}"></script>
-<script src="{{ url_for('static', path='assets/js/breakpoints.min.js') }}"></script>
-<script src="{{ url_for('static', path='assets/js/util.js') }}"></script>
-<script src="{{ url_for('static', path='assets/js/main.js') }}"></script>
+</html>
 </body>
 
 </html>

@@ -1,29 +1,31 @@
 <style>
-/* Define la arquitectura visual principal del menú lateral estilo cristal */
+/* Define la arquitectura visual principal del menú lateral estilo cristal premium */
 #menu {
     z-index: 10000;
 }
 #menu .inner {
-    background: rgba(18, 18, 18, 0.70) !important;
-    backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px);
-    border-left: 1px solid rgba(255, 255, 255, 0.08);
-    box-shadow: -10px 0 40px rgba(0, 0, 0, 0.6);
-    padding: 2em 1.5em !important;
-    max-width: 300px;
+    background: hsla(220, 15%, 4%, 0.6) !important;
+    backdrop-filter: var(--blur-intensity) !important;
+    -webkit-backdrop-filter: var(--blur-intensity) !important;
+    border-left: 1px solid var(--glass-border) !important;
+    box-shadow: -15px 0 50px rgba(0, 0, 0, 0.9) !important;
+    padding: 4em 3em !important;
+    max-width: 280px;
     display: flex;
     flex-direction: column;
+    font-family: 'Outfit', sans-serif !important;
 }
 
 #menu .inner h2 {
-    color: #FFCD00;
-    font-size: 1.2em;
-    letter-spacing: 2px;
+    color: var(--brand-yellow) !important;
+    font-size: 1.25em;
+    letter-spacing: 4px;
     text-transform: uppercase;
-    margin-bottom: 1em;
-    border-bottom: 2px solid #D32F2F;
-    padding-bottom: 0.5em;
-    text-shadow: 0 4px 10px rgba(0, 0, 0, 0.7);
+    margin-bottom: 2em;
+    border-bottom: 2px solid var(--brand-red) !important;
+    padding-bottom: 1em;
+    text-shadow: 0 4px 15px rgba(0, 0, 0, 0.9);
+    font-weight: 700;
 }
 
 #menu .inner .links {
@@ -34,68 +36,80 @@
 }
 
 #menu .inner .links li {
-    margin: 0.5em 0;
+    margin: 1.25em 0;
     border-top: none !important;
     padding: 0 !important;
 }
 
 #menu .inner .links li a {
-    color: #FFFFFF !important;
+    color: var(--brand-white) !important;
     font-size: 0.9em;
-    font-weight: 500;
+    font-weight: 300;
     text-decoration: none;
     display: block;
-    padding: 0.6em 1em;
-    border-radius: 8px;
-    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    padding: 0.5em 0;
+    transition: all var(--transition-snappy);
     position: relative;
-    overflow: hidden;
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.05);
+    overflow: visible;
+    background: transparent;
+    border: none;
+    letter-spacing: 2px;
+    text-transform: uppercase;
 }
 
 #menu .inner .links li a:hover {
-    color: #121212 !important;
-    background: #FFCD00;
+    color: var(--brand-yellow) !important;
     transform: translateX(12px);
-    border-color: #FFCD00;
-    box-shadow: 0 8px 20px rgba(255, 205, 0, 0.3);
-    font-weight: bold;
+    font-weight: 600;
+}
+
+#menu .inner .links li a::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background-color: var(--brand-yellow);
+    transition: width var(--transition-snappy);
+}
+
+#menu .inner .links li a:hover::after {
+    width: 40px;
 }
 
 #menu .inner .close {
     background-image: none !important; 
     position: absolute;
-    top: 1em;
-    right: 1em;
-    width: 35px;
-    height: 35px;
+    top: 2em;
+    right: 2em;
+    width: 32px;
+    height: 32px;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: rgba(255, 255, 255, 0.1) !important;
+    background: hsla(0, 0%, 100%, 0.05) !important;
     border-radius: 50%;
-    color: white !important;
+    color: rgba(255,255,255,0.6) !important;
     text-decoration: none;
-    transition: all 0.4s ease;
-    border: 1px solid rgba(255, 255, 255, 0.2) !important;
-    font-size: 0.9em;
+    transition: all var(--transition-snappy);
+    border: 1px solid hsla(0, 0%, 100%, 0.1) !important;
+    font-size: 0.8em;
     text-indent: 0 !important;
     overflow: visible !important;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
 }
 
 #menu .inner .close:hover {
-    background: #D32F2F !important;
+    background: var(--brand-red) !important;
     transform: rotate(90deg) scale(1.1);
-    border-color: #D32F2F !important;
-    box-shadow: 0 0 15px rgba(211, 47, 47, 0.7);
+    color: white !important;
+    border-color: var(--brand-red) !important;
+    box-shadow: 0 0 20px hsla(0, 80%, 50%, 0.3);
 }
 
-/* Control fluido de visibilidad y opacidad para enlaces del menú */
+/* Control de opacidad para enfoque visual */
 #menu .inner .links li {
-    opacity: 0.9;
-    transition: opacity 0.3s;
+    transition: opacity var(--transition-snappy);
 }
 #menu .inner .links:hover li {
     opacity: 0.4;
@@ -103,42 +117,18 @@
 #menu .inner .links li:hover {
     opacity: 1;
 }
-
-/* Estructurador unificado y responsivo para el botón global desplegable */
-.btn-menu-header {
-    background: rgba(18, 18, 18, 0.7);
-    backdrop-filter: blur(5px);
-    -webkit-backdrop-filter: blur(5px);
-    color: #FFCD00 !important;
-    font-weight: bold;
-    text-transform: uppercase;
-    padding: 0.5em 1.5em;
-    border-radius: 30px;
-    border: 1px solid rgba(255, 205, 0, 0.5);
-    box-shadow: 0 4px 10px rgba(0,0,0,0.5);
-    letter-spacing: 1px;
-    text-decoration: none;
-}
-
-/* Fuerza la topología de FontAwesome a 900 para asegurar la visibilidad del ícono sólido */
-.btn-menu-header:before, .btn-menu-header:after {
-    font-weight: 900 !important;
-    color: inherit;
-    font-size: 1.1em;
-}
-
 </style>
 
 <nav id="menu">
     <div class="inner">
-        <h2>Grupo M-P</h2>
+        <h2>Menú</h2>
         <ul class="links">
             <li><a href="/">Inicio</a></li>
             <li><a href="/nosotros">Nosotros</a></li>
             <li><a href="/petrolera">Petrolera</a></li>
             <li><a href="/agricola">Agrícola</a></li>
             <li><a href="/mineria">Minería</a></li>
-            <li><a href="/energia">Energía Sistémica</a></li>
+            <li><a href="/energia">Energía</a></li>
             <li><a href="/construccion">Construcción</a></li>
             <li><a href="/contacto">Contacto</a></li>
         </ul>
