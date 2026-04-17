@@ -443,7 +443,7 @@
         <footer id="footer" style="background: #030406 !important; border-top: 1px solid rgba(255,255,255,0.05);">
             <div class="inner">
                 <ul class="copyright">
-                    <li>&copy; GMPC 2024.</li>
+                    <li>&copy; {{ current_year }} GMPC.</li>
                     <li>Ingeniería: <a href="https://linkedin.com/in/mardila77">Manuel Ardila</a></li>
                 </ul>
             </div>
@@ -502,6 +502,10 @@
                         btnUnified.innerHTML = 'ENVIAR CORREO ELECTRÓNICO';
                         btnUnified.className = 'button primary large';
                     } else {
+                        // Limpiar adjunto si se cambia a WhatsApp para evitar basura técnica
+                        plateInput.value = "";
+                        document.getElementById('file-name').innerText = "ARRASTRE Y SUELTE PARA ADJUNTAR";
+                        
                         plateUploadSection.classList.add('hidden-flow');
                         plateInfoSection.classList.add('hidden-flow');
                         emailBox.style.display = 'none';

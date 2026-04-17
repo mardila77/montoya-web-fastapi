@@ -5,6 +5,28 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to a custom 4-section versioning logic.
 
+## [1.0.0.006] - 2026-04-17
+
+### Added
+- **Automatización de Copyright**: Implementación dinámica del año de copyright en todo el portal web y correos electrónicos.
+- **Personalización del Trato**: Lógica de extracción del primer nombre para un saludo más cercano y profesional en el email de agradecimiento.
+- **Robustez Industrial**: Transición a un flujo de registro síncrono en Google Sheets para garantizar la integridad de los leads antes del éxito visual.
+
+### Changed
+- Refactorización del servidor para aceptar archivos de forma tolerante (opcional) en el flujo de WhatsApp, eliminando errores 422 por inconsistencia de FormData.
+- Limpieza automática de estados de adjuntos al alternar canales en el formulario de contacto para evitar el envío de datos obsoletos.
+
+## [1.0.0.005] - 2026-04-16
+
+### Added
+- Registro visual premium en emails mediante adjuntos CID para asegurar la visibilidad del logo en clientes modernos (Gmail/Outlook).
+- Prevención de duplicados en el registro de leads.
+
+## [1.0.0.004] - 2026-04-15
+
+### Changed
+- Estabilización de rutas de activos estáticos y optimización de carga de imágenes corporativas.
+
 ## [1.0.0.003] - 2026-04-15
 
 ### Added

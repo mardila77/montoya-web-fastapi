@@ -34,30 +34,33 @@ CONTACTO = {"telefono": os.getenv("CONTACT_PHONE"), "email": os.getenv("CONTACT_
 @app.get("/")
 async def leer_raiz(request: Request):
     # Inyectamos los datos de contacto de forma dinámica
+    current_year = datetime.now(VENEZUELA_TZ).year
     return templates.TemplateResponse(
         "index.html",
-        {"request": request, "phone": CONTACTO["telefono"], "email": CONTACTO["email"]},
+        {"request": request, "phone": CONTACTO["telefono"], "email": CONTACTO["email"], "current_year": current_year},
     )
 
 
 # Ruta de contacto (debe ir después de la inicialización de app y variables)
 @app.get("/contacto")
 async def contacto(request: Request):
+    current_year = datetime.now(VENEZUELA_TZ).year
     return templates.TemplateResponse(
         "contacto.html",
-        {"request": request, "phone": CONTACTO["telefono"], "email": CONTACTO["email"]},
+        {"request": request, "phone": CONTACTO["telefono"], "email": CONTACTO["email"], "current_year": current_year},
     )
 
 # --- Rutas de Sectores ---
 @app.get("/{sector}")
 async def sectores(request: Request, sector: str):
     sectores_validos = ["agricola", "construccion", "petrolera", "mineria", "energia", "nosotros"]
+    current_year = datetime.now(VENEZUELA_TZ).year
     if sector in sectores_validos:
         return templates.TemplateResponse(
             f"{sector}.html",
-            {"request": request, "phone": CONTACTO["telefono"], "email": CONTACTO["email"]},
+            {"request": request, "phone": CONTACTO["telefono"], "email": CONTACTO["email"], "current_year": current_year},
         )
-    return templates.TemplateResponse("index.html", {"request": request})
+    return templates.TemplateResponse("index.html", {"request": request, "current_year": current_year})
 
 # Función auxiliar para envío de correos automatizados (Admin + Cliente)
 async def enviar_correos_automatizados(
@@ -105,10 +108,14 @@ async def enviar_correos_automatizados(
         fecha_ve = now_ve.strftime("%d/%m/%Y")
         hora_ve = now_ve.strftime("%I:%M %p")
 
+        # Extraer solo el primer nombre para el correo de agradecimiento (más personal)
+        first_name = name.split()[0] if name else "Cliente"
+
         html_content = templates.get_template("email_agradecimiento.html").render({
-            "name": name,
+            "name": first_name,
             "fecha": fecha_ve,
-            "hora": hora_ve
+            "hora": hora_ve,
+            "current_year": now_ve.year
         })
         msg_customer.attach(MIMEText(html_content, 'html', 'utf-8'))
 
@@ -142,7 +149,8 @@ async def registrar_lead(
     phone: str = Form(...),
     service: str = Form(...),
     message: str = Form(...),
-    channel: str = Form("whatsapp")
+    channel: str = Form("whatsapp"),
+    plate_image: Optional[UploadFile] = File(None)
 ):
     data = {
         "name": name,
@@ -153,9 +161,12 @@ async def registrar_lead(
         "channel": channel
     }
     
-    # 1. Registrar en sheets (background)
-    background_tasks.add_task(sheets_manager.register_lead, data)
+    # 1. Registrar en sheets (OPERACIÓN SÍNCRONA CRÍTICA)
+    registro_exitoso = sheets_manager.register_lead(data)
     
+    if not registro_exitoso:
+        print(f"ALERTA CRÍTICA: Falló el registro en Sheets para el lead: {name}")
+
     # 2. Envío de correos automáticos (Marco + Cliente)
     background_tasks.add_task(
         enviar_correos_automatizados,
@@ -176,7 +187,6 @@ async def enviar_contacto(
     message: str = Form(...),
     plate_image: Optional[UploadFile] = File(None)
 ):
-    # 1. Registrar en Google Sheets
     lead_data = {
         "name": name,
         "email": email,
@@ -185,7 +195,8 @@ async def enviar_contacto(
         "message": message,
         "channel": "email"
     }
-    background_tasks.add_task(sheets_manager.register_lead, lead_data)
+    # 1. Registrar en Google Sheets (SÍNCRONO)
+    sheets_manager.register_lead(lead_data)
 
     # 2. Envío de correos automáticos (Marco + Cliente)
     background_tasks.add_task(
