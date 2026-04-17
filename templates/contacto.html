@@ -241,10 +241,71 @@
         .hidden-flow {
             display: none !important;
         }
+
+        /* --- GMPC NOTIFICATION ENGINE v1.0 --- */
+        #gmpc_notification {
+            position: fixed;
+            top: -100px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            max-width: 500px;
+            background: linear-gradient(135deg, rgba(10, 150, 40, 0.95), rgba(0, 80, 20, 0.95));
+            backdrop-filter: blur(15px);
+            border: 2px solid rgba(0, 255, 100, 0.5);
+            border-radius: 12px;
+            padding: 20px 30px;
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.8), 0 0 20px rgba(0, 255, 100, 0.2);
+            transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        #gmpc_notification.active {
+            top: 40px;
+        }
+
+        #gmpc_notification i {
+            font-size: 2.2em;
+            color: #00ff64;
+            filter: drop-shadow(0 0 5px rgba(0, 255, 100, 0.8));
+            animation: pulse-glow 2s infinite;
+        }
+
+        #gmpc_notification .message-box strong {
+            display: block;
+            color: white;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.9em;
+            margin-bottom: 4px;
+        }
+
+        #gmpc_notification .message-box span {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 0.85em;
+        }
+
+        @keyframes pulse-glow {
+            0% { transform: scale(1); filter: brightness(1); }
+            50% { transform: scale(1.1); filter: brightness(1.5); }
+            100% { transform: scale(1); filter: brightness(1); }
+        }
     </style>
 </head>
 
 <body class="is-preload">
+    <!-- Notification Engine -->
+    <div id="gmpc_notification">
+        <i class="fas fa-check-circle"></i>
+        <div class="message-box">
+            <strong>Solicitud Enviada</strong>
+            <span id="notif_text">Tu requerimiento ha sido registrado con éxito.</span>
+        </div>
+    </div>
+
     <div id="page-wrapper">
         <section id="hero-sector">
             <div class="hero-overlay-fade"></div>
@@ -256,7 +317,7 @@
 
         <header id="header"
             style="position: absolute; top: 0; left: 0; width: 100vw; background: transparent; z-index: 30; padding: 2em; display: flex; justify-content: space-between; align-items: center; box-sizing: border-box;">
-            <h1><a href="/" class="logo-container"><img src="{{ url_for('static', path='images/logo-premium.png') }}" alt="GMPC" class="logo-rect"></a></h1>
+            <h1><a href="/" class="logo-container"><img src="{{ url_for('static', path='images/logo-premium.png') }}" alt="Grupo Montoya-Pérez" class="logo-rect" style="width: 85px; height: auto;"></a></h1>
             <nav><a href="#menu" class="hamburger-trigger"><div class="hamburger"><span></span><span></span><span></span></div></a></nav>
         </header>
 
@@ -284,14 +345,19 @@
 
                 <form id="formulario_contacto" method="post" action="/enviar_contacto" enctype="multipart/form-data">
                     <div id="form_logic_wrapper" class="form-locked">
-                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-bottom: 2rem;">
+                        <!-- Campos de Identificación v8.0 -->
+                        <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1.5rem; margin-bottom: 2rem;">
                             <div class="form-group">
                                 <label style="color:rgba(255,255,255,0.7); font-size: 0.75em; margin-bottom: 0.8em; display: block; font-weight: 600; text-transform: uppercase;">Nombre y Apellido</label>
                                 <input type="text" name="name" id="contact_name" required class="form-control" placeholder="Ej: Manuel Ardila" />
                             </div>
                             <div class="form-group">
-                                <label style="color:rgba(255,255,255,0.7); font-size: 0.75em; margin-bottom: 0.8em; display: block; font-weight: 600; text-transform: uppercase;">E-mail Corporativo</label>
-                                <input type="email" name="email" id="contact_email" required class="form-control" placeholder="ejemplo@corporativo.com" />
+                                <label style="color:rgba(255,255,255,0.7); font-size: 0.75em; margin-bottom: 0.8em; display: block; font-weight: 600; text-transform: uppercase;">Email Corporativo</label>
+                                <input type="email" name="email" id="contact_email" required class="form-control" placeholder="ejemplo@empresa.com" />
+                            </div>
+                            <div class="form-group">
+                                <label style="color:rgba(255,255,255,0.7); font-size: 0.75em; margin-bottom: 0.8em; display: block; font-weight: 600; text-transform: uppercase;">Teléfono de Contacto</label>
+                                <input type="tel" name="phone" id="contact_phone" required class="form-control" placeholder="+58 4XX XXXXXXX" />
                             </div>
                         </div>
 
@@ -363,10 +429,9 @@
                             <p><strong>RECOMENDACIÓN:</strong> Al incluir una imagen de la placa identificadora, el <strong>Correo Electrónico</strong> es el canal prioritario para garantizar que los datos técnicos lleguen con la máxima fidelidad a nuestro equipo de ingeniería.</p>
                         </div>
 
-                        <!-- Botón de Envío Unificado v7.1 -->
+                        <!-- Botón de Envío Unificado v7.2 -->
                         <div id="submit_container" class="hidden-flow" style="display: flex; flex-direction: column; align-items: center; gap: 1.5rem; width: 100%; margin-top: 2rem;">
                             <button id="btn_unified_submit" type="submit" class="button large" style="width: 380px !important; height: 80px !important; padding: 0 !important; letter-spacing: 1px; font-weight: 800; border-radius: 0.75rem; display: flex; align-items: center; justify-content: center; gap: 10px; text-align: center; font-size: 0.85em !important;">
-                                <!-- El contenido se inyecta vía JS -->
                                 ENVIAR SOLICITUD
                             </button>
                         </div>
@@ -392,7 +457,6 @@
     <script src="{{ url_for('static', path='assets/js/util.js') }}"></script>
     <script src="{{ url_for('static', path='assets/js/main.js') }}"></script>
 
-    <!-- Lógica de Contacto Condicional & Segmentación de Canales v7.0 -->
     <script>
         function handleFileSelect(files) {
             const fileNameSpan = document.getElementById('file-name');
@@ -408,63 +472,55 @@
 
         document.addEventListener('DOMContentLoaded', () => {
             const form = document.getElementById('formulario_contacto');
+            const btnUnified = document.getElementById('btn_unified_submit');
             const dropZone = document.getElementById('drop_zone');
             const plateInput = document.getElementById('plate_image');
-            const emailBox = document.getElementById('email_priority_box');
             
-            // Elementos del Flujo Condicional v7.1
             const optEmail = document.getElementById('opt_email');
             const optWhatsapp = document.getElementById('opt_whatsapp');
             const formWrapper = document.getElementById('form_logic_wrapper');
             const plateUploadSection = document.getElementById('plate_upload_section');
             const plateInfoSection = document.getElementById('plate_info_section');
             const submitContainer = document.getElementById('submit_container');
-            const btnUnified = document.getElementById('btn_unified_submit');
+            const emailBox = document.getElementById('email_priority_box');
 
             let selectedChannel = null;
 
-            // 1. Selector de Canal
             const switchChannel = (channel) => {
                 selectedChannel = channel;
-                
-                // Actualizar UI del selector
                 optEmail.classList.toggle('active', channel === 'email');
                 optWhatsapp.classList.toggle('active', channel === 'whatsapp');
                 
-                // Desbloquear formulario y mostrar botón
-                formWrapper.classList.remove('form-locked');
-                formWrapper.classList.add('form-active');
-                submitContainer.classList.remove('hidden-flow');
-
-                // Lógica de visibilidad y apariencia del botón ÚNICO
-                if (channel === 'email') {
-                    // Configuración Email
-                    plateUploadSection.classList.remove('hidden-flow');
-                    plateInfoSection.classList.remove('hidden-flow');
+                if (channel) {
+                    formWrapper.classList.remove('form-locked');
+                    formWrapper.classList.add('form-active');
+                    submitContainer.classList.remove('hidden-flow');
                     
-                    btnUnified.innerHTML = 'ENVIAR CORREO ELECTRÓNICO';
-                    btnUnified.className = 'button primary large';
-                    btnUnified.type = 'submit';
+                    if (channel === 'email') {
+                        plateUploadSection.classList.remove('hidden-flow');
+                        plateInfoSection.classList.remove('hidden-flow');
+                        btnUnified.innerHTML = 'ENVIAR CORREO ELECTRÓNICO';
+                        btnUnified.className = 'button primary large';
+                    } else {
+                        plateUploadSection.classList.add('hidden-flow');
+                        plateInfoSection.classList.add('hidden-flow');
+                        emailBox.style.display = 'none';
+                        btnUnified.innerHTML = '<i class="fab fa-whatsapp" style="font-size: 1.6em;"></i> CONSULTA VÍA WHATSAPP';
+                        btnUnified.className = 'button large btn-whatsapp-dynamic';
+                    }
                 } else {
-                    // Configuración WhatsApp
+                    formWrapper.classList.add('form-locked');
+                    formWrapper.classList.remove('form-active');
+                    submitContainer.classList.add('hidden-flow');
                     plateUploadSection.classList.add('hidden-flow');
                     plateInfoSection.classList.add('hidden-flow');
-                    emailBox.style.display = 'none';
-                    
-                    btnUnified.innerHTML = '<i class="fab fa-whatsapp" style="font-size: 1.6em;"></i> CONSULTA RÁPIDA VÍA WHATSAPP';
-                    btnUnified.className = 'button large btn-whatsapp-dynamic';
-                    btnUnified.type = 'button';
                 }
-
-                // Scroll suave al inicio de los campos
-                const offset = formWrapper.offsetTop - 100;
-                window.scrollTo({ top: offset, behavior: 'smooth' });
             };
 
             optEmail.addEventListener('click', () => switchChannel('email'));
             optWhatsapp.addEventListener('click', () => switchChannel('whatsapp'));
 
-            // 2. Drag and Drop
+            // Lógica de Drag and Drop
             ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
                 dropZone.addEventListener(eventName, e => {
                     e.preventDefault();
@@ -486,46 +542,90 @@
                 if (selectedChannel === 'email') handleFileSelect(e.dataTransfer.files);
             }, false);
 
-            plateInput.addEventListener('change', function() {
-                if (this.files && this.files.length > 0) {
-                    handleFileSelect(this.files);
-                } else {
-                    emailBox.style.display = 'none';
-                }
-            });
-
-            // 3. Acción del Botón Unificado
-            btnUnified.addEventListener('click', (e) => {
-                if (selectedChannel === 'whatsapp') {
-                    const name = document.getElementById('contact_name').value;
-                    const email = document.getElementById('contact_email').value;
-                    const service = document.getElementById('contact_service').value;
-                    const message = document.getElementById('contact_message').value;
-
-                    if(!name || !email || !service || !message) {
-                        alert('Por favor complete todos los campos obligatorios para el contacto vía WhatsApp.');
-                        return;
-                    }
-
-                    const text = `¡Hola *Marco Montoya*! ✨
+            const showNotification = (message) => {
+                const notif = document.getElementById('gmpc_notification');
+                const text = document.getElementById('notif_text');
+                text.innerText = message;
+                notif.classList.add('active');
                 
-Me comunico desde el portal GMPC para una consulta rápida:
+                setTimeout(() => {
+                    notif.classList.remove('active');
+                }, 5000);
+            };
 
-🔍 *Servicio:* ${service}
-👤 *Nombre:* ${name}
-📧 *Email:* ${email}
+            const handleFormSubmit = async (e) => {
+                e.preventDefault();
+                
+                const name = document.getElementById('contact_name').value;
+                const email = document.getElementById('contact_email').value;
+                const phone = document.getElementById('contact_phone').value;
+                const service = document.getElementById('contact_service').value;
+                const message = document.getElementById('contact_message').value;
 
-📝 *Detalles:*
-${message}
-
-_Solicitud enviada vía WhatsApp._`;
-
-                    const encodedText = encodeURIComponent(text);
-                    const phone = "{{ phone }}"; 
-                    window.open(`https://api.whatsapp.com/send?phone=${phone}&text=${encodedText}`, '_blank');
+                if(!name || !email || !phone || !service || !message) {
+                    return; 
                 }
-                // Si es email, type="submit" hará el trabajo automáticamente
-            });
+
+                const originalText = btnUnified.innerHTML;
+                btnUnified.innerHTML = '<i class="fas fa-spinner fa-spin"></i> PROCESANDO...';
+                btnUnified.disabled = true;
+                btnUnified.style.pointerEvents = 'none';
+
+                if (selectedChannel === 'whatsapp') {
+                    // Flujo WhatsApp (Lead + Notif + Hook + Redirect)
+                    const formData = new FormData(form);
+                    formData.append('channel', 'whatsapp');
+
+                    try {
+                        const response = await fetch('/registrar_lead', { method: 'POST', body: formData });
+                        if (response.ok) {
+                            showNotification('¡Registro exitoso! Abriendo canal de WhatsApp...');
+                            
+                            // 1. Limpiar y Subir
+                            form.reset();
+                            window.scrollTo({ top: 0, behavior: 'smooth' });
+                            
+                            // 2. Redirigir a WhatsApp tras un breve delay para ver la notificación
+                            setTimeout(() => {
+                                const text = `¡Hola *Marco Montoya*! ✨\n\nMe comunico desde el portal GMPC:\n\n🔍 *Servicio:* ${service}\n👤 *Nombre:* ${name}\n📱 *Tel:* ${phone}\n📧 *Email:* ${email}\n\n📝 *Mensaje:*\n${message}`;
+                                window.open(`https://api.whatsapp.com/send?phone={{ phone }}&text=${encodeURIComponent(text)}`, '_blank');
+                            }, 1500);
+                        }
+                    } catch (err) { 
+                        console.error('Error capturando lead:', err); 
+                        alert('Error al conectar con el servidor.');
+                    }
+                } else {
+                    // Flujo Email (Lead + Notif Admin + Hook Cliente - TODO ASÍNCRONO)
+                    const formData = new FormData(form);
+                    
+                    try {
+                        const response = await fetch('/enviar_contacto', { method: 'POST', body: formData });
+                        if (response.ok) {
+                            showNotification('¡Correo enviado con éxito! Revisa tu bandeja de entrada.');
+                            
+                            // Limpiar y Subir
+                            form.reset();
+                            window.scrollTo({ top: 0, behavior: 'smooth' });
+                            switchChannel(null); // Bloquear de nuevo hasta elegir canal
+                            selectedChannel = null;
+                            optEmail.classList.remove('active');
+                            optWhatsapp.classList.remove('active');
+                            formWrapper.classList.add('form-locked');
+                            submitContainer.classList.add('hidden-flow');
+                        }
+                    } catch (err) {
+                        console.error('Error enviando formulario:', err);
+                        alert('Error al enviar la solicitud por correo.');
+                    }
+                }
+                
+                btnUnified.innerHTML = originalText;
+                btnUnified.disabled = false;
+                btnUnified.style.pointerEvents = 'auto';
+            };
+
+            form.addEventListener('submit', handleFormSubmit);
 
             // 4. Protección contra interacción sin canal
             formWrapper.addEventListener('click', (e) => {
@@ -536,6 +636,14 @@ _Solicitud enviada vía WhatsApp._`;
             }, true);
         });
     </script>
+
+    <!-- Botón flotante de Acceso Rápido (v5.0) -->
+    <a href="/contacto" class="whatsapp-float" title="Soporte Técnico GMPC">
+        <i class="fas fa-headset"></i>
+    </a>
+    {% include 'audio_engine.html' %}
+</body>
+</html>
 
     <!-- Botón flotante de Acceso Rápido (v5.0) -->
     <a href="/contacto" class="whatsapp-float" title="Soporte Técnico GMPC">

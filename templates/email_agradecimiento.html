@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirmación de Asistencia Técnica - GMPC</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap');
+        
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #030406;
+            font-family: 'Outfit', Arial, sans-serif;
+            color: #ffffff;
+        }
+
+        .email-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #0a0b0e;
+            border: 1px solid #1a1c20;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+        }
+
+        .header {
+            background-color: #030406;
+            padding: 40px 20px;
+            text-align: center;
+            border-bottom: 2px solid #ffcd00;
+        }
+
+        .logo {
+            max-width: 250px;
+            height: auto;
+        }
+
+        .content {
+            padding: 40px 50px;
+            line-height: 1.6;
+        }
+
+        h1 {
+            color: #ffcd00;
+            font-size: 24px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 30px;
+            font-weight: 700;
+        }
+
+        p {
+            font-size: 16px;
+            color: #e0e0e0;
+            margin-bottom: 20px;
+            font-weight: 300;
+        }
+
+        .highlight {
+            color: #ffffff;
+            font-weight: 600;
+        }
+
+        .callout-box {
+            background: rgba(255, 205, 0, 0.05);
+            border-left: 4px solid #cc0000;
+            padding: 20px;
+            margin: 30px 0;
+            border-radius: 4px;
+        }
+
+        .callout-box p {
+            margin-bottom: 0;
+            font-size: 15px;
+            color: #ffcd00;
+        }
+
+        .footer {
+            background-color: #030406;
+            padding: 30px 50px;
+            text-align: left;
+            border-top: 1px solid #1a1c20;
+        }
+
+        .signature {
+            border-left: 2px solid #ffcd00;
+            padding-left: 15px;
+        }
+
+        .signature strong {
+            display: block;
+            font-size: 18px;
+            color: #ffffff;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .signature span {
+            color: #888888;
+            font-size: 14px;
+        }
+
+        .meta-info {
+            font-size: 12px;
+            color: #555555;
+            margin-top: 30px;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        @media screen and (max-width: 600px) {
+            .content {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="email-container">
+        <!-- Header con el nuevo Logo Rectangular -->
+        <div class="header">
+            <!-- Nota: Para producción, esta URL debe ser absoluta (ej: https://tudominio.com/logo.jpg) -->
+            <img src="cid:logo_gmpc" alt="Grupo Montoya-Pérez" class="logo">
+        </div>
+
+        <!-- Contenido Principal -->
+        <div class="content">
+            <h1>Confirmación de Asistencia</h1>
+            
+            <p>Hola <span class="highlight">{{ name }}</span>,</p>
+            
+            <p>Gracias por confiar en el respaldo de ingeniería de <span class="highlight">Grupo Montoya-Pérez</span>.</p>
+            
+            <p>Hemos recibido tu comunicación el día hoy, <span class="highlight">{{ fecha }}</span>, a las <span class="highlight">{{ hora }}</span> (Uso horario de Venezuela).</p>
+            
+            <p>Tu solicitud ya ha sido asignada a nuestro equipo de especialistas técnicos. En <span class="highlight">GMPC</span>, sabemos que la continuidad de tu operación es lo más importante; por eso, ya estamos analizando tu requerimiento utilizando nuestra base de datos de ingeniería exclusiva (más de 3TB de especificaciones técnicas) para garantizarte una solución precisa, rápida y libre de errores.</p>
+
+            <div class="callout-box">
+                <p><strong>¿Qué sigue ahora?</strong><br>
+                Un asesor se pondrá en contacto contigo en breve para darte el diagnóstico exacto o la cotización que necesitas. Mientras tanto, ten la seguridad de que tu requerimiento ya está en marcha.</p>
+            </div>
+
+            <p>Gracias por permitirnos ser parte de tu cadena de valor.</p>
+        </div>
+
+        <!-- Firma y Footer -->
+        <div class="footer">
+            <div class="signature">
+                <strong>Marco Montoya</strong>
+                <span>Respaldo de Ingeniería - Grupo Montoya-Pérez</span>
+            </div>
+            
+            <div class="meta-info">
+                GMPC 2024 | Suministros, Repuestos, Reparaciones y Alquiler
+            </div>
+        </div>
+    </div>
+</body>
+</html>

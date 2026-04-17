@@ -18,8 +18,13 @@ wheels/
 # Archivos de Entorno (Secretos y Contraseñas)
 .env
 .env.*
+google_credentials.json
 
 # Medios de referencia (excluidos de Git)
 montoya-media/
 Montoya-Media/
 Montoya Media/
+
+# Scratch and temp
+scratch/
+logo_b64.txt

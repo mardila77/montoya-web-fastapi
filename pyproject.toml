@@ -10,4 +10,7 @@ dependencies = [
     "uvicorn>=0.41.0",
     "python-dotenv>=1.0.1",
     "python-multipart>=0.0.9",
+    "gspread>=6.2.1",
+    "google-auth>=2.49.2",
+    "pytz>=2025.1",
 ]

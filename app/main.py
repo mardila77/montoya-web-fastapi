@@ -3,13 +3,18 @@ import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from email.mime.base import MIMEBase
+from email.mime.image import MIMEImage
 from email import encoders
 from typing import Optional
-from fastapi import FastAPI, Request, Form, File, UploadFile
+from fastapi import FastAPI, Request, Form, File, UploadFile, BackgroundTasks
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from pathlib import Path
 from dotenv import load_dotenv
+from datetime import datetime
+
+# Importamos nuestro gestor de Google Sheets y la zona horaria
+from app.sheets_manager import sheets_manager, VENEZUELA_TZ
 
 # Cargamos las variables de entorno del archivo .env
 load_dotenv()
@@ -43,105 +48,149 @@ async def contacto(request: Request):
         {"request": request, "phone": CONTACTO["telefono"], "email": CONTACTO["email"]},
     )
 
-# Ruta del sector agrícola
-@app.get("/agricola")
-async def agricola(request: Request):
-    return templates.TemplateResponse(
-        "agricola.html",
-        {"request": request, "phone": CONTACTO["telefono"], "email": CONTACTO["email"]},
-    )
+# --- Rutas de Sectores ---
+@app.get("/{sector}")
+async def sectores(request: Request, sector: str):
+    sectores_validos = ["agricola", "construccion", "petrolera", "mineria", "energia", "nosotros"]
+    if sector in sectores_validos:
+        return templates.TemplateResponse(
+            f"{sector}.html",
+            {"request": request, "phone": CONTACTO["telefono"], "email": CONTACTO["email"]},
+        )
+    return templates.TemplateResponse("index.html", {"request": request})
 
-# Ruta del sector construcción
-@app.get("/construccion")
-async def construccion(request: Request):
-    return templates.TemplateResponse(
-        "construccion.html",
-        {"request": request, "phone": CONTACTO["telefono"], "email": CONTACTO["email"]},
-    )
+# Función auxiliar para envío de correos automatizados (Admin + Cliente)
+async def enviar_correos_automatizados(
+    name: str, 
+    email: str, 
+    phone: str, 
+    service: str, 
+    message: str, 
+    plate_image: Optional[UploadFile] = None,
+    is_whatsapp: bool = False
+):
+    smtp_user = os.getenv("CONTACT_EMAIL")
+    smtp_password = os.getenv("SMTP_PASSWORD")
+    
+    if not (smtp_user and smtp_password):
+        print("Error: SMTP credentials not found in environment.")
+        return
 
-# Ruta del sector petrolero
-@app.get("/petrolera")
-async def petrolera(request: Request):
-    return templates.TemplateResponse(
-        "petrolera.html",
-        {"request": request, "phone": CONTACTO["telefono"], "email": CONTACTO["email"]},
-    )
+    try:
+        # --- CORREO 1: Notificación a Marco (Interno) ---
+        msg_internal = MIMEMultipart()
+        msg_internal['From'] = f"GMPC Web {'[WhatsApp]' if is_whatsapp else ''} <{smtp_user}>"
+        msg_internal['To'] = smtp_user
+        msg_internal['Subject'] = f"{'WHATSAPP ' if is_whatsapp else ''}Nuevo Lead [{service}]: {name}"
 
-# Ruta del sector minería
-@app.get("/mineria")
-async def mineria(request: Request):
-    return templates.TemplateResponse(
-        "mineria.html",
-        {"request": request, "phone": CONTACTO["telefono"], "email": CONTACTO["email"]},
-    )
+        body_internal = f"{'CONTACTO VÍA WHATSAPP' if is_whatsapp else 'CONTACTO VÍA EMAIL'}\n\n"
+        body_internal += f"Nombre: {name}\nEmail: {email}\nTeléfono: {phone}\nServicio: {service}\n\nMensaje:\n{message}"
+        msg_internal.attach(MIMEText(body_internal, 'plain', 'utf-8'))
 
-# Ruta de Energía
-@app.get("/energia")
-async def energia(request: Request):
-    return templates.TemplateResponse(
-        "energia.html",
-        {"request": request, "phone": CONTACTO["telefono"], "email": CONTACTO["email"]},
-    )
+        if plate_image and plate_image.filename:
+            file_content = await plate_image.read()
+            part = MIMEBase('application', 'octet-stream')
+            part.set_payload(file_content)
+            encoders.encode_base64(part)
+            part.add_header('Content-Disposition', f'attachment; filename="{plate_image.filename}"')
+            msg_internal.attach(part)
 
-# Ruta Nosotros / Quiénes Somos
-@app.get("/nosotros")
-async def nosotros(request: Request):
-    return templates.TemplateResponse(
-        "nosotros.html",
-        {"request": request, "phone": CONTACTO["telefono"], "email": CONTACTO["email"]},
-    )
+        # --- CORREO 2: Respuesta Premium al Cliente (Externo) ---
+        msg_customer = MIMEMultipart()
+        msg_customer['From'] = f"Marco Montoya - GMPC <{smtp_user}>"
+        msg_customer['To'] = email
+        msg_customer['Subject'] = "Gracias por contactar a Grupo Montoya-Pérez"
 
-# Ruta POST para envío de correos desde Contacto
-@app.post("/enviar_contacto")
-async def enviar_contacto(
-    request: Request,
+        now_ve = datetime.now(VENEZUELA_TZ)
+        fecha_ve = now_ve.strftime("%d/%m/%Y")
+        hora_ve = now_ve.strftime("%I:%M %p")
+
+        html_content = templates.get_template("email_agradecimiento.html").render({
+            "name": name,
+            "fecha": fecha_ve,
+            "hora": hora_ve
+        })
+        msg_customer.attach(MIMEText(html_content, 'html', 'utf-8'))
+
+        # Adjuntar Logo como CID para visibilidad en Gmail/Outlook
+        logo_path = os.path.join(BASE_DIR, "static", "images", "logo-rectangular.jpeg")
+        if os.path.exists(logo_path):
+            with open(logo_path, 'rb') as f:
+                logo_data = f.read()
+            msg_img = MIMEImage(logo_data)
+            msg_img.add_header('Content-ID', '<logo_gmpc>')
+            msg_img.add_header('Content-Disposition', 'inline', filename="logo-rectangular.jpeg")
+            msg_customer.attach(msg_img)
+
+        # Envío de ambos correos
+        server = smtplib.SMTP("smtp.gmail.com", 587)
+        server.starttls()
+        server.login(smtp_user, smtp_password)
+        server.send_message(msg_internal)
+        server.send_message(msg_customer)
+        server.quit()
+    except Exception as e:
+        print(f"Error en envío de correos automatizados: {e}")
+
+
+# Endpoint para registro asíncrono (WhatsApp) + Notificación por Email Interna
+@app.post("/registrar_lead")
+async def registrar_lead(
+    background_tasks: BackgroundTasks,
     name: str = Form(...),
     email: str = Form(...),
+    phone: str = Form(...),
+    service: str = Form(...),
+    message: str = Form(...),
+    channel: str = Form("whatsapp")
+):
+    data = {
+        "name": name,
+        "email": email,
+        "phone": phone,
+        "service": service,
+        "message": message,
+        "channel": channel
+    }
+    
+    # 1. Registrar en sheets (background)
+    background_tasks.add_task(sheets_manager.register_lead, data)
+    
+    # 2. Envío de correos automáticos (Marco + Cliente)
+    background_tasks.add_task(
+        enviar_correos_automatizados,
+        name=name, email=email, phone=phone, service=service, message=message, is_whatsapp=True
+    )
+
+    return {"status": "success"}
+
+
+# Ruta POST para envío de correos desde Contacto (Flujo Asíncrono/AJAX)
+@app.post("/enviar_contacto")
+async def enviar_contacto(
+    background_tasks: BackgroundTasks,
+    name: str = Form(...),
+    email: str = Form(...),
+    phone: str = Form(...),
+    service: str = Form(...),
     message: str = Form(...),
     plate_image: Optional[UploadFile] = File(None)
 ):
-    # Variables de entorno
-    smtp_server = "smtp.gmail.com"
-    smtp_port = 587
-    smtp_user = os.getenv("CONTACT_EMAIL")
-    smtp_password = os.getenv("SMTP_PASSWORD")
+    # 1. Registrar en Google Sheets
+    lead_data = {
+        "name": name,
+        "email": email,
+        "phone": phone,
+        "service": service,
+        "message": message,
+        "channel": "email"
+    }
+    background_tasks.add_task(sheets_manager.register_lead, lead_data)
 
-    if smtp_password and smtp_user:
-        try:
-            msg = MIMEMultipart()
-            msg['From'] = smtp_user
-            msg['To'] = smtp_user  # Se envían el correo a sí mismos (Grupo Montoya-Pérez)
-            msg['Subject'] = f"Nuevo Contacto Web: {name}"
-
-            body = f"Nombre del prospecto: {name}\nCorreo de contacto: {email}\n\nMensaje:\n{message}"
-            msg.attach(MIMEText(body, 'plain', 'utf-8'))
-
-            # Si hay imagen anexada, la extraemos y codificamos
-            if plate_image and plate_image.filename:
-                file_content = await plate_image.read()
-                part = MIMEBase('application', 'octet-stream')
-                part.set_payload(file_content)
-                encoders.encode_base64(part)
-                part.add_header('Content-Disposition', f'attachment; filename="{plate_image.filename}"')
-                msg.attach(part)
-
-            # Envío real del correo al servicio SMTP de Google
-            server = smtplib.SMTP(smtp_server, smtp_port)
-            server.starttls()
-            server.login(smtp_user, smtp_password)
-            server.send_message(msg)
-            server.quit()
-        except Exception as e:
-            print(f"Error interno SMTP: {e}")
-            # En producción, esto debería disparar un alert a la terminal.
-
-    # Indiferentemente del estado del SMTP, respondemos éxito visualmente en web
-    return templates.TemplateResponse(
-        "contacto.html",
-        {
-            "request": request, 
-            "phone": CONTACTO["telefono"], 
-            "email": CONTACTO["email"],
-            "exito": True
-        },
+    # 2. Envío de correos automáticos (Marco + Cliente)
+    background_tasks.add_task(
+        enviar_correos_automatizados,
+        name=name, email=email, phone=phone, service=service, message=message, plate_image=plate_image
     )
+
+    return {"status": "success"}
